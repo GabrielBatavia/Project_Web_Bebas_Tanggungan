@@ -1,25 +1,20 @@
 <?php
-// Mahasiswa model content
 class Mahasiswa {
-    private $db;
+    // Fungsi untuk mendapatkan data mahasiswa berdasarkan ID
+    public function getMahasiswaById($id) {
+        // Data dummy yang seakan-akan diambil dari database
+        $dummyData = [
+            'id' => $id,
+            'name' => 'Gabriel Batavia Xaverius',
+            'major' => 'Teknik Informatika'
+        ];
 
-    public function __construct($database) {
-        $this->db = $database;
-    }
-    public function getMahasiswaById($studentId) {
-        $query = "SELECT * FROM mahasiswa WHERE id = :studentId";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':studentId', $studentId);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $dummyData; // Kembalikan data dummy
     }
 
+    // Fungsi update data mahasiswa (dummy)
     public function updateMahasiswa($data) {
-        $query = "UPDATE mahasiswa SET name = :name, major = :major WHERE id = :studentId";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':name', $data['name']);
-        $stmt->bindParam(':major', $data['major']);
-        $stmt->bindParam(':studentId', $data['student_id']);
-        return $stmt->execute();
+        // Simulasikan bahwa data berhasil diupdate
+        return true;
     }
 }

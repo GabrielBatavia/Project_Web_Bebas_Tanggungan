@@ -7,7 +7,9 @@ class MahasiswaController extends Controller {
     }
 
     public function index() {
+        // Ambil data dummy
         $mahasiswa = $this->mahasiswaModel->getMahasiswaById(1);  // ID mahasiswa dummy
+        // Kirim data dummy ke view
         $this->view('dataMahasiswa', $mahasiswa);
     }
 
@@ -17,7 +19,10 @@ class MahasiswaController extends Controller {
             'name' => $_POST['name'],
             'major' => $_POST['major']
         ];
+        
+        // Simulasikan proses update (dummy)
         $this->mahasiswaModel->updateMahasiswa($data);
+        
         header("Location: /mahasiswa");
     }
 }
