@@ -1,2 +1,2 @@
 <?php
-// Index page
+require_once '../core/Router.php';
