@@ -1,0 +1,2 @@
+<?php
+// Tanggungan model content

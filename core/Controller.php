@@ -1,0 +1,2 @@
+<?php
+// Core Controller class
