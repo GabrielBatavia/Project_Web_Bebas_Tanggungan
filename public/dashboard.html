@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Menyertakan Chart.js -->
+</head>
+<body>
+    <div class="navbar-top">
+        <div class="logo">
+            <img src="Jti.png" alt="Logo">
+            <span>Jurusan Teknologi Informasi</span>
+        </div>
+        <div class="menu-items">
+            <a href="#" class="menu-item">Home</a>
+            <a href="#" class="menu-item">Pengaturan</a>
+            <a href="#" class="menu-item">Kelola Bimbingan</a>
+            <a href="#" class="menu-item">Pengajuan Judul</a>
+            <a href="#" class="menu-item">Proposal</a>
+            <a href="#" class="menu-item">Tugas Akhir</a>
+            <a href="#" class="menu-item">Data Dosen & Mahasiswa</a>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="profile">
+            <div class="profile-pic">
+                <img src="profile.jpg" alt="Profile Picture"> <!-- Ganti 'profile.jpg' dengan path gambar -->
+            </div>
+            <h3>Gabriel Batavia Xaverius</h3>
+            <p>NIM: 2341721234</p>
+            <p>D-VI Teknik Informatika</p>
+        </div>
+        <div class="menu">
+            <a href="#" class="menu-link">Beranda</a>
+            <a href="#" class="menu-link">Pesan</a>
+            <a href="#" class="menu-link">Menu 3</a>
+            <a href="#" class="menu-link">Menu 4</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>Visualisasi Dashboard</h2>
+        <div class="chart-container">
+            <div class="chart-wrapper">
+                <canvas id="jumlahMahasiswaChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="uploadProgressChart"></canvas>
+            </div>
+        </div>
+        <div class="pie-chart-container">
+            <canvas id="submitTugasAkhirChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Data dummy
+        const jumlahMahasiswa = 300;
+        const jumlahDosen = 30;
+        const submitTugasAkhir = 200;
+        const belumSubmitTugasAkhir = jumlahMahasiswa - submitTugasAkhir;
+        const totalUploadsUser = 350;
+        const totalUploadsDiperlukan = 500;
+
+        // Bar Chart: Jumlah Mahasiswa dan Dosen
+        const ctx1 = document.getElementById('jumlahMahasiswaChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Mahasiswa', 'Dosen'],
+                datasets: [{
+                    label: 'Jumlah',
+                    data: [jumlahMahasiswa, jumlahDosen],
+                    backgroundColor: ['#3e95cd', '#8e5ea2']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Bar Chart: Persentase Upload Berkas
+        const ctx3 = document.getElementById('uploadProgressChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Upload User', 'Total Diperlukan'],
+                datasets: [{
+                    label: 'Jumlah Berkas',
+                    data: [totalUploadsUser, totalUploadsDiperlukan],
+                    backgroundColor: ['#ffa726', '#66bb6a']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart: Mahasiswa yang Submit vs Belum Submit Tugas Akhir
+        const ctx2 = document.getElementById('submitTugasAkhirChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Sudah Submit', 'Belum Submit'],
+                datasets: [{
+                    label: 'Tugas Akhir',
+                    data: [submitTugasAkhir, belumSubmitTugasAkhir],
+                    backgroundColor: ['#3cba9f', '#e8c3b9']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, // Ini memastikan aspek rasio dipertahankan
+                plugins: {
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            }
+        });
+
+
+    </script>
+
+</body>
+</html>
