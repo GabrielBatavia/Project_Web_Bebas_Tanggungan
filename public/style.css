@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-panel {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-panel .logo img {
+    width: 80px;
+}
+
+.login-panel h2 {
+    font-size: 18px;
+    margin: 20px 0;
+    color: white;
+}
+
+.login-panel input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.login-panel button {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #004aad;
+    color: white;
+    cursor: pointer;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    color: #d1d1d1;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    color: white;
+}
