@@ -1,0 +1,60 @@
+/* Mengatur body untuk menghapus margin dan padding dan menyesuaikan dengan navbar */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    padding-top: 56px; /* Tinggi navbar */
+}
+
+/* Styling untuk navbar atas */
+.navbar-top {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #002d72;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo span {
+    margin-left: 10px;
+}
+
+.menu-items {
+    display: flex;
+    margin-left: auto;
+    gap: 20px;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu-item:hover {
+    color: #90caf9;
+}

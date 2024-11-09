@@ -1,12 +1,4 @@
-body {
-    background-color: #f8f9fa;
-    font-family: 'Poppins', sans-serif;
-}
-
-.container {
-    max-width: 800px;
-}
-
+/* Spesifik styling untuk halaman Ujian Proposal */
 .card-header {
     background-color: #343a40;
     color: white;

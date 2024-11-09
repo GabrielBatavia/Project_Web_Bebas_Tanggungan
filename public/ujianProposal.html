@@ -6,20 +6,28 @@
     <title>Ujian Seminar Proposal</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Impor CSS navbar, sidebar, dan dashboard -->
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="ujianProposal.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
-    <!-- Container Utama -->
-    <div class="container my-5">
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Sidebar Placeholder -->
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Konten Utama untuk Halaman Ujian Proposal -->
+    <div class="content container my-5">
         <h2 class="mb-4">Ujian Seminar Proposal</h2>
 
         <!-- Tabel Revisi Penguji -->
         <div class="card mb-4">
-            <div class="card-header">
-                Revisi Penguji
-            </div>
+            <div class="card-header">Revisi Penguji</div>
             <div class="card-body">
                 <table class="table table-bordered table-hover text-center">
                     <thead>
@@ -31,7 +39,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Placeholder untuk data -->
                         <tr>
                             <td colspan="4" class="text-muted">Tidak ada data</td>
                         </tr>
@@ -42,9 +49,7 @@
 
         <!-- Tabel Revisi Laporan -->
         <div class="card mb-4">
-            <div class="card-header">
-                Revisi Laporan
-            </div>
+            <div class="card-header">Revisi Laporan</div>
             <div class="card-body">
                 <table class="table table-bordered table-hover text-center">
                     <thead>
@@ -56,7 +61,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Placeholder untuk data -->
                         <tr>
                             <td colspan="4" class="text-muted">Tidak ada data</td>
                         </tr>
@@ -67,9 +71,7 @@
 
         <!-- Upload Berkas Revisi -->
         <div class="card mb-4">
-            <div class="card-header">
-                Upload Revisi Laporan Proposal
-            </div>
+            <div class="card-header">Upload Revisi Laporan Proposal</div>
             <div class="card-body">
                 <form id="uploadForm">
                     <div class="form-group">
@@ -91,6 +93,15 @@
             </div>
         </div>
     </div>
+
+    <!-- Memuat Navbar dan Sidebar dengan JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Memuat konten dari navbar.html dan sidebar.html
+            $("#navbar-placeholder").load("navbar.html");
+            $("#sidebar-placeholder").load("sidebar.html");
+        });
+    </script>
 
     <!-- Bootstrap dan jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
