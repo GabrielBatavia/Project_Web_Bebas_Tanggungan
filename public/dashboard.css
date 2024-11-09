@@ -4,6 +4,7 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background-color: #f4f4f9; /* Warna latar belakang untuk konten */
+    padding-top: 56px; /* Menyesuaikan dengan tinggi navbar */
 }
 
 /* Styling untuk navbar atas */
@@ -20,6 +21,10 @@ body {
     color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     z-index: 1000;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
 }
 
 .logo {
@@ -57,10 +62,10 @@ body {
 /* Styling untuk sidebar */
 .sidebar {
     position: fixed;
-    top: 50px; /* Menyesuaikan dengan tinggi navbar */
+    top: 56px; /* Menyesuaikan dengan tinggi navbar */
     left: 0;
     width: 280px;
-    height: calc(100vh - 50px); /* Mengurangi tinggi navbar */
+    height: calc(100vh - 56px); /* Menyesuaikan tinggi sidebar */
     background-color: #1a1e36; /* Warna biru gelap */
     color: white;
     display: flex;
@@ -68,8 +73,23 @@ body {
     align-items: center;
     padding-top: 30px;
     box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2);
-    border-right: 1px solid #394263; /* Border pemisah */
-    z-index: 999; /* Supaya berada di bawah navbar */
+    border-right: 1px solid #394263;
+    z-index: 999;
+    overflow-x: hidden;
+    overflow-y: auto; /* Sidebar dapat di-scroll */
+}
+
+.sidebar .nav-link {
+    font-size: 16px;
+}
+
+.sidebar .sidebar-heading {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
 }
 
 .profile {
@@ -134,16 +154,8 @@ body {
     margin-left: 280px; /* Menyesuaikan lebar sidebar */
     padding: 30px;
     box-sizing: border-box;
-    overflow-y: auto; /* Agar konten dapat digulir */
+    overflow-y: auto;
     transition: margin-left 0.3s;
-}
-
-/* Tambahan ikon */
-.menu-link::before {
-    content: '\f015'; /* Contoh ikon, font harus mendukung (e.g., FontAwesome) */
-    font-family: 'FontAwesome';
-    margin-right: 15px;
-    font-size: 18px;
 }
 
 /* Styling untuk container chart */
@@ -165,22 +177,16 @@ body {
 .pie-chart-container {
     display: flex;
     justify-content: center;
-    align-items: center; /* Tambahkan ini untuk memastikan elemen berada di tengah secara vertikal */
-    width: 100%; /* Pastikan lebar penuh */
+    align-items: center;
+    width: 100%;
 }
 
 /* Styling untuk elemen canvas chart */
 canvas {
-    width: 100%; /* Menggunakan lebar penuh dari kontainer */
-    height: auto; /* Membiarkan browser menyesuaikan tinggi agar menjaga aspek rasio */
-    max-width: 400px; /* Batas maksimum untuk tampilan */
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
 }
-
-/* Khusus untuk pie chart */
-.pie-chart-container canvas {
-    max-width: 1600px; /* Membatasi ukuran maksimal */
-}
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -190,6 +196,15 @@ canvas {
 
     .content {
         margin-left: 200px;
+    }
+
+    #sidebarMenu {
+        top: 0;
+    }
+    
+    .sidebar-sticky {
+        top: 0;
+        height: 100vh;
     }
 }
 

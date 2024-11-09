@@ -1,64 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Menyertakan Chart.js -->
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="navbar-top">
-        <div class="logo">
-            <img src="Jti.png" alt="Logo">
-            <span>Jurusan Teknologi Informasi</span>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="Jti.png" alt="Logo" height="30">
+            Jurusan Teknologi Informasi
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTopMenu" aria-controls="navbarTopMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTopMenu">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+                        <img src="user-profile.jpg" alt="Profile" class="rounded-circle" height="30"> Nama Pengguna
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Pengaturan</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="menu-items">
-            <a href="#" class="menu-item">Home</a>
-            <a href="#" class="menu-item">Pengaturan</a>
-            <a href="#" class="menu-item">Kelola Bimbingan</a>
-            <a href="#" class="menu-item">Pengajuan Judul</a>
-            <a href="#" class="menu-item">Proposal</a>
-            <a href="#" class="menu-item">Tugas Akhir</a>
-            <a href="#" class="menu-item">Data Dosen & Mahasiswa</a>
+    </nav>
+
+    <!-- Sidebar dan Konten -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        <span>Dashboard</span>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Collapsible Sidebar Menu for Proposal -->
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        <span>Proposal</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a href="#proposalSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
+                                <i class="fas fa-lightbulb"></i> Proposal
+                            </a>
+                            <ul class="collapse list-unstyled" id="proposalSubmenu">
+                                <li class="nav-item"><a href="#" class="nav-link">Usulan Topik Dosen</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">My Proposal</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">Bimbingan Dosen</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">Pendaftaran Seminar</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">Ujian Proposal</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- Profile -->
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        <span>Profile</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-user"></i> Profile Mahasiswa</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-cog"></i> Akun</a></li>
+                    </ul>
+
+                    <!-- Logout -->
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Konten Utama -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="pt-4 pb-2 mb-3 border-bottom">
+                    <h2>Visualisasi Dashboard</h2>
+                </div>
+
+                <!-- Card untuk Chart -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">Jumlah Mahasiswa dan Dosen</div>
+                            <div class="card-body">
+                                <canvas id="jumlahMahasiswaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">Progress Upload Berkas</div>
+                            <div class="card-body">
+                                <canvas id="uploadProgressChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Submit Tugas Akhir</div>
+                            <div class="card-body">
+                                <canvas id="submitTugasAkhirChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
-    <div class="sidebar">
-        <div class="profile">
-            <div class="profile-pic">
-                <img src="profile.jpg" alt="Profile Picture"> <!-- Ganti 'profile.jpg' dengan path gambar -->
-            </div>
-            <h3>Gabriel Batavia Xaverius</h3>
-            <p>NIM: 2341721234</p>
-            <p>D-VI Teknik Informatika</p>
-        </div>
-        <div class="menu">
-            <a href="#" class="menu-link">Beranda</a>
-            <a href="#" class="menu-link">Pesan</a>
-            <a href="#" class="menu-link">Menu 3</a>
-            <a href="#" class="menu-link">Menu 4</a>
-        </div>
-    </div>
-
-    <div class="content">
-        <h2>Visualisasi Dashboard</h2>
-        <div class="chart-container">
-            <div class="chart-wrapper">
-                <canvas id="jumlahMahasiswaChart"></canvas>
-            </div>
-            <div class="chart-wrapper">
-                <canvas id="uploadProgressChart"></canvas>
-            </div>
-        </div>
-        <div class="pie-chart-container">
-            <canvas id="submitTugasAkhirChart"></canvas>
-        </div>
-    </div>
-
+    <!-- Bootstrap dan jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js dan script custom -->
     <script>
-        // Data dummy
+        // Data dummy untuk chart
         const jumlahMahasiswa = 300;
         const jumlahDosen = 30;
         const submitTugasAkhir = 200;
@@ -72,25 +154,9 @@
             type: 'bar',
             data: {
                 labels: ['Mahasiswa', 'Dosen'],
-                datasets: [{
-                    label: 'Jumlah',
-                    data: [jumlahMahasiswa, jumlahDosen],
-                    backgroundColor: ['#3e95cd', '#8e5ea2']
-                }]
+                datasets: [{ label: 'Jumlah', data: [jumlahMahasiswa, jumlahDosen], backgroundColor: ['#3e95cd', '#8e5ea2'] }]
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        enabled: true
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
         });
 
         // Bar Chart: Persentase Upload Berkas
@@ -99,25 +165,9 @@
             type: 'bar',
             data: {
                 labels: ['Upload User', 'Total Diperlukan'],
-                datasets: [{
-                    label: 'Jumlah Berkas',
-                    data: [totalUploadsUser, totalUploadsDiperlukan],
-                    backgroundColor: ['#ffa726', '#66bb6a']
-                }]
+                datasets: [{ label: 'Jumlah Berkas', data: [totalUploadsUser, totalUploadsDiperlukan], backgroundColor: ['#ffa726', '#66bb6a'] }]
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        enabled: true
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
         });
 
         // Pie Chart: Mahasiswa yang Submit vs Belum Submit Tugas Akhir
@@ -126,25 +176,10 @@
             type: 'pie',
             data: {
                 labels: ['Sudah Submit', 'Belum Submit'],
-                datasets: [{
-                    label: 'Tugas Akhir',
-                    data: [submitTugasAkhir, belumSubmitTugasAkhir],
-                    backgroundColor: ['#3cba9f', '#e8c3b9']
-                }]
+                datasets: [{ label: 'Tugas Akhir', data: [submitTugasAkhir, belumSubmitTugasAkhir], backgroundColor: ['#3cba9f', '#e8c3b9'] }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true, // Ini memastikan aspek rasio dipertahankan
-                plugins: {
-                    tooltip: {
-                        enabled: true
-                    }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false }
         });
-
-
     </script>
-
 </body>
 </html>
