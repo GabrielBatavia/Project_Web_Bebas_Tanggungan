@@ -28,7 +28,7 @@
 }
 
 .sidebar .nav-link.active {
-    color: #007bff;
+    color: white;
 }
 
 .profile {
@@ -85,6 +85,16 @@
     color: #6c757d;
     padding: 10px 25px;
     border-bottom: 1px solid #2b2f4a;
+}
+
+#sidebarMenu{
+    background-color: #050A30;
+    color: white;
+}
+
+#sidebarMenu a{
+    background-color: #050A30;
+    color: white;
 }
 
 /* Responsive adjustments */
