@@ -1,0 +1,15 @@
+.img-fluid{
+    width: 150px;
+    height: 150px;
+}
+.form-control:disabled {
+    color:#000;
+}
+.form-control:enabled {
+    color: #525151;
+    background-color: #fff;
+    border: 1px solid #9a9fa4;
+}
+.btn-primary {
+    margin-left: auto;
+}
