@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bebas Tanggungan</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="bg-primary text-white vh-100 p-3" style="width: 250px;">
+            <h4 class="mb-4">Bebas Tanggungan</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white" href="#">Beranda</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white" data-bs-toggle="collapse" href="#jurusanMenu" role="button" aria-expanded="false" aria-controls="jurusanMenu">
+                        Teknisi Jurusan
+                    </a>
+                    <div class="collapse" id="jurusanMenu">
+                        <ul class="list-unstyled ps-3">
+                            <li><a href="#" class="text-white">Laporan Tugas Akhir</a></li>
+                            <li><a href="#" class="text-white">Program Aplikasi</a></li>
+                            <li><a href="#" class="text-white">Pernyataan Publikasi</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-grow-1 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Beranda</h2>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        Nama Pengguna
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Statistik -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card text-center p-3 shadow-sm">
+                        <h5>Pengguna</h5>
+                        <p class="fs-4 fw-bold">342</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center p-3 shadow-sm">
+                        <h5>Mahasiswa Verif</h5>
+                        <p class="fs-4 fw-bold">340</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center p-3 shadow-sm">
+                        <h5>Mahasiswa Lulus</h5>
+                        <p class="fs-4 fw-bold">330</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter -->
+            <div class="mb-3">
+                <button class="btn btn-outline-primary me-2">Semua</button>
+                <button class="btn btn-outline-success me-2">Done</button>
+                <button class="btn btn-outline-danger">Belum Done</button>
+            </div>
+
+            <!-- Tabel -->
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No Induk</th>
+                            <th>Nama Lengkap</th>
+                            <th>Label</th>
+                            <th>No. Telepon</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2341721103</td>
+                            <td>Ahmad Naufal</td>
+                            <td><span class="badge bg-danger">Urgent</span></td>
+                            <td>083245630018</td>
+                            <td><span class="badge bg-primary">Dibaca</span></td>
+                            <td><button class="btn btn-outline-secondary btn-sm">Lihat</button></td>
+                        </tr>
+                        <tr>
+                            <td>2341721104</td>
+                            <td>Ahmad Naufal</td>
+                            <td><span class="badge bg-warning">Sedang</span></td>
+                            <td>083245630019</td>
+                            <td><span class="badge bg-success">Unread</span></td>
+                            <td><button class="btn btn-outline-secondary btn-sm">Lihat</button></td>
+                        </tr>
+                        <!-- Tambahkan baris lain jika diperlukan -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

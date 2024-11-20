@@ -1,0 +1,119 @@
+/* Style Sidebar */
+.bg-primary {
+    background-color: #1d3557 !important; /* Warna biru tua */
+}
+
+.nav-link {
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: #457b9d; /* Biru lebih terang */
+    color: white;
+    transition: 0.3s;
+}
+
+/* Style Main Content */
+.card {
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f9fa; /* Warna abu terang */
+}
+
+.card h5 {
+    font-size: 1.2rem;
+    color: #6c757d; /* Warna teks abu-abu */
+}
+
+.card p {
+    font-size: 1.8rem;
+    color: #343a40; /* Warna teks hitam */
+}
+
+/* Tabel */
+.table-bordered {
+    border: 1px solid #dee2e6; /* Warna garis tabel */
+}
+
+.table thead {
+    background-color: #f1f3f5; /* Warna latar header tabel */
+    color: #495057; /* Warna teks header tabel */
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa; /* Warna latar saat hover */
+}
+
+.badge {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.badge.bg-danger {
+    background-color: #e63946 !important; /* Merah */
+}
+
+.badge.bg-warning {
+    background-color: #ffca3a !important; /* Kuning */
+    color: #343a40; /* Teks gelap */
+}
+
+.badge.bg-success {
+    background-color: #2a9d8f !important; /* Hijau */
+}
+
+.badge.bg-primary {
+    background-color: #457b9d !important; /* Biru lebih terang */
+}
+
+/* Tombol Aksi */
+.btn-outline-secondary {
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Filter Buttons */
+.btn-outline-primary,
+.btn-outline-success,
+.btn-outline-danger {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .bg-primary {
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+    .nav-link {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .flex-grow-1 {
+        padding: 15px;
+    }
+
+    .card p {
+        font-size: 1.5rem;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+}
