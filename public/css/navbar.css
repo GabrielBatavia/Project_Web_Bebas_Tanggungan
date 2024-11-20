@@ -16,11 +16,19 @@ body {
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    background-color: #002d72;
+    background-color: #002981;
     padding: 10px 20px;
     color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     z-index: 1000;
+}
+
+.navbar-color{
+    background-color: #002981;
+    color: white;
+}
+.navbar-color a{
+    color: white;
 }
 
 .navbar-brand img {
