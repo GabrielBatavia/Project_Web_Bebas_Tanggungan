@@ -2,9 +2,12 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f9; /* Warna latar belakang untuk konten */
     padding-top: 56px; /* Menyesuaikan dengan tinggi navbar */
+}
+small{
+    margin-top: -50px;
 }
 
 /* Styling untuk konten utama */
@@ -17,34 +20,21 @@ body {
     transition: margin-left 0.3s;
 }
 
-/* Styling untuk container chart */
-.chart-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
+.bg-verydarkblue{
+    background-color: #002981;
+}
+.text-verygreen{
+    background-color: rgba(0,230,27, 0.2);
+    color: #006b0c;
+}
+.text-red{
+    background-color: rgba(223,0,0, 0.2);
+    color: #6b0000;
 }
 
-/* Styling untuk wrapper chart */
-.chart-wrapper {
-    flex: 1;
-    min-width: 300px;
-}
-
-/* Styling untuk container pie chart */
-.pie-chart-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-/* Styling untuk elemen canvas chart */
-canvas {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 400px;
+.card-header, .card {
+    border-radius: 10px;
+    box-shadow: 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Responsive adjustments */
@@ -63,3 +53,79 @@ canvas {
         flex-direction: column;
     }
 }
+
+/* Timeline */
+.timeline {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    padding: 20px 0;
+}
+.timeline-item {
+    text-align: center;
+    position: relative;
+}
+.timeline-item:before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 50px;
+    background: #FDBF10;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+.bg-jtiyellow{
+    background-color: #FDBF10;
+    border: solid #F9991C 3px;
+}
+.timeline-item h5 {
+    margin-top: 10px;
+}
+.timeline-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+/* overview and stuff like it idk. */
+.card-header {
+    font-weight: bold;
+  }
+  .status-late {
+    color: red;
+    font-weight: bold;
+  }
+  .status-pending {
+    color: gray;
+  }
+  .status-success {
+    color: green;
+  }
+  .status-rejected {
+    color: red;
+  }
+  .item-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .item-list:last-child {
+    border-bottom: none;
+  }
+  .btn-detail {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .btn-detail:hover {
+    text-decoration: underline;
+  }
