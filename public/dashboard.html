@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
@@ -16,6 +17,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
@@ -32,38 +34,155 @@
                     <h2>Visualisasi Dashboard</h2>
                 </div>
 
-                <!-- Card untuk Chart -->
+                <!-- TIMELINE -->
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-jtiyellow text-white">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5>Pengumpulan Berkas</h5>
+                        <p>Description of Event 1</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-jtiyellow text-white">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5>Cool Placeholder Text</h5>
+                        <p>Description of Event 2</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-jtiyellow text-white">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5>Cool Placeholder Text</h5>
+                        <p>Description of Event 3</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-jtiyellow text-white">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5>Cool Placeholder Text</h5>
+                        <p>Description of Event 4</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-jtiyellow text-white">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5>Pengambilan Ijazah</h5>
+                        <p>Description of Event 5</p>
+                    </div>
+                </div>
+
+                <!-- Card untuk Konten -->
                 <div class="row">
-                    <div class="col-md-6 mb-4">
+                    <!-- List Tanggungan -->
+                    <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">Jumlah Mahasiswa dan Dosen</div>
+                            <div class="card-header bg-verydarkblue text-white">
+                                List Tanggungan
+                            </div>
                             <div class="card-body">
-                                <canvas id="jumlahMahasiswaChart"></canvas>
+                                <!-- Tanggungan Item -->
+                                <div class="item-list">
+                                    <span>
+                                        <b>Tanda Terima Penyerahan Laporan TA <br></b>
+                                        <small>Upload Tanda Terima Penyerahan Laporan Tugas Akhir...</small>
+                                    </span>
+                                </div>
+                                <div class="item-list">
+                                    <span>
+                                        <b>Tanda Terima Penyerahan Laporan PKL <br></b>
+                                        <small>Upload Tanda Terima Penyerahan Laporan PKL ke Ruang...</small>
+                                    </span>
+                                </div>
+                                <div class="item-list">
+                                    <span>
+                                        <b>Surat Bebas Kompen <br></b>
+                                        <small>Upload Surat Bebas Kompen</small>
+                                    </span>
+                                </div>
+                                <div class="item-list">
+                                    <span>
+                                        <b>Hasil Tes TOEIC <br></b>
+                                        <small>Upload Scan hasil tes TOEIC dengan skor minimal 450...</small>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
+
+                    <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">Progress Upload Berkas</div>
+                            <div class="card-header bg-verydarkblue text-white">
+                                Overview
+                            </div>
                             <div class="card-body">
-                                <canvas id="uploadProgressChart"></canvas>
+                                <!-- Overview Item ACC -->
+                                <div class="acc">
+                                    <div class="row px-3 py-1 text-verygreen" style="border-radius: 10px;">
+                                        <span>
+                                            <i class="fas fa-check mr-2"></i>Diterima
+                                        </span>
+                                    </div>
+
+                                    <div class="item-list">
+                                        <span>
+                                            Laporan Tugas Akhir/Skripsi<br>
+                                            <small>Di Terima pada tanggal 20 Oktober 2024</small><br>
+                                            <a href="#" class="btn-detail">Selengkapnya ></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Overview Item REJECT -->
+                                <div class="reject">
+                                    <div class="row px-3 py-1 text-red" style="border-radius: 10px;">
+                                        <span>
+                                            <i class="fas fa-xmark mr-2"></i>Ditolak
+                                        </span>
+                                    </div>
+
+                                    <div class="item-list">
+                                        <span>
+                                            Program/Aplikasi Tugas Akhir/Skripsi<br>
+                                            <small>Di Tolak pada tanggal 20 Oktober 2024</small><br>
+                                            <a href="#" class="btn-detail">Selengkapnya ></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Overview Item PENDING -->
+                                <div class="pending">
+                                    <div class="row px-3 py-1 bg-secondary text-white" style="border-radius: 10px;">
+                                        <span>
+                                            <i class="fa-regular fa-clock mr-2"></i>Pending
+                                        </span>
+                                    </div>
+
+                                    <div class="item-list">
+                                        <span>
+                                            Surat Pernyataan Publikasi<br>
+                                            <small>Menunggu Konfirmasi</small><br>
+                                            <a href="#" class="btn-detail">Detail ></a>
+                                        </span>
+                                    </div>
+                                    <div class="item-list">
+                                        <span>
+                                            Surat Bebas Tanggungan Akademik Pusat<br>
+                                            <small>Menunggu Konfirmasi</small><br>
+                                            <a href="#" class="btn-detail">Detail ></a>
+                                        </span>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">Submit Tugas Akhir</div>
-                            <div class="card-body">
-                                <canvas id="submitTugasAkhirChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
         </div>
+        <!-- End Main -->
+        </main>
+    </div>
     </div>
 
     <!-- Bootstrap dan jQuery JS -->
@@ -72,51 +191,11 @@
     <!-- Chart.js dan script custom -->
     <script>
         // Include navbar and sidebar
-        $(function(){
+        $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
         });
-
-        // Data dummy untuk chart
-        const jumlahMahasiswa = 300;
-        const jumlahDosen = 30;
-        const submitTugasAkhir = 200;
-        const belumSubmitTugasAkhir = jumlahMahasiswa - submitTugasAkhir;
-        const totalUploadsUser = 350;
-        const totalUploadsDiperlukan = 500;
-
-        // Bar Chart: Jumlah Mahasiswa dan Dosen
-        const ctx1 = document.getElementById('jumlahMahasiswaChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Mahasiswa', 'Dosen'],
-                datasets: [{ label: 'Jumlah', data: [jumlahMahasiswa, jumlahDosen], backgroundColor: ['#3e95cd', '#8e5ea2'] }]
-            },
-            options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
-        });
-
-        // Bar Chart: Persentase Upload Berkas
-        const ctx3 = document.getElementById('uploadProgressChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['Upload User', 'Total Diperlukan'],
-                datasets: [{ label: 'Jumlah Berkas', data: [totalUploadsUser, totalUploadsDiperlukan], backgroundColor: ['#ffa726', '#66bb6a'] }]
-            },
-            options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
-        });
-
-        // Pie Chart: Mahasiswa yang Submit vs Belum Submit Tugas Akhir
-        const ctx2 = document.getElementById('submitTugasAkhirChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'pie',
-            data: {
-                labels: ['Sudah Submit', 'Belum Submit'],
-                datasets: [{ label: 'Tugas Akhir', data: [submitTugasAkhir, belumSubmitTugasAkhir], backgroundColor: ['#3cba9f', '#e8c3b9'] }]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-        });
     </script>
 </body>
+
 </html>
