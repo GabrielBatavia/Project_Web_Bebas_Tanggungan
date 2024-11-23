@@ -1,0 +1,85 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #333; /* Dark gray text */
+  }
+  
+  /* Card Styles */
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .card-body p {
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+  }
+  
+  .btn-primary {
+    font-size: 14px;
+  }
+  
+  /* Custom Colors for Card Borders */
+  .card.border-primary {
+    border: 2px solid #007bff;
+  }
+  
+  /* Section Header Styles */
+  .card-header {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Link Styles */
+  .text-primary {
+    text-decoration: underline;
+    font-size: 14px;
+  }
+  
+  /* Button Styles */
+  .btn {
+    border-radius: 4px;
+    padding: 8px 16px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-weight: bold;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  /* Margin Between Sections */
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Box Shadow for Cards */
+  .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Template Link */
+  .text-primary {
+    font-weight: 500;
+    text-decoration: underline;
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  .text-primary:hover {
+    color: #0056b3;
+  }
+  
