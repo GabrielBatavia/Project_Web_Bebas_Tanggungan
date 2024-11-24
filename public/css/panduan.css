@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9; 
+    padding-top: 56px; 
+}
+
+.pt-4 {
+    margin-left: 48px;
+}
+
+.pt-4 h2 {
+    font-weight: bold;
+}
+
+.card-body1 {
+    display: flex;
+    align-items: center;
+    margin: 32px 115px 0px 20px;
+}
+
+.card-body2{
+    display: flex;
+    align-items: center;
+    margin: 32px 20px 0px 100px;
+}
+
+.card-body3{
+    display: flex;
+    align-items: center;
+    margin: 32px 115px 36px 20px;
+}
+
+.card-body4{
+    display: flex;
+    align-items: center;
+    margin: 32px 20px 90px 100px;
+}
+
+.card-body5 {
+    display: flex;
+    align-items: center;
+    margin: 32px 115px 90px 20px;
+}
+
+.card-body6 {
+    display: flex;
+    align-items: center;
+    margin: 32px 20px 50px 100px;
+}
+
+.card-body7 {
+    display: flex;
+    align-items: center;
+    margin: 190px 115px 132px 59px;
+}
+
+.card {
+    border: 2px solid rgb(0, 0, 0, 0.6);
+    border-radius: 20px;
+    margin: 0px 43px 81px 48px;
+}
+
+.card a{
+    color: #4848EF;
+}
+
+.card-divider {
+    height: 1px; /* Ketebalan garis */
+    background-color: #050a30; /* Warna garis dengan transparansi */
+    margin: 1rem 0; /* Jarak atas dan bawah garis */
+}
+
+.card-icon {
+    width: 250px;
+    height: 250px;
+    margin-right: 1rem; /* Jarak antara ikon dan teks */
+}
+
+.card-icon1 {
+    width: 149px;
+    height: 149px;
+    margin-left: 64px; /* Jarak antara ikon dan teks */
+}
+
+.card-icon2 {
+    width: 203px;
+    height: 203px;
+    margin-left: 64px; /* Jarak antara ikon dan teks */
+    margin-right: 75px;
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-title2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Subtitle atau deskripsi */
+.card-description {
+    font-size: 20px;
+    color: #6c757d; /* Warna teks abu-abu */
+}
+
+.card button {
+    color: #FFFFFF;
+    background-color: #002981;
+    margin-left: 90px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 24px;
+    width: 260px;
+    height: 58px;
+}
+
