@@ -55,45 +55,128 @@ small{
 }
 
 /* Timeline */
+.timeline-container {
+    text-align: center;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  
+.timeline-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
 .timeline {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; /* Sesuaikan agar elemen tersebar */
     align-items: center;
+    flex-wrap: nowrap; /* Hindari elemen membungkus */
     position: relative;
-    padding: 20px 0;
+    max-width: 100%; /* Batasi lebar maksimal sesuai dengan kontainer */
+    overflow-x: auto; /* Beri kemampuan scroll jika lebar melebihi viewport */
+    padding: 10px 0;
 }
-.timeline-item {
-    text-align: center;
-    position: relative;
-}
-.timeline-item:before {
+  
+.timeline::before {
     content: '';
-    display: block;
-    width: 2px;
-    height: 50px;
-    background: #FDBF10;
     position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+    width: 140vw;
+    height: 4px;
+    background: #000;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: -1;
-}
-.bg-jtiyellow{
-    background-color: #FDBF10;
-    border: solid #F9991C 3px;
-}
-.timeline-item h5 {
-    margin-top: 10px;
-}
-.timeline-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+  }
+  
+.timeline-item {
+    position: relative;
+    flex: 0 0 auto;
+    margin: 80px; /*mengatur timeline*/
+  }
+  
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff9800;
+    border: 4px solid #000;
     border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+.timeline-content {
+    text-align: center;
+    margin-bottom: 20px;
+    max-width: 150px; /* Batasi lebar konten */
+    word-wrap: break-word; /* Pastikan teks panjang terpotong */
 }
+  
+.timeline-content h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+.timeline-content p {
+    font-size: 14px;
+  }
+
+.timeline-item {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+.timeline-item:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.timeline-item:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.timeline-item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.timeline-item:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline {
+      justify-content: flex-start; /* Ubah distribusi untuk layar kecil */
+  }
+  .timeline-item {
+      margin: 0 10px; /* Kurangi margin untuk layar kecil */
+  }
+  .timeline-content {
+      max-width: 120px; /* Kurangi ukuran untuk layar kecil */
+  }
+}
+
+.timeline-content.top {
+    top: -120px;
+    transform: translateY(-40px);
+}
+
+.timeline-content.bottom {
+    top: 120px;
+    transform: translateY(60px);
+}
+
 
 /* overview and stuff like it idk. */
 .card-header {
