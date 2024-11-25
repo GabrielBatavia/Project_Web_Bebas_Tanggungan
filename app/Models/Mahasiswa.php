@@ -1,20 +1,18 @@
 <?php
 class Mahasiswa {
-    // Fungsi untuk mendapatkan data mahasiswa berdasarkan ID
-    public function getMahasiswaById($id) {
-        // Data dummy yang seakan-akan diambil dari database
-        $dummyData = [
-            'id' => $id,
-            'name' => 'Gabriel Batavia Xaverius',
-            'major' => 'Teknik Informatika'
-        ];
+    private $conn;
+    private $table = 'mahasiswa';
 
-        return $dummyData; // Kembalikan data dummy
+    public function __construct($db) {
+        $this->conn = $db;
     }
 
-    // Fungsi update data mahasiswa (dummy)
-    public function updateMahasiswa($data) {
-        // Simulasikan bahwa data berhasil diupdate
-        return true;
+    public function getMahasiswaById($nim) {
+        $query = "SELECT * FROM " . $this->table . " WHERE nim = :nim";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nim', $nim);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+?>
