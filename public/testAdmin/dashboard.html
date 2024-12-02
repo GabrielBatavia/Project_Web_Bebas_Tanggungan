@@ -10,9 +10,9 @@
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../dashboard.css">
-    <link rel="stylesheet" href="../navbar.css">
-    <link rel="stylesheet" href="../sidebar.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -29,37 +29,103 @@
             <!-- Konten Utama -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Visualisasi Dashboard</h2>
+                    <h2>Dashboard Verifikator</h2>
                 </div>
 
-                <!-- Card untuk Chart -->
                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">Jumlah Mahasiswa dan Dosen</div>
-                            <div class="card-body">
-                                <canvas id="jumlahMahasiswaChart"></canvas>
-                            </div>
+                    <div class="card col-md-4">
+                        <div class="card-body">
+                            <p><b>Total</b></p>
+                            <h3>322</h3>
+                            <p>Total Berkas Masuk</p>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">Progress Upload Berkas</div>
-                            <div class="card-body">
-                                <canvas id="uploadProgressChart"></canvas>
-                            </div>
+                    <div class="card col-md-4">
+                        <div class="card-body">
+                            <p><b>Berkas Berstatus</b></p>
+                            <h3>100</h3>
+                            <p>Total Berkas Diterima + Ditolak</p>
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-body">
+                            <p><b>Menunggu</b></p>
+                            <h3>222</h3>
+                            <p>Total Berkas Pending</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">Submit Tugas Akhir</div>
-                            <div class="card-body">
-                                <canvas id="submitTugasAkhirChart"></canvas>
-                            </div>
+                <div class="d-flex">
+                    <div class="btn-group justify-content-start">
+                        <button type="button" class="btn btn-outline-primary">Semua</button>
+                        <button type="button" class="btn btn-outline-primary">Berstatus</button>
+                        <button type="button" class="btn btn-outline-primary">Menunggu</button>
+                    </div>
+                    <div class="input-group justify-content-end">
+                        <input type="text" name="" id="" class="form-control" style="max-width: 350px;">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary">
+                                <i class="fas fa-magnifying-glass"></i>
+                            </button>
                         </div>
+                    </div>
+                </div> <br><br>
+
+                <table class="table">
+                    <thead>
+                        <th>No. Induk</th>
+                        <th>Nama Lengkap</th>
+                        <th>Urgensi</th>
+                        <th>No. Telepon</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2341720000</td>
+                            <td>Mamang John</td>
+                            <td><span class="badge badge-danger">Tinggi</span></td>
+                            <td>080000000000</td>
+                            <td><span class="badge badge-danger">Belum</span></td>
+                            <td><a href=""><i class="fas fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>2341720000</td>
+                            <td>Mamang John</td>
+                            <td><span class="badge badge-warning">Sedang</span></td>
+                            <td>080000000000</td>
+                            <td><span class="badge badge-warning">Dibaca</span></td>
+                            <td><a href=""><i class="fas fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>2341720000</td>
+                            <td>Mamang John</td>
+                            <td><span class="badge badge-success">Ringan</span></td>
+                            <td>080000000000</td>
+                            <td><span class="badge badge-success">Dibalas</span></td>
+                            <td><a href=""><i class="fas fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>2341720000</td>
+                            <td>Mamang John</td>
+                            <td><span class="badge badge-secondary">Tidak Urgent</span></td>
+                            <td>080000000000</td>
+                            <td><span class="badge badge-danger">Belum</span></td>
+                            <td><a href=""><i class="fas fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <p>Menampilkan 1-4 dari 4</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary"><</button>
+                        <button type="button" class="btn btn-outline-secondary">1</button>
+                        <button type="button" class="btn btn-outline-secondary">2</button>
+                        <button type="button" class="btn btn-outline-secondary">3</button>
+                        <button type="button" class="btn btn-outline-secondary">></button>
                     </div>
                 </div>
             </main>
@@ -75,47 +141,6 @@
         $(function(){
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
-        });
-
-        // Data dummy untuk chart
-        const jumlahMahasiswa = 300;
-        const jumlahDosen = 30;
-        const submitTugasAkhir = 200;
-        const belumSubmitTugasAkhir = jumlahMahasiswa - submitTugasAkhir;
-        const totalUploadsUser = 350;
-        const totalUploadsDiperlukan = 500;
-
-        // Bar Chart: Jumlah Mahasiswa dan Dosen
-        const ctx1 = document.getElementById('jumlahMahasiswaChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Mahasiswa', 'Dosen'],
-                datasets: [{ label: 'Jumlah', data: [jumlahMahasiswa, jumlahDosen], backgroundColor: ['#3e95cd', '#8e5ea2'] }]
-            },
-            options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
-        });
-
-        // Bar Chart: Persentase Upload Berkas
-        const ctx3 = document.getElementById('uploadProgressChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['Upload User', 'Total Diperlukan'],
-                datasets: [{ label: 'Jumlah Berkas', data: [totalUploadsUser, totalUploadsDiperlukan], backgroundColor: ['#ffa726', '#66bb6a'] }]
-            },
-            options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
-        });
-
-        // Pie Chart: Mahasiswa yang Submit vs Belum Submit Tugas Akhir
-        const ctx2 = document.getElementById('submitTugasAkhirChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'pie',
-            data: {
-                labels: ['Sudah Submit', 'Belum Submit'],
-                datasets: [{ label: 'Tugas Akhir', data: [submitTugasAkhir, belumSubmitTugasAkhir], backgroundColor: ['#3cba9f', '#e8c3b9'] }]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
         });
     </script>
 </body>
