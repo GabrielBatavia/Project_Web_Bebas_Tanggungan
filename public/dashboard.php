@@ -74,17 +74,56 @@ if ($db) {
                 </div>
 
                 <!-- Timeline -->
-                <div class="timeline">
-                    <h4>Timeline</h4>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="timeline-item">
-                                <div class="timeline-icon bg-jtiyellow text-white">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </div>
-                                <h5>Pengumpulan Berkas</h5>
-                                <p>23 November 2024</p>
-                                <p>Deskripsi lain bila diperlukan</p>
+                <div class="timeline-container">
+                    <h2 class="timeline-title">Timeline Proyek</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">1</div>
+                            <div class="timeline-content">
+                                <h5>Mulai Proyek</h5>
+                                <p>Deskripsi aktivitas pertama yang harus dilakukan.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">2</div>
+                            <div class="timeline-content">
+                                <h5>Perencanaan</h5>
+                                <p>Deskripsi aktivitas kedua yang harus dilakukan.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">3</div>
+                            <div class="timeline-content">
+                                <h5>Implementasi</h5>
+                                <p>Deskripsi aktivitas ketiga yang harus dilakukan.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">4</div>
+                            <div class="timeline-content">
+                                <h5>Penyelesaian</h5>
+                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">5</div>
+                            <div class="timeline-content">
+                                <h5>Penyelesaian</h5>
+                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">6</div>
+                            <div class="timeline-content">
+                                <h5>Penyelesaian</h5>
+                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">6</div>
+                            <div class="timeline-content">
+                                <h5>Penyelesaian</h5>
+                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
                             </div>
                         </div>
                     </div>

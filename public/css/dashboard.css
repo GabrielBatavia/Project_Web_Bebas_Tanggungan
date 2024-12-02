@@ -54,128 +54,139 @@ small{
     }
 }
 
-/* Timeline */
+/* Styling untuk Timeline */
+/* Timeline Container */
 .timeline-container {
-    text-align: center;
-    padding: 20px;
-    overflow-x: auto;
-  }
-  
+  text-align: center;
+  padding: 40px;
+  overflow-x: auto; /* Membolehkan scroll horizontal */
+  background-color: #f9f9f9;
+}
+
+/* Judul Timeline */
 .timeline-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Timeline */
 .timeline {
-    display: flex;
-    justify-content: space-between; /* Sesuaikan agar elemen tersebar */
-    align-items: center;
-    flex-wrap: nowrap; /* Hindari elemen membungkus */
-    position: relative;
-    max-width: 100%; /* Batasi lebar maksimal sesuai dengan kontainer */
-    overflow-x: auto; /* Beri kemampuan scroll jika lebar melebihi viewport */
-    padding: 10px 0;
+  display: flex;
+  justify-content: flex-start;  /* Menyusun item secara horizontal */
+  align-items: flex-start;
+  position: relative;
+  width: max-content; /* Ukuran kontainer mengikuti lebar semua item */
+  margin-top: 50px;
+  overflow-x: auto;  /* Scroll horizontal diaktifkan */
+  padding: 10px 0;
 }
-  
+
+/* Garis waktu horizontal */
 .timeline::before {
-    content: '';
-    position: absolute;
-    width: 140vw;
-    height: 4px;
-    background: #000;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: -1;
-  }
-  
-.timeline-item {
-    position: relative;
-    flex: 0 0 auto;
-    margin: 80px; /*mengatur timeline*/
-  }
-  
-.timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #ff9800;
-    border: 4px solid #000;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-.timeline-content {
-    text-align: center;
-    margin-bottom: 20px;
-    max-width: 150px; /* Batasi lebar konten */
-    word-wrap: break-word; /* Pastikan teks panjang terpotong */
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #2196f3; /* Garis waktu */
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: -1;
 }
-  
-.timeline-content h3 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-.timeline-content p {
-    font-size: 14px;
-  }
 
+/* Item timeline */
 .timeline-item {
+  position: relative;
+  width: 180px; /* Menentukan lebar tetap untuk tiap item */
+  margin: 0 20px; /* Memberikan jarak antar item */
+  text-align: center;
   opacity: 0;
-  animation: fadeInUp 0.8s ease-in-out forwards;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.timeline-item:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.timeline-item:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-.timeline-item:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-.timeline-item:nth-child(4) {
-  animation-delay: 0.8s;
-}
-
+/* Animasi FadeInUp untuk item timeline */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
 
+/* Hover effect untuk timeline-item */
+.timeline-item:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Ikon timeline */
+.timeline-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #002981, #4d79ff); /* Ganti dengan gradien biru */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Animasi rotasi saat hover pada ikon */
+.timeline-item:hover .timeline-icon {
+  background: linear-gradient(135deg, #4d79ff, #002981); /* Ganti dengan gradien biru */
+  transform: rotate(360deg);
+}
+
+/* Konten timeline */
+.timeline-content {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Posisi konten pada tiap item timeline */
+.timeline-content h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #002981; /* Ganti warna judul menjadi biru */
+}
+
+.timeline-content p {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Menyesuaikan pada layar kecil */
 @media (max-width: 768px) {
   .timeline {
-      justify-content: flex-start; /* Ubah distribusi untuk layar kecil */
+      padding: 30px;
   }
+
   .timeline-item {
-      margin: 0 10px; /* Kurangi margin untuk layar kecil */
+      margin: 0 10px;
+      width: 140px; /* Ukuran item lebih kecil pada layar kecil */
   }
+
   .timeline-content {
-      max-width: 120px; /* Kurangi ukuran untuk layar kecil */
+      font-size: 14px;
+      max-width: 120px;
   }
 }
 
-.timeline-content.top {
-    top: -120px;
-    transform: translateY(-40px);
-}
-
-.timeline-content.bottom {
-    top: 120px;
-    transform: translateY(60px);
-}
 
 
 /* overview and stuff like it idk. */
@@ -212,3 +223,149 @@ small{
   .btn-detail:hover {
     text-decoration: underline;
   }
+
+
+  /* Card container */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column; /* Menjaga isi card vertikal */
+  height: auto; /* Membiarkan card semakin panjang tergantung kontennya */
+}
+
+/* Card header (membuat header selalu di atas) */
+.card-header {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+  color: white;
+  background-color: #002981; /* Sama untuk keduanya */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Hover effect pada card */
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* List Tanggungan dan Overview */
+.card-body {
+  padding: 15px;
+  flex-grow: 1; /* Membiarkan card body berkembang sesuai konten */
+}
+
+/* List Tanggungan */
+.item-list {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect pada item-list */
+.item-list:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Link untuk detail */
+.item-list .btn-detail {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.item-list .btn-detail:hover {
+  text-decoration: underline;
+}
+
+/* Overview Sections */
+.acc, .reject, .pending {
+  border-radius: 6px;
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+/* ACC - diterima */
+.acc {
+  background-color: #e0f7e6;
+  border-left: 5px solid #2e7d32;
+}
+
+/* REJECT - ditolak */
+.reject {
+  background-color: #f8d7da;
+  border-left: 5px solid #dc3545;
+}
+
+/* PENDING - pending */
+.pending {
+  background-color: #f0f0f0;
+  border-left: 5px solid #6c757d;
+}
+
+/* Ikon di Overview */
+.acc i, .reject i, .pending i {
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+/* Menambah padding dan border radius pada row di dalam Overview */
+.row {
+    display: flex;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+/* Bagian teks dalam Overview */
+.item-list {
+  margin-bottom: 10px;
+}
+
+.item-list span {
+  display: block;
+  color: #333;
+  font-size: 13px;
+}
+
+.item-list small {
+  font-size: 12px;
+  color: #666;
+}
+
+.item-list a {
+  color: #007bff;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.item-list a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivitas untuk layar kecil */
+@media (max-width: 768px) {
+  .card {
+      margin-bottom: 10px;
+  }
+
+  .item-list {
+      padding: 8px;
+      font-size: 13px;
+  }
+
+  .item-list .btn-detail {
+      font-size: 12px;
+  }
+
+  .acc .row, .reject .row, .pending .row {
+      font-size: 14px;
+  }
+}
