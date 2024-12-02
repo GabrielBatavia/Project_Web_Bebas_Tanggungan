@@ -1,2 +1,0 @@
-<?php
-// SuratController content
