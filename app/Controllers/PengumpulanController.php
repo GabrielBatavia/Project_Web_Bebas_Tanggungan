@@ -4,7 +4,7 @@ include_once __DIR__ . '/../models/FileUpload.php';
 
 class PengumpulanController {
     public function uploadFile() {
-        $forms = ['file_upload_1', 'file_upload_2', 'file_upload_3']; // ID dari setiap input file di form
+        $forms = ['file_upload_1', 'file_upload_2', 'file_upload_3', 'file_upload_4']; // ID dari setiap input file di form
         $maxFileSize = 10 * 1024 * 1024; // 10 MB
     
         // Loop untuk menangani setiap file input
