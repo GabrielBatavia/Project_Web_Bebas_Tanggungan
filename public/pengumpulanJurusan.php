@@ -48,66 +48,62 @@ if (isset($_GET['success'])) {
                 <div class="pt-4 pb-2 mb-3 border-bottom">
                     <h2>Bebas Tanggungan Jurusan</h2>
                 </div>
-                <!-- Laporan Tugas Akhir -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5>Laporan Tugas Akhir/Skripsi</h5>
-                    </div>
-                    <div class="card-body">
-                        <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
-                        <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id_tanggungan" value="1"> <!-- Example value -->
+
+                <!-- Main Form -->
+                <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                    <input type="hidden" name="id_tanggungan" value="1"> <!-- Example value -->
+                    
+                    <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Laporan Tugas Akhir/Skripsi 1</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload">Upload File:</label>
-                                <input type="file" name="file_upload" class="form-control" required>
+                                <label for="file_upload_1">Upload File 1:</label>
+                                <input type="file" name="file_upload_1" class="form-control" required id="file_upload_1">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Bebas Tanggungan Jurusan</h2>
-                </div>
-                <!-- Laporan Tugas Akhir -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5>Laporan Tugas Akhir/Skripsi</h5>
-                    </div>
-                    <div class="card-body">
-                        <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
-                        <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id_tanggungan" value="1"> <!-- Example value -->
+
+                    <!-- Form 2: Laporan Tugas Akhir/Skripsi 2 -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Laporan Tugas Akhir/Skripsi 2</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload">Upload File:</label>
-                                <input type="file" name="file_upload" class="form-control" required>
+                                <label for="file_upload_2">Upload File 2:</label>
+                                <input type="file" name="file_upload_2" class="form-control" required id="file_upload_2">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Bebas Tanggungan Jurusan</h2>
-                </div>
-                <!-- Laporan Tugas Akhir -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5>Laporan Tugas Akhir/Skripsi</h5>
-                    </div>
-                    <div class="card-body">
-                        <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
-                        <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id_tanggungan" value="1"> <!-- Example value -->
+
+                    <!-- Form 3: Laporan Tugas Akhir/Skripsi 3 -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Laporan Tugas Akhir/Skripsi 3</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload">Upload File:</label>
-                                <input type="file" name="file_upload" class="form-control" required>
+                                <label for="file_upload_3">Upload File 3:</label>
+                                <input type="file" name="file_upload_3" class="form-control" required id="file_upload_3">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Upload Button in the top-right of the page -->
+                    <div class="upload-btn-container">
+                        <button type="submit" class="btn btn-primary" id="uploadBtn" disabled>Upload All</button>
+                    </div>
+                </form>
+
             </main>
         </div>
     </div>
@@ -115,6 +111,30 @@ if (isset($_GET['success'])) {
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // JavaScript to enable the Upload button once all file inputs are selected
+        $(document).ready(function() {
+            function checkFiles() {
+                let allFilesSelected = true;
+                $(".upload-form input[type='file']").each(function() {
+                    if ($(this).val() === '') {
+                        allFilesSelected = false;
+                    }
+                });
+                if (allFilesSelected) {
+                    $('#uploadBtn').prop('disabled', false); // Enable the upload button
+                } else {
+                    $('#uploadBtn').prop('disabled', true); // Keep it disabled if not all files are selected
+                }
+            }
+
+            // Trigger file check whenever a file is selected
+            $(".upload-form input[type='file']").change(function() {
+                checkFiles();
+            });
+        });
+    </script>
 </body>
 
 </html>
