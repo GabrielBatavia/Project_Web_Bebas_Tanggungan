@@ -112,14 +112,14 @@ small{
 
 /* Animasi FadeInUp untuk item timeline */
 @keyframes fadeInUp {
-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-to {
-  opacity: 1;
-  transform: translateY(0);
-}
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Hover effect untuk timeline-item */
@@ -188,7 +188,6 @@ to {
 }
 
 
-
 /* overview and stuff like it idk. */
 .card-header {
     font-weight: bold;
@@ -235,6 +234,7 @@ to {
   display: flex;
   flex-direction: column; /* Menjaga isi card vertikal */
   height: auto; /* Membiarkan card semakin panjang tergantung kontennya */
+  margin: 0px 16px 0px 16px;
 }
 
 /* Card header (membuat header selalu di atas) */
@@ -368,4 +368,46 @@ to {
   .acc .row, .reject .row, .pending .row {
       font-size: 14px;
   }
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table thead th {
+  background-color: #F0F0F0;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.table tbody td {
+  text-align: center;
+}
+
+.card-title-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.card-title-with-icon .card-icon {
+  width: 50px;
+  height: 55px;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px;
 }

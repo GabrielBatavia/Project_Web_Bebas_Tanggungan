@@ -33,25 +33,34 @@
                 </div>
 
                 <div class="row">
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <div class="card-body">
-                            <p><b>Total</b></p>
+                            <p class="card-title-with-icon">
+                                <b>Pengguna</b>
+                                <img class="card-icon" src="../img/Pengguna.png" alt="Icon Pengguna">
+                            </p>
                             <h3>322</h3>
-                            <p>Total Berkas Masuk</p>
+                            <p>Total pengguna keseluruhan</p>
                         </div>
                     </div>
                     <div class="card col-md-4">
                         <div class="card-body">
-                            <p><b>Berkas Berstatus</b></p>
-                            <h3>100</h3>
-                            <p>Total Berkas Diterima + Ditolak</p>
+                            <p class="card-title-with-icon">
+                                <b>Mahasiswa Verif Berkas</b>
+                                <img class="card-icon" src="../img/Pending.png" alt="Icon Pengguna">
+                            </p>
+                            <h3>120</h3>
+                            <p>Total pengguna persyaratan lengkap</p>
                         </div>
                     </div>
                     <div class="card col-md-4">
                         <div class="card-body">
-                            <p><b>Menunggu</b></p>
-                            <h3>222</h3>
-                            <p>Total Berkas Pending</p>
+                            <p class="card-title-with-icon">
+                                <b>Mahasiswa Berkas Selesai</b>
+                                <img class="card-icon" src="../img/Complite.png" alt="Icon Pengguna">
+                            </p>
+                            <h3>80</h3>
+                            <p>Total pengguna berkas lengkap</p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +68,7 @@
                 <div class="d-flex">
                     <div class="btn-group justify-content-start">
                         <button type="button" class="btn btn-outline-primary">Semua</button>
-                        <button type="button" class="btn btn-outline-primary">Berstatus</button>
+                        <button type="button" class="btn btn-outline-primary">Selesai</button>
                         <button type="button" class="btn btn-outline-primary">Menunggu</button>
                     </div>
                     <div class="input-group justify-content-end">
@@ -70,16 +79,18 @@
                             </button>
                         </div>
                     </div>
-                </div> <br><br>
+                </div>
 
                 <table class="table">
                     <thead>
-                        <th>No. Induk</th>
-                        <th>Nama Lengkap</th>
-                        <th>Urgensi</th>
-                        <th>No. Telepon</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <tr>
+                            <th>No. Induk</th>
+                            <th>Nama Lengkap</th>
+                            <th>Urgensi</th>
+                            <th>No. Telepon</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -117,7 +128,6 @@
                     </tbody>
                 </table>
 
-                <hr>
                 <div class="d-flex justify-content-between">
                     <p>Menampilkan 1-4 dari 4</p>
                     <div class="btn-group">
