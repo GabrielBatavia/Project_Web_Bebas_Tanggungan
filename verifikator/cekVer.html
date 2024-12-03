@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags dan judul -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknisi Jurusan</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/navbarVer.css">
+    <link rel="stylesheet" href="css/sidebarVer.css">
+    <link rel="stylesheet" href="css/cekVeri.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Sidebar dan Konten -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div id="sidebar-placeholder"></div>
+
+            <!-- Header -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="title">
+                    <div class="pt-4 pb-2 mb-3 border-bottom border-dark">
+                        <h2>Berkas Tugas Akhir Skripsi</h2>
+                    </div>
+                    <div class="header">
+                        <div class="left">
+                            <h2>Berkas Tugas Akhir Skripsi</h2>
+                            <ul class="breadcrumb">
+                                <li>
+                                    <a href="#" class="li1">Dashboard</a>
+                                </li>
+                                <li><i class="fa-solid fa-chevron-right"></i></li>
+                                <li>
+                                    <a href="#" class="li2">List Berkas</a>
+                                </li>
+                                <li><i class="fa-solid fa-chevron-right"></i></li>
+                                <li>
+                                    <a href="#" class="li3">Detail Berkas</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="button">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-secondary">Batal</button>
+                        </div>
+                    </div>
+                </div>
+            <!-- Konten Utama -->
+            <div class="contentf">
+                <div class="leftc">
+                    <!-- Box1 -->
+                    <div class="card box1">
+                        <div class="card-desc">
+                            <h4>Detail Mahasiswa</h4>
+                            <div class="bio">
+                                <div class="bio-item">
+                                    <span class="label">Nama</span>
+                                    <span class="value">Gabriel Batavia Xaverius</span>
+                                </div>
+                                <div class="bio-item">
+                                    <span class="label">Tanggal Upload</span>
+                                    <span class="value">16 Mei 2024</span>                              
+                                </div>
+                                <div class="bio-item">
+                                    <span class="label">Waktu</span>
+                                    <span class="value">09.40</span>
+                                </div>
+                                <div class="bio-item">
+                                    <span class="label">Nama File</span>
+                                    <span class="value">Berkas Pengumpulan_Gabriel Batavia.pdf</span>
+                                </div>
+                                <div class="bio-item">
+                                    <span class="label">Program Studi</span>
+                                    <span class="value">Teknik Informatika</span>
+                                </div>
+                                <div class="bio-item">
+                                    <span class="label">Surat Pendukung</span>
+                                    <span class="value">
+                                      <a href="#" class="link">Surat Perizinan.pdf</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Box2 -->
+                    <div class="card box2">
+                        <div class="card-desc">
+                            <h4 class="desc1">File</h4>
+                            <div class="button">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="left">
+                                        <i class="fa-regular fa-file" style="color: #000000;"></i> 
+                                        Surat_Bebas_Tanggungan
+                                    </span>
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="left">
+                                        <i class="fa-regular fa-file" style="color: #000000;"></i> 
+                                        Surat_Bebas_PKL
+                                    </span> 
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="left">
+                                        <i class="fa-regular fa-file" style="color: #000000;"></i> 
+                                        Surat_Bebas_Anu??
+                                    </span> 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Box3 -->
+                    <div class="card box3">
+                        <div class="card-desc">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="rightc">
+                    <!-- Box4 -->
+                    <div class="card box4">
+                        <div class="card-desc">
+                            <h4 class="desc1">Preview</h4>
+                            <img src="img/image 58.png" alt="">
+                            <button type="submit" class="btn btn-primary">Cetak</button>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  -- Pilih Status --
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item dw1" href="#">Disetujui</a>
+                                  <a class="dropdown-item" href="#">Ditolak</a>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            </main>
+        <!-- End Main -->
+        </main>
+    </div>
+    </div>
+
+    <!-- Bootstrap dan jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js dan script custom -->
+    <script>
+        // Include navbar and sidebar
+        $(function () {
+            $("#navbar-placeholder").load("navbarVer.html");
+            $("#sidebar-placeholder").load("sidebarVeri.html");
+        });
+    </script>
+</body>
+
+</html>
