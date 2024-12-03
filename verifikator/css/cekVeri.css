@@ -195,6 +195,27 @@ body {
     margin-right: 8px;
   }
 
+  .box3 .desc1 {
+    color: #7A7A7A;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: start;
+  }
+
+  .box3 .card-desc {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column; 
+    align-items: start;   
+  }
+
+  .box3 textarea{
+    min-height: 325px;
+    max-width: max-content;
+    max-height: 325px;
+    align-items: center; 
+  }
+
   .box4 .card-desc {
     display: flex;
     flex-direction: column; 
