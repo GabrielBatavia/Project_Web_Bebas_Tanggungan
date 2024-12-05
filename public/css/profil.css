@@ -1,0 +1,130 @@
+/* Reset dan dasar */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    padding-top: 56px; /* Sesuaikan dengan tinggi navbar */
+}
+
+/* Container Profil */
+.profile-container {
+    margin-top: 20px;
+}
+
+/* Kartu Profil */
+.profile-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+/* Header Kartu */
+.card-header {
+    font-weight: bold;
+    background-color: #002981;
+    color: #FFFFFF;
+    padding: 1rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Body Kartu */
+.card-body {
+    padding: 1.5rem;
+    color: #333333;
+}
+
+/* Kartu Info Individu */
+.info-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h6 {
+    font-weight: 600;
+    color: #002981;
+    margin-bottom: 0.5rem;
+}
+
+.info-card p {
+    margin: 0;
+    color: #555555;
+    font-size: 0.95rem;
+}
+
+/* Kartu Notifikasi dan Pertanyaan */
+.notifications-card, .questions-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Alert */
+.alert {
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.alert h6 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.alert-danger {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+.alert-success {
+    background-color: #e6ffed;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.alert-secondary {
+    background-color: #f2f2f2;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+/* Paginasi */
+.pagination .page-link {
+    color: #002981;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #002981;
+    border-color: #002981;
+    color: #ffffff;
+}
+
+.pagination .page-link:hover {
+    background-color: #002981;
+    color: #ffffff;
+}
+
+/* Heading */
+h2 {
+    color: #002981;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+
+    .info-card {
+        margin-bottom: 1rem;
+    }
+}

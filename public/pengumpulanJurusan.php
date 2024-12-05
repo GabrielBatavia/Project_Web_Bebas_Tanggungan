@@ -71,10 +71,10 @@ if (isset($_GET['success'])) {
                     <!-- Form 2: Laporan Tugas Akhir/Skripsi 2 -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 2</h5>
+                            <h5>Program Aplikasi</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Catatan: Upload dalam bentuk format ZIP/RAR (max 1 GB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_2">Upload File 2:</label>
                                 <input type="file" name="file_upload_2" class="form-control" required id="file_upload_2">
@@ -86,7 +86,7 @@ if (isset($_GET['success'])) {
                     <!-- Form 3: Laporan Tugas Akhir/Skripsi 3 -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 3</h5>
+                            <h5>Surat Pernyataan Publikasi</h5>
                         </div>
                         <div class="card-body">
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>

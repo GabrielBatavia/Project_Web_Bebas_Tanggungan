@@ -75,26 +75,26 @@ if ($db) {
 
                 <!-- Timeline -->
                 <div class="timeline-container">
-                    <h2 class="timeline-title">Timeline Proyek</h2>
+                    <h2 class="timeline-title">Timeline Pengumpulan</h2>
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-icon">1</div>
                             <div class="timeline-content">
-                                <h5>Mulai Proyek</h5>
+                                <h5>Pengumpulan Skripsi</h5>
                                 <p>Deskripsi aktivitas pertama yang harus dilakukan.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-icon">2</div>
                             <div class="timeline-content">
-                                <h5>Perencanaan</h5>
+                                <h5>Pengumpulan Program</h5>
                                 <p>Deskripsi aktivitas kedua yang harus dilakukan.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-icon">3</div>
                             <div class="timeline-content">
-                                <h5>Implementasi</h5>
+                                <h5>Pengumpulan publikasi</h5>
                                 <p>Deskripsi aktivitas ketiga yang harus dilakukan.</p>
                             </div>
                         </div>
