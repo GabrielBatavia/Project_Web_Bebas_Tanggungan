@@ -1,44 +1,61 @@
 <?php
+class Database {
+    private $host = 'localhost';
+    private $user = 'root';
+    private $pass = '';
+    private $dbname = 'pbl';
 
-class Database
-{
-    private static $instance = null;
-    private $connection;
+    private $dbh; // Database handler
+    private $stmt;
 
-    private function __construct(array $config)
-    {
-        $serverName = $config["server_name"];
-        $database = $config["database"];
-        $username = $config["username"];
-        $password = $config["password"];
+    public function __construct() {
+        $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbname;
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
 
         try {
-            $dsn = "sqlsrv:server=$serverName;Database=$database";
-            $this->connection = new PDO($dsn, $username, $password);
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            // die("Koneksi gagal tuan: " . $e->getMessage() . $e->getCode() . $e);
-            throw new PDOException("Koneksi gagal tuan: " . $e->getMessage(), $e->getCode(), $e);
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+        } catch(PDOException $e) {
+            die($e->getMessage());
         }
     }
 
-    public static function getInstance(array $config, $onError)
-    {
-        // Test Error Page
-        // call_user_func($onError, "404", "Message");
-        try {
-            if (self::$instance === null) {
-                self::$instance = new self($config);
+    public function query($sql) {
+        $this->stmt = $this->dbh->prepare($sql);
+    }
+
+    public function bind($param, $value, $type = null) {
+        if (is_null($type)) {
+            switch (true) {
+                case is_int($value):
+                    $type = PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type = PDO::PARAM_STR;
             }
-        } catch (PDOException $e) {
-            call_user_func($onError, $e->getCode(), $e->getMessage());
         }
-
-        return self::$instance;
+        $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function getConnection()
-    {
-        return $this->connection;
+    public function execute() {
+        return $this->stmt->execute();
+    }
+
+    public function resultSet() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function single() {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
