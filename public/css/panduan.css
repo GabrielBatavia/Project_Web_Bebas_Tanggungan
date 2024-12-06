@@ -1,9 +1,10 @@
+/* Reset dan Dasar */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9; 
-    padding-top: 56px; 
+    background-color: #f4f4f9;
+    padding-top: 56px; /* Sesuaikan dengan tinggi navbar */
 }
 
 .pt-4 {
@@ -11,111 +12,185 @@ body {
 }
 
 .pt-4 h2 {
-    font-weight: bold;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
 }
 
-.card-body1 {
+/* Swiper Container dengan Satu Kartu per Tampilan */
+.swiper-container {
+    padding: 50px 0;
+}
+
+.swiper-slide {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 32px 115px 0px 20px;
+    /* Adjust slide size */
+    width: 100%;
 }
 
-.card-body2{
-    display: flex;
-    align-items: center;
-    margin: 32px 20px 0px 100px;
-}
-
-.card-body3{
-    display: flex;
-    align-items: center;
-    margin: 32px 115px 36px 20px;
-}
-
-.card-body4{
-    display: flex;
-    align-items: center;
-    margin: 32px 20px 90px 100px;
-}
-
-.card-body5 {
-    display: flex;
-    align-items: center;
-    margin: 32px 115px 90px 20px;
-}
-
-.card-body6 {
-    display: flex;
-    align-items: center;
-    margin: 32px 20px 50px 100px;
-}
-
-.card-body7 {
-    display: flex;
-    align-items: center;
-    margin: 190px 115px 132px 59px;
-}
-
+/* Card Styling */
 .card {
-    border: 2px solid rgb(0, 0, 0, 0.6);
+    border: none;
     border-radius: 20px;
-    margin: 0px 43px 81px 48px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 600px; /* Lebar maksimum kartu */
 }
 
-.card a{
-    color: #4848EF;
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-.card-divider {
-    height: 1px; /* Ketebalan garis */
-    background-color: #050a30; /* Warna garis dengan transparansi */
-    margin: 1rem 0; /* Jarak atas dan bawah garis */
+.card-body {
+    padding: 30px;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    position: relative;
 }
 
+/* Ikon Styling */
 .card-icon {
-    width: 250px;
-    height: 250px;
-    margin-right: 1rem; /* Jarak antara ikon dan teks */
+    font-size: 3rem; /* Sesuaikan ukuran ikon */
+    color: #002981;
+    margin-right: 25px;
+    transition: transform 0.3s ease;
 }
 
-.card-icon1 {
-    width: 149px;
-    height: 149px;
-    margin-left: 64px; /* Jarak antara ikon dan teks */
+.card-body:hover .card-icon {
+    transform: scale(1.1);
 }
 
-.card-icon2 {
-    width: 203px;
-    height: 203px;
-    margin-left: 64px; /* Jarak antara ikon dan teks */
-    margin-right: 75px;
+/* Konten Card */
+.card-content {
+    flex: 1;
 }
 
 .card-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #002981;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 10px;
 }
 
-.card-title2 {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-/* Subtitle atau deskripsi */
-.card-description {
-    font-size: 20px;
-    color: #6c757d; /* Warna teks abu-abu */
-}
-
-.card button {
-    color: #FFFFFF;
+.card-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
     background-color: #002981;
-    margin-left: 90px;
+    border-radius: 50%;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #555;
+}
+
+.card-description ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.card-description a {
+    color: #4848EF;
+    text-decoration: none;
+}
+
+.card-description a:hover {
+    text-decoration: underline;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #002981;
+    border: none;
     border-radius: 10px;
     font-weight: 500;
-    font-size: 24px;
-    width: 260px;
-    height: 58px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
 }
 
+.btn-primary:hover {
+    background-color: #001f6b;
+}
+
+/* Swiper Navigation Buttons */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #002981;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.5rem;
+}
+
+/* Swiper Pagination Bullets */
+.swiper-pagination-bullet {
+    background: #002981;
+    opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+    background: #001f6b;
+    opacity: 1;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .pt-4 {
+        margin-left: 20px;
+    }
+
+    .pt-4 h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-body {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .card-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .card-description {
+        font-size: 0.95rem;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 1.2rem;
+    }
+}
