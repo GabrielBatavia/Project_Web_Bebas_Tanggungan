@@ -1,6 +1,20 @@
 <?php
-// Start session atau include session handling jika diperlukan
-// session_start();
+session_start();
+// $_SESSION['nim'] = '1000001';
+
+// Load semua file yang diperlukan
+require_once '../app/core/Database.php';
+require_once '../app/models/ProfilModel.php';
+require_once '../app/models/NotifikasiModel.php';
+require_once '../app/models/RiwayatPesanModel.php';
+require_once '../app/controllers/ProfilController.php';
+
+// Ambil data dari controller
+$controller = new ProfilController();
+$data = $controller->index();
+
+// Setelah ini, $data berisi:
+// $data['mahasiswaData'], $data['notifikasiData'], $data['riwayatPesanData']
 
 // Include navbar dan sidebar
 include 'navbar.html';
@@ -8,7 +22,6 @@ include 'sidebar.html';
 ?>
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
@@ -26,7 +39,6 @@ include 'sidebar.html';
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
@@ -51,30 +63,31 @@ include 'sidebar.html';
                                 <h5>Data Pribadi</h5>
                             </div>
                             <div class="card-body">
+                                <?php $mahasiswa = $data['mahasiswaData']; ?>
                                 <div class="row">
                                     <!-- Kartu Info Individu -->
                                     <div class="col-md-4 mb-3">
                                         <div class="info-card">
                                             <h6>Nama Lengkap</h6>
-                                            <p>Nama Pengguna</p>
+                                            <p><?= isset($mahasiswa['nama']) ? htmlspecialchars($mahasiswa['nama']) : '-' ?></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <div class="info-card">
                                             <h6>NIM</h6>
-                                            <p>1234567890</p>
+                                            <p><?= isset($mahasiswa['nim']) ? htmlspecialchars($mahasiswa['nim']) : '-' ?></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <div class="info-card">
                                             <h6>Email</h6>
-                                            <p>MahasiswaKeren@polinema.ac.id</p>
+                                            <p><?= isset($mahasiswa['email']) ? htmlspecialchars($mahasiswa['email']) : '-' ?></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <div class="info-card">
                                             <h6>No. Telp</h6>
-                                            <p>1234567890</p>
+                                            <p><?= isset($mahasiswa['no_telepon']) ? htmlspecialchars($mahasiswa['no_telepon']) : '-' ?></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
@@ -86,7 +99,7 @@ include 'sidebar.html';
                                     <div class="col-md-4 mb-3">
                                         <div class="info-card">
                                             <h6>Prodi</h6>
-                                            <p>D-IV Teknik Informatika</p>
+                                            <p><?= isset($mahasiswa['program_studi']) ? htmlspecialchars($mahasiswa['program_studi']) : '-' ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,25 +116,28 @@ include 'sidebar.html';
                     <div class="col-md-10">
                         <div class="card notifications-card">
                             <div class="card-body">
-                                <!-- Konten Notifikasi -->
                                 <div id="notifications-content">
-                                    <!-- Notifikasi akan dimuat di sini -->
+                                    <?php 
+                                    $notifikasiData = $data['notifikasiData'];
+                                    if(!empty($notifikasiData)): 
+                                        foreach($notifikasiData as $notif): 
+                                    ?>
+                                        <div class="alert alert-<?= htmlspecialchars($notif['type']) ?>">
+                                            <h6><?= htmlspecialchars($notif['title']) ?></h6>
+                                            <p><?= htmlspecialchars($notif['message']) ?></p>
+                                        </div>
+                                    <?php 
+                                        endforeach; 
+                                    else: 
+                                    ?>
+                                        <div class="alert alert-secondary">Tidak ada notifikasi.</div>
+                                    <?php endif; ?>
                                 </div>
-                                <!-- Paginasi -->
-                                <nav aria-label="Navigasi notifikasi">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#" id="notif-prev">&laquo;</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#" data-page="1">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" id="notif-next">&raquo;</a></li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Bagian Pertanyaan -->
+                <!-- Bagian Pertanyaan (Riwayat Pesan) -->
                 <div class="pt-4 pb-2 mb-3 border-bottom">
                     <h2>Pertanyaan</h2>
                 </div>
@@ -130,20 +146,24 @@ include 'sidebar.html';
                     <div class="col-md-10">
                         <div class="card questions-card">
                             <div class="card-body">
-                                <!-- Konten Pertanyaan -->
                                 <div id="questions-content">
-                                    <!-- Pertanyaan akan dimuat di sini -->
+                                    <?php 
+                                    $riwayatPesanData = $data['riwayatPesanData'];
+                                    if(!empty($riwayatPesanData)): 
+                                        foreach($riwayatPesanData as $ques): 
+                                    ?>
+                                        <div class="alert alert-secondary">
+                                            <h6><?= htmlspecialchars($ques['title']) ?></h6>
+                                            <p><strong><?= date('d/m/Y H:i', strtotime($ques['tanggal'])) ?></strong></p>
+                                            <p><?= htmlspecialchars($ques['message']) ?></p>
+                                        </div>
+                                    <?php 
+                                        endforeach; 
+                                    else: 
+                                    ?>
+                                        <div class="alert alert-secondary">Tidak ada riwayat pertanyaan.</div>
+                                    <?php endif; ?>
                                 </div>
-                                <!-- Paginasi -->
-                                <nav aria-label="Navigasi pertanyaan">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#" id="ques-prev">&laquo;</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#" data-page="1">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" id="ques-next">&raquo;</a></li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>
@@ -156,93 +176,13 @@ include 'sidebar.html';
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://rerofya.github.io/resources/sweetalert.js"></script>
-    <!-- Chart.js dan script custom -->
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Include navbar dan sidebar
         $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
         });
-
-        // Data sampel untuk notifikasi dan pertanyaan
-        const notifications = [
-            {
-                type: 'danger',
-                title: 'Berkas Ditolak!',
-                message: 'Komentar Verifikator: "Kamu belum melengkapi tandatangan"'
-            },
-            {
-                type: 'danger',
-                title: 'Berkas Ditolak!',
-                message: 'Komentar Verifikator: "Tolong dibaca ulang dokumennya, jangan ada typo pada penulisan nama"'
-            },
-            {
-                type: 'success',
-                title: 'Berkas Diterima!',
-                message: 'Tidak ada komentar dari Verifikator'
-            },
-            // Tambahkan notifikasi lain sesuai kebutuhan
-        ];
-
-        const questions = [
-            {
-                date: '15/11/2024 Pukul 12.00',
-                title: 'Pertanyaan Anda',
-                message: 'Pesan : Mohon Maaf sebesar-besarnya Ibu saya Bla-bla-bla'
-            },
-            {
-                date: '16/11/2024 Pukul 13.00',
-                title: 'Pertanyaan Anda',
-                message: 'Pesan : Mohon Maaf sebesar-besarnya Ibu saya Bla-bla-bla'
-            },
-            {
-                date: '17/11/2024 Pukul 14.00',
-                title: 'Berkas Diterima',
-                message: 'Pesan : Mohon Maaf sebesar-besarnya Ibu saya Bla-bla-bla'
-            },
-            // Tambahkan pertanyaan lain sesuai kebutuhan
-        ];
-
-        // Fungsi untuk menampilkan konten dengan paginasi
-        function renderContent(contentArray, contentId, page, itemsPerPage) {
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const paginatedItems = contentArray.slice(start, end);
-            let contentHtml = '';
-            paginatedItems.forEach(item => {
-                contentHtml += `
-                <div class="alert alert-${item.type || 'secondary'}">
-                    <h6>${item.title}</h6>
-                    <p>${item.message}</p>
-                </div>`;
-            });
-            $(contentId).html(contentHtml);
-        }
-
-        // Inisialisasi tampilan awal
-        $(document).ready(function () {
-            renderContent(notifications, '#notifications-content', 1, 3);
-            renderContent(questions, '#questions-content', 1, 3);
-        });
-
-        // Handler klik untuk paginasi
-        $('.pagination a.page-link').on('click', function (e) {
-            e.preventDefault();
-            const page = $(this).data('page');
-            if ($(this).parents('nav').attr('aria-label') === 'Navigasi notifikasi') {
-                renderContent(notifications, '#notifications-content', page, 3);
-                updatePagination('nav[aria-label="Navigasi notifikasi"]', page);
-            } else {
-                renderContent(questions, '#questions-content', page, 3);
-                updatePagination('nav[aria-label="Navigasi pertanyaan"]', page);
-            }
-        });
-
-        function updatePagination(paginationSelector, activePage) {
-            $(paginationSelector + ' li').removeClass('active');
-            $(paginationSelector + ` a[data-page="${activePage}"]`).parent().addClass('active');
-        }
     </script>
 </body>
-
 </html>
