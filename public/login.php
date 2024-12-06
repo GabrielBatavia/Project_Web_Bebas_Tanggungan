@@ -1,28 +1,34 @@
 <?php
 session_start();
 
-// Sample hardcoded users (you can replace this with a database query)
+// Sample hardcoded users (username => password)
 $valid_users = [
-    'admin' => 'admin123',  // Admin user
-    'GabrielBatavia' => '2341720184', // Example mahasiswa
-    'mahasiswa2' => 'studentpass2'  // Another mahasiswa
+    'admin' => 'admin123',
+    'GabrielBatavia' => '2341720184',
+    'mahasiswa2' => 'studentpass2'
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check if the username exists and the password is correct
+    // Check credentials
     if (array_key_exists($username, $valid_users) && $valid_users[$username] == $password) {
-        // Set session variable
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $username;
 
-        // Redirect based on the role of the user
+        // Set nim based on username (contoh hardcoded)
+        if ($username == 'GabrielBatavia') {
+            $_SESSION['nim'] = '1000001';
+        } else if ($username == 'mahasiswa2') {
+            $_SESSION['nim'] = '1000002';
+        }
+
+        // Redirect based on role
         if ($username == 'admin') {
-            header("Location: ./testAdmin/dashboard.html"); // Admin page
+            header("Location: ./testAdmin/dashboard.html");
         } else {
-            header("Location: dashboard.php"); // Student page
+            header("Location: dashboard.php");
         }
         exit;
     } else {

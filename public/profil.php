@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['nim'] = '1000001';
+// $_SESSION['nim'] = '1000001';
 
 // Load semua file yang diperlukan
 require_once '../app/core/Database.php';
