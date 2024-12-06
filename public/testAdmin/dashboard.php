@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
@@ -18,6 +19,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
@@ -40,7 +42,10 @@
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card pengguna-card">
                             <div class="card-body">
-                                <h5>Pengguna </h5>
+                                <div class="card-title-with-icon">
+                                    <h5>Pengguna</h5>
+                                    <img class="card-icon" src="../img/Pengguna.png" alt="Icon Pengguna">
+                                </div>
                                 <h3 class="stat-number">322</h3>
                                 <p>Total pengguna keseluruhan</p>
                             </div>
@@ -50,7 +55,10 @@
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card verif-berkas-card">
                             <div class="card-body">
-                                <h5>Mahasiswa Verif Berkas </h5>
+                                <div class="card-title-with-icon">
+                                    <h5>Permintaan Verifikasi</h5>
+                                    <img class="card-icon" src="../img/Pending.png" alt="Icon Pengguna">
+                                </div>
                                 <h3 class="stat-number">120</h3>
                                 <p>Total pengguna persyaratan lengkap</p>
                             </div>
@@ -60,7 +68,10 @@
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card berkas-selesai-card">
                             <div class="card-body">
-                                <h5>Mahasiswa Berkas Selesai</h5>
+                                <div class="card-title-with-icon">
+                                    <h5>Permintaan Verifikasi</h5>
+                                    <img class="card-icon" src="../img/Complite.png" alt="Icon Pengguna">
+                                </div>
                                 <h3 class="stat-number">80</h3>
                                 <p>Total pengguna berkas lengkap</p>
                             </div>
@@ -68,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Filter dan Search -->
                 <div class="d-flex filter-search">
                     <div class="filter-container mr-3">
@@ -165,18 +176,19 @@
     <!-- Chart.js dan script custom -->
     <script>
         // Include navbar dan sidebar
-        $(function(){
+        $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
         });
 
         // Script untuk Filter dan Search (Optional)
-        $(document).ready(function(){
-            $('.toggle-btn-group .btn').on('click', function(){
+        $(document).ready(function () {
+            $('.toggle-btn-group .btn').on('click', function () {
                 $('.toggle-btn-group .btn').removeClass('active');
                 $(this).addClass('active');
             });
         });
     </script>
 </body>
+
 </html>
