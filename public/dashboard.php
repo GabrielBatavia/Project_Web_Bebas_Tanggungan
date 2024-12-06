@@ -209,6 +209,7 @@ if ($db) {
                         </div>
                     </div>
                 </div>
+                <div class="footer" id="footer"></div>
             </main>
         </div>
     </div>
@@ -221,6 +222,7 @@ if ($db) {
         $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
+            $("#footer").load("footer.html");
         });
     </script>
 </body>
