@@ -40,34 +40,31 @@
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card pengguna-card">
                             <div class="card-body">
-                                <div class="card-header-admin">
-                                    <h5>Pengguna <i class="fas fa-users card-icon"></i></h5>
-                                </div>
+                                <h5>Pengguna </h5>
                                 <h3 class="stat-number">322</h3>
                                 <p>Total pengguna keseluruhan</p>
                             </div>
+                            <i class="fas fa-users card-icon"></i>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card verif-berkas-card">
                             <div class="card-body">
-                                <div class="card-header-admin">
-                                    <h5>Mahasiswa Verif Berkas <i class="fas fa-file-alt card-icon"></i></h5>
-                                </div>
+                                <h5>Mahasiswa Verif Berkas </h5>
                                 <h3 class="stat-number">120</h3>
                                 <p>Total pengguna persyaratan lengkap</p>
                             </div>
+                            <i class="fas fa-file-alt card-icon"></i>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card berkas-selesai-card">
                             <div class="card-body">
-                                <div class="card-header-admin">
-                                    <h5>Mahasiswa Berkas Selesai <i class="fas fa-check-circle card-icon"></i></h5>
-                                </div>
+                                <h5>Mahasiswa Berkas Selesai</h5>
                                 <h3 class="stat-number">80</h3>
                                 <p>Total pengguna berkas lengkap</p>
                             </div>
+                            <i class="fas fa-check-circle card-icon"></i>
                         </div>
                     </div>
                 </div>
@@ -143,7 +140,7 @@
 
                 <!-- Pagination -->
                 <div class="d-flex justify-content-between align-items-center pagination-container">
-                    <p>Menampilkan 1-4 dari 4</p>
+                    <p>Menampilkan 1-3 dari 3</p>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination mb-0">
                             <li class="page-item disabled">

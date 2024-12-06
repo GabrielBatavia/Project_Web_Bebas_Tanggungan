@@ -1,0 +1,6 @@
+#toast-container {
+    position: fixed;
+    bottom: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    z-index: 1050; /* Ensure it appears above other content */
+}

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/navbarVer.css">
     <link rel="stylesheet" href="css/sidebarVer.css">
     <link rel="stylesheet" href="css/cekVeri.css">
+    <link rel="stylesheet" href="../public/css/toast.css">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -137,7 +138,7 @@
                             <div class="card-desc">
                                 <h4 class="desc1">Preview</h4>
                                 <img src="img/image 58.png" alt="">
-                                <a class="btn btn-primary" href="../public/img/Surat-Bebas-Tanggungan.png" download>Cetak</a>
+                                <a class="btn btn-primary" id="cetak">Cetak</a>
                                 <select class="form-control">
                                     <option>-- Pilih Status --</option>
                                     <option value="accepted">Diterima</option>
@@ -150,6 +151,7 @@
 
             </main>
             <!-- End Main -->
+            <div id="toast-container" class="position-fixed p-3"></div>
             </main>
         </div>
     </div>
@@ -159,11 +161,49 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js dan script custom -->
     <script>
-        // Include navbar and sidebar
+        let documentsSubmitted = 0;
+        $('.file-uploadan').click(function () {
+            documentsSubmitted += 1;
+            console.log("test")
+        });
+
         $(function () {
             $("#navbar-placeholder").load("navbarVer.html");
             $("#sidebar-placeholder").load("sidebarVeri.html");
+            $('#cetak').click(function () {
+                if (!documentsSubmitted) {
+                    showToast("Anda belum mengumpulkan semua berkas. Silakan lengkapi berkas terlebih dahulu.", "danger");
+                } else {
+                    window.location.href = "../img/Surat-Bebas-Tanggungan.png";
+                    showToast("File telah diunduh", "success");
+                }
+            });
         });
+
+        // Show Toast
+        function showToast(message, type = 'light') {
+            const toastHTML = `
+        <div class="toast align-items-center text-white bg-${type} mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div>
+                <div class="toast-header">
+                    <strong class="mr-auto">Sistem Bebas Tanggungan</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">&times;</button>
+                </div>
+                <div class="toast-body">
+                    ${message}
+                </div>
+            </div>
+        </div>`;
+
+            const toastContainer = $('#toast-container');
+            toastContainer.append(toastHTML);
+            const toast = new bootstrap.Toast(toastContainer.find('.toast').last()[0]);
+            toast.show();
+
+            toastContainer.find('.toast').on('hidden.bs.toast', function () {
+                $(this).remove();
+            });
+        }
     </script>
 </body>
 
