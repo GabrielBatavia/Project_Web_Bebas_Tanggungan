@@ -1,40 +1,33 @@
 <?php
-// Include Overview.php dan Tanggungan.php
-require_once "../config/Database.php";
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit;
+}
+
+// Include Database dan Models
+require_once "../app/core/Database.php";
 require_once "../app/models/Tanggungan.php";
 require_once "../app/models/Overview.php";
 
-// Inisialisasi koneksi database
-$database = new Database();
-$db = $database->connect();
+// Inisialisasi Database
+$db = new Database();
 
-// Cek koneksi dan ambil data dari Overview.php dan Tanggungan.php
-if ($db) {
-    $overview = new Overview($db);
-    $tanggunganModel = new Tanggungan($db);
+// Inisialisasi Models dengan koneksi database
+$tanggunganModel = new Tanggungan($db->dbh);
+$overviewModel = new Overview($db->dbh);
 
-    $selesai = $overview->getSelesai();
-    $belumSelesai = $overview->getBelumSelesai();
-    $pending = $overview->getPending();
+// Ambil NIM dari session
+$nim = $_SESSION['nim'];
 
-    $tanggungan = $tanggunganModel->getBelumSelesaiTanggungan()->fetchAll(PDO::FETCH_ASSOC);
-} else {
-    // Jika koneksi gagal, gunakan data statis untuk debug
-    $selesai = [
-        ["id_tanggungan" => 1, "nama_berkas" => "Formulir Pendaftaran", "status" => "Selesai"],
-    ];
-    $belumSelesai = [
-        ["id_tanggungan" => 2, "nama_berkas" => "Proposal Penelitian", "status" => "Belum Selesai"],
-    ];
-    $pending = [
-        ["id_tanggungan" => 3, "nama_berkas" => "Surat Keterangan", "status" => "Pending"],
-    ];
+// Ambil data tanggungan berdasarkan NIM
+$tanggungan = $tanggunganModel->getTanggunganByNIM($nim);
 
-    $tanggungan = [
-        ["nama_berkas" => "Tanda Terima Penyerahan Laporan TA", "deskripsi" => "Upload laporan TA", "status" => "Terlambat"],
-        ["nama_berkas" => "Tanda Terima Penyerahan Laporan PKL", "deskripsi" => "Upload laporan PKL", "status" => "Overdue by 2 days"],
-    ];
-}
+// Ambil data overview
+$selesai = $overviewModel->getSelesaiByNIM($nim);
+$belumSelesai = $overviewModel->getBelumSelesaiByNIM($nim);
+$pending = $overviewModel->getPendingByNIM($nim);
 ?>
 
 <!DOCTYPE html>

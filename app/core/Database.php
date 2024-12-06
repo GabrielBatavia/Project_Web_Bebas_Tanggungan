@@ -5,11 +5,11 @@ class Database {
     private $pass = '';
     private $dbname = 'pbl';
 
-    private $dbh; // Database handler
+    public $dbh; // Ubah menjadi public agar bisa diakses di luar kelas
     private $stmt;
 
     public function __construct() {
-        $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbname;
+        $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbname.';charset=utf8mb4';
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -59,3 +59,4 @@ class Database {
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+?>
