@@ -1,70 +1,164 @@
+/* Import Font Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9; /* Warna latar belakang untuk konten */
-    padding-top: 56px; /* Menyesuaikan dengan tinggi navbar */
+    background-color: #f4f4f9; /* Warna latar belakang konten */
+    padding-top: 56px; /* Sesuaikan dengan tinggi navbar */
 }
 
+/* Alert Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animated.fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Card Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.animated.fadeInUp {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.animated.fadeInUp.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.animated.fadeInUp.delay-2 {
+    animation-delay: 0.4s;
+}
+
+/* Card Styles */
 .card-header {
-    font-weight: bold;
-    background-color: #002981;
+    font-weight: 600;
+    background-color: #002981; /* Warna asli dipertahankan */
     color: #FFFFFF;
     border-bottom: 1px solid #e9ecef;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.3s ease;
+    border-radius: 0.25rem 0.25rem 0 0; /* Menjaga border-radius seperti Bootstrap */
+}
+
+.card-header:hover {
+    background-color: #001f6f; /* Sedikit lebih gelap saat hover */
 }
 
 .card-body {
-    padding: 1rem;
-    font-size: 0.9rem;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 0 0 0.25rem 0.25rem; /* Menjaga border-radius seperti Bootstrap */
+}
+
+.card-body:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-3px);
 }
 
 .card {
     margin-bottom: 1.5rem;
+    border: none;
+    border-radius: 0.25rem; /* Menjaga border-radius seperti Bootstrap */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
 }
 
-.btn-link {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
+.card.shadow-sm:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.btn-link:hover {
-    text-decoration: underline;
-}
-
+/* Button Styles */
 .btn-primary {
-    background-color: #ffffff;
-    color: #007bff;
+    background-color: #007bff; /* Warna asli dipertahankan */
+    color: #ffffff;
     border: 1px solid #007bff; 
-    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.25rem; /* Menjaga border-radius seperti Bootstrap */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
 }
 
 .btn-primary:hover {
-    background-color: #007bff; /* Warna latar saat hover */
-    color: #ffffff; /* Warna teks saat hover */
+    background-color: #0056b3; /* Warna saat hover */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
 }
 
-/* Custom styles for the upload button placement */
+/* Upload Button Container */
 .upload-btn-container {
     text-align: right;
-    margin-top: -40px;
-}
-.upload-btn-container button {
-    display: inline-block;
+    margin-top: 1rem;
 }
 
+.upload-btn-container button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ripple Effect */
+.upload-btn-container .btn-animated::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.75s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 0;
+}
+
+.upload-btn-container .btn-animated:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.upload-btn-container .btn-animated i {
+    position: relative;
+    z-index: 1;
+}
+
+/* Form Group Styles */
 .form-group {
     margin-top: 1rem;
 }
 
 input[type="file"] {
     margin-top: 0.5rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+input[type="file"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Image Preview Styles */
 .preview {
     display: flex;
     flex-direction: column;
@@ -78,5 +172,9 @@ input[type="file"] {
     max-width: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
+.preview img:hover {
+    transform: scale(1.05);
+}
