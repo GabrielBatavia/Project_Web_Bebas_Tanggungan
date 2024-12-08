@@ -13,9 +13,9 @@
     <!-- Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/helpDesk.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/helpdesk.css">
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -37,14 +37,14 @@
                     <h2>HelpDesk</h2>
                 </div>
                 <div class="header">
-                    <img src="img/image 10.png" alt="" class="g1">
+                    <img src="../img/image 10.png" alt="" class="g1">
                     <div class="header-text">
                         <h5 class="header-title">Pertanyaan Umum</h5>
                         <p class="header-title2">
                             Beberapa Pertanyaan yang sering ditanyakan
                         </p>
                     </div>
-                    <img src="img/image 11.png" alt="" class="g2">
+                    <img src="../img/image 11.png" alt="" class="g2">
                 </div>
                 <div class="card">
                     <div class="card-body1">
@@ -92,17 +92,19 @@
                 <div class="card card61">
                     <div class="body6">
                         <div class="kiri">
-                            <img src="img/user-profile.jpg" alt="Profile" class="rounded-circle" height="88">
+                            <img src="../img/user-profile.jpg" alt="Profile" class="rounded-circle" height="88">
                             <h3>Admin Prodi</h3>
                             <p>1-2 Hari Kerja</p>
                             <textarea class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..."></textarea>
+                            <button type="submit" id="kirim" class="btn btn-primary">Kirim</button>
                         </div>
                         <div class="vertical-divider"></div>
                         <div class="kanan">
-                            <img src="img/user-profile.jpg" alt="Profile" class="rounded-circle" height="88">
+                            <img src="../img/user-profile.jpg" alt="Profile" class="rounded-circle" height="88">
                             <h3>Verifikator lt 7</h3>
                             <p>1-2 Hari Kerja</p>
-                            <textarea class="form-control" rows="3" style="width: 357px; height: 133px;" ="Ketik pesan disini..."></textarea>
+                            <textarea class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..."></textarea>
+                            <button type="submit" id="kirim" class="btn btn-primary">Kirim</button>
                         </div>
                     </div>
                 </div>
@@ -115,12 +117,17 @@
     </div>
     </div>
 
+    <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: none;">
+        <div id="toast-message" style="background: #143273; color: white; padding: 10px 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+            Pesan anda telah terkirim!
+        </div>
+    </div>    
+
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js dan script custom -->
     <script>
-        // Include navbar and sidebar
         $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
@@ -134,7 +141,22 @@
                 $(this).toggleClass('fa-chevron-down fa-chevron-up');
             });
         });
+
+        document.querySelectorAll('#kirim').forEach(button => {
+            button.addEventListener('click', () => {
+                const toastContainer = document.getElementById('toast-container');
+                
+                toastContainer.style.display = 'block';
+                toastContainer.style.opacity = '1';
+                
+                setTimeout(() => {
+                    toastContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        toastContainer.style.display = 'none';
+                    }, 300); 
+                }, 2000);
+            });
+        });
     </script>
 </body>
-
 </html>
