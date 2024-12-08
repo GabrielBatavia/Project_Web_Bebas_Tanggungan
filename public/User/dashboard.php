@@ -2,14 +2,14 @@
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: index.html");
+    header("Location: ../index.html");
     exit;
 }
 
 // Include Database dan Models
-require_once "../app/core/Database.php";
-require_once "../app/models/Tanggungan.php";
-require_once "../app/models/Overview.php";
+require_once "../../app/core/Database.php";
+require_once "../../app/models/Tanggungan.php";
+require_once "../../app/models/Overview.php";
 
 // Inisialisasi Database
 $db = new Database();
@@ -43,9 +43,9 @@ $pending = $overviewModel->getPendingByNIM($nim);
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>

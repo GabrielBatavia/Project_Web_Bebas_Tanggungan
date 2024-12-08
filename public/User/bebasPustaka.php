@@ -22,7 +22,7 @@ if (isset($_GET['success'])) {
     <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebas Akademi Pusat</title>
+    <title>Bebas Pustaka</title>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome untuk ikon -->
@@ -30,9 +30,9 @@ if (isset($_GET['success'])) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/pengumpulanBerkas.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/pengumpulanBerkas.css">
     
     <!-- Animate.css untuk animasi (Opsional tetapi disarankan) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -54,22 +54,22 @@ if (isset($_GET['success'])) {
             <!-- Konten Utama -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Bebas Akademi Pusat</h2>
+                    <h2>Bebas Pustaka</h2>
                 </div>
 
                 <!-- Main Form -->
                 <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                     <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
 
-                    <!-- Form: Bebas Akademi Pusat -->
-                    <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
+                    <!-- Form: Bebas Pustaka -->
+                    <div class="card mb-4 shadow-sm animated fadeInUp">
                         <div class="card-header">
-                            <h5>Bebas Akademi Pusat</h5>
+                            <h5>Bebas Pustaka</h5>
                         </div>
                         <div class="card-body">
-                            <h6>Selesaikan terlebih dahulu Persyaratan Bebas Tanggungan Akademi Pusat di 
-                            <a href="https://helpakademik.polinema.ac.id/" target="_blank">helpakademik.polinema.ac.id</a> pada menu Bebas Tanggungan
-                            dan Upload Surat Keterangan Bebas Akademi Pusat di sini.</h6><br>
+                            <h6>Selesaikan terlebih dahulu Persyaratan Bebas Pustaka di 
+                            <a href="https://library.polinema.ac.id/" target="_blank">library.polinema.ac.id</a>
+                            dan Upload Surat Keterangan Bebas Pustaka di sini.</h6><br>
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_1">Upload File 1:</label>

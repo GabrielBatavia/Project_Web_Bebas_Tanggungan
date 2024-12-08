@@ -3,11 +3,11 @@ session_start();
 // $_SESSION['nim'] = '1000001';
 
 // Load semua file yang diperlukan
-require_once '../app/core/Database.php';
-require_once '../app/models/ProfilModel.php';
-require_once '../app/models/NotifikasiModel.php';
-require_once '../app/models/RiwayatPesanModel.php';
-require_once '../app/controllers/ProfilController.php';
+require_once '../../app/core/Database.php';
+require_once '../../app/models/ProfilModel.php';
+require_once '../../app/models/NotifikasiModel.php';
+require_once '../../app/models/RiwayatPesanModel.php';
+require_once '../../app/controllers/ProfilController.php';
 
 // Ambil data dari controller
 $controller = new ProfilController();
@@ -32,10 +32,10 @@ include 'sidebar.html';
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/profil.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/profil.css">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>

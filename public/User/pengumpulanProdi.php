@@ -22,7 +22,7 @@ if (isset($_GET['success'])) {
     <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebas Pustaka</title>
+    <title>Bebas Tanggungan Prodi</title>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome untuk ikon -->
@@ -30,9 +30,9 @@ if (isset($_GET['success'])) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/pengumpulanBerkas.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/pengumpulanBerkas.css">
     
     <!-- Animate.css untuk animasi (Opsional tetapi disarankan) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -54,26 +54,68 @@ if (isset($_GET['success'])) {
             <!-- Konten Utama -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Bebas Pustaka</h2>
+                    <h2>Bebas Tanggungan Prodi</h2>
                 </div>
 
                 <!-- Main Form -->
                 <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                     <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
 
-                    <!-- Form: Bebas Pustaka -->
+                    <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp">
                         <div class="card-header">
-                            <h5>Bebas Pustaka</h5>
+                            <h5>Laporan Tugas Akhir/Skripsi 1</h5>
                         </div>
                         <div class="card-body">
-                            <h6>Selesaikan terlebih dahulu Persyaratan Bebas Pustaka di 
-                            <a href="https://library.polinema.ac.id/" target="_blank">library.polinema.ac.id</a>
-                            dan Upload Surat Keterangan Bebas Pustaka di sini.</h6><br>
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_1">Upload File 1:</label>
                                 <input type="file" name="file_upload_1" class="form-control file-input" required id="file_upload_1">
+                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form 2: Laporan Tugas Akhir/Skripsi 2 -->
+                    <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
+                        <div class="card-header">
+                            <h5>Laporan Tugas Akhir/Skripsi 2</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <div class="form-group">
+                                <label for="file_upload_2">Upload File 2:</label>
+                                <input type="file" name="file_upload_2" class="form-control file-input" required id="file_upload_2">
+                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form 3: Laporan Tugas Akhir/Skripsi 3 -->
+                    <div class="card mb-4 shadow-sm animated fadeInUp delay-2">
+                        <div class="card-header">
+                            <h5>Laporan Tugas Akhir/Skripsi 3</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <div class="form-group">
+                                <label for="file_upload_3">Upload File 3:</label>
+                                <input type="file" name="file_upload_3" class="form-control file-input" required id="file_upload_3">
+                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form 4: Laporan Tugas Akhir/Skripsi 4 -->
+                    <div class="card mb-4 shadow-sm animated fadeInUp delay-3">
+                        <div class="card-header">
+                            <h5>Laporan Tugas Akhir/Skripsi 4</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <div class="form-group">
+                                <label for="file_upload_4">Upload File 4:</label>
+                                <input type="file" name="file_upload_4" class="form-control file-input" required id="file_upload_4">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
                         </div>

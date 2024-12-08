@@ -27,7 +27,7 @@ function getPdfPreview($pdfFilePath, $previewPath) {
 }
 
 // Tentukan path PDF dan gambar preview
-$pdfFolder = __DIR__ . '/../app/uploads'; // Folder tempat file PDF berada
+$pdfFolder = __DIR__ . '../../app/uploads'; // Folder tempat file PDF berada
 $pdfFiles = glob($pdfFolder . '/*.pdf'); // Ambil semua file PDF di folder
 
 // Periksa apakah ada file PDF
@@ -49,9 +49,9 @@ if (empty($pdfFiles)) {
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/pengumpulanBerkas.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/pengumpulanBerkas.css">
 </head>
 <body>
     <!-- Navbar -->

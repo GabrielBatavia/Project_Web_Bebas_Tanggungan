@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Sample hardcoded users (username => password)
+// Daftar pengguna valid (username => password)
 $valid_users = [
     'admin' => 'admin123',
     'GabrielBatavia' => '2341720184',
@@ -12,23 +12,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check credentials
+    // Cek kredensial
     if (array_key_exists($username, $valid_users) && $valid_users[$username] == $password) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $username;
 
-        // Set nim based on username (contoh hardcoded)
+        // Set NIM berdasarkan username (contoh hardcoded)
         if ($username == 'GabrielBatavia') {
             $_SESSION['nim'] = '1000001';
-        } else if ($username == 'mahasiswa2') {
+        } elseif ($username == 'mahasiswa2') {
             $_SESSION['nim'] = '1000002';
         }
 
-        // Redirect based on role
+        // Redirect berdasarkan peran
         if ($username == 'admin') {
-            header("Location: ./testAdmin/dashboard.php");
+            header("Location: Admin/dashboard.php");
         } else {
-            header("Location: dashboard.php");
+            header("Location: User/dashboard.php");
         }
         exit;
     } else {
