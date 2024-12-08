@@ -1,0 +1,176 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9; /* Warna latar belakang untuk konten */
+    padding-top: 56px; /* Menyesuaikan dengan tinggi navbar */
+}
+
+.pt-4 {
+    margin-left: 48px;
+}
+
+.pt-4 h2 {
+    font-weight: bold;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .header-text {
+    text-align: center; /* Horizontal: Pusatkan teks dalam elemen */
+    margin: 0 auto;
+}
+
+.header .header-title {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.header .g1 {
+    width: 270px;
+    height: 261px;
+    margin-left: 48px;
+}
+
+.header .g2 {
+    width: 208px;
+    height: 201px;
+    margin-right: 22px;
+}
+
+.card {
+    border: 2px solid rgb(0, 0, 0, 0.6);
+    border-radius: 10px;
+    max-width: 964px;
+    margin-left: 147px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: left;
+}
+
+.card-divider {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #808080;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+}
+
+.card .bold {
+    text-align: left; /* Horizontal: Pusatkan teks dalam elemen */
+    margin-left: 32px;
+    margin-top: 17px;
+    font-size: 20px;
+    font-weight: 600;
+    max-width: 778px;   
+    display: flex;
+}
+
+.card-body1 {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 35px;
+}
+
+.card-body2 {
+    display: none;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+.card .semi {
+    text-align: left; /* Horizontal: Pusatkan teks dalam elemen */
+    margin-left: 32px;
+    margin-top: 17px;
+    font-size: 20px;
+    font-weight: 500;
+    max-width: 778px;
+}
+
+.card i {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.body51 {
+    margin-bottom: 53px;
+}
+
+.middle-text {
+    font-size: 32px;
+    font-weight: 600px;
+    margin-left: 147px;
+    margin-bottom: 13px;
+}
+
+.card61 {
+    margin-bottom: 96px;
+    min-height: 406px;
+}
+
+.body6 {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: 406px;
+}
+
+.kiri, .kanan {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 372px;
+    background-color: #808080;
+    margin: 0 10px;
+}
+
+.body6:not(:last-child) {
+    margin-right: 10px;
+}
+
+.body6 h3 {
+    font-size: 20px;
+    font-weight: 600px;
+    margin-bottom: 8px;
+}
+
+.body6 img {
+    margin-top: 25px;
+    margin-bottom: 8px;
+}
+
+.body6 p {
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.textarea {
+    width: 357px;
+    height: 133px;
+    border: 4px solid #808080;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
