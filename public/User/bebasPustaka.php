@@ -33,12 +33,19 @@ if (isset($_GET['success'])) {
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/pengumpulanBerkas.css">
-    
+
     <!-- Animate.css untuk animasi (Opsional tetapi disarankan) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #footer {
+            bottom: 0;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,7 +65,8 @@ if (isset($_GET['success'])) {
                 </div>
 
                 <!-- Main Form -->
-                <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data"
+                    class="upload-form" id="uploadForm">
                     <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
 
                     <!-- Form: Bebas Pustaka -->
@@ -67,13 +75,15 @@ if (isset($_GET['success'])) {
                             <h5>Bebas Pustaka</h5>
                         </div>
                         <div class="card-body">
-                            <h6>Selesaikan terlebih dahulu Persyaratan Bebas Pustaka di 
-                            <a href="https://library.polinema.ac.id/" target="_blank">library.polinema.ac.id</a>
-                            dan Upload Surat Keterangan Bebas Pustaka di sini.</h6><br>
+                            <h6>Selesaikan terlebih dahulu Persyaratan Bebas Pustaka di
+                                <a href="https://library.polinema.ac.id/" target="_blank">library.polinema.ac.id</a>
+                                dan Upload Surat Keterangan Bebas Pustaka di sini.
+                            </h6><br>
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_1">Upload File 1:</label>
-                                <input type="file" name="file_upload_1" class="form-control file-input" required id="file_upload_1">
+                                <input type="file" name="file_upload_1" class="form-control file-input" required
+                                    id="file_upload_1">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
@@ -87,36 +97,80 @@ if (isset($_GET['success'])) {
                     </div>
                 </form>
 
+                <br><br><br>
+                <footer id="footer" style="margin-top: 10px;"></footer>
             </main>
         </div>
     </div>
+
+    <div id="toast-container"></div>
 
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        const uploaded = false;
+
+        $('#footer').load('footer.html');
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
-        $(document).ready(function() {
+        $(document).ready(function () {
             function checkFiles() {
                 let allFilesSelected = true;
-                $(".upload-form input[type='file']").each(function() {
+                $(".upload-form input[type='file']").each(function () {
                     if ($(this).val() === '') {
                         allFilesSelected = false;
+                        showToast("File Berhasil Diupload", "success");
                     }
                 });
                 if (allFilesSelected) {
                     $('#uploadBtn').prop('disabled', false); // Aktifkan tombol upload
+                    $uploaded = false;
                 } else {
                     $('#uploadBtn').prop('disabled', true); // Nonaktifkan jika belum semua file dipilih
+                    $uploaded = true;
                 }
             }
-
             // Cek file saat dipilih
-            $(".upload-form input[type='file']").change(function() {
+            $(".upload-form input[type='file']").change(function () {
                 checkFiles();
             });
+
         });
+
+        //Fix whatever happened on this toasts later.
+        $('#uploadBtn').click(function () {
+            if (uploaded) {
+                showToast("File Berhasil Diupload");
+            } else {
+                showToast("Silahkan upload file terlebih dahulu", 'warning');
+            }
+        });
+
+        function showToast(message, type = 'light') {
+            const toastHTML = `
+        <div class="toast align-items-center text-white bg-${type} mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div>
+                <div class="toast-header">
+                    <strong class="mr-auto">Sistem Bebas Tanggungan</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">&times;</button>
+                </div>
+                <div class="toast-body">
+                    ${message}
+                </div>
+            </div>
+        </div>`;
+
+            const toastContainer = $('#toast-container');
+            toastContainer.append(toastHTML);
+            const toast = new bootstrap.Toast(toastContainer.find('.toast').last()[0]);
+            toast.show();
+
+            toastContainer.find('.toast').on('hidden.bs.toast', function () {
+                $(this).remove();
+            });
+        }
+
     </script>
 </body>
 

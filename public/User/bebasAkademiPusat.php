@@ -36,9 +36,16 @@ if (isset($_GET['success'])) {
     
     <!-- Animate.css untuk animasi (Opsional tetapi disarankan) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #footer {
+            bottom: 0;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -87,15 +94,20 @@ if (isset($_GET['success'])) {
                     </div>
                 </form>
 
+                <br><br>
+                <footer id="footer" style="margin-top: 14px;"></footer>
             </main>
         </div>
     </div>
+
+    <div id="toast-container" class="position-fixed p-3"></div>
 
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        $('#footer').load('footer.html');
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
         $(document).ready(function() {
             function checkFiles() {
@@ -117,6 +129,31 @@ if (isset($_GET['success'])) {
                 checkFiles();
             });
         });
+
+        //Fix whatever happened on this toasts later.
+        function showToast(message, type = 'light') {
+            const toastHTML = `
+        <div class="toast align-items-center text-white bg-${type} mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div>
+                <div class="toast-header">
+                    <strong class="mr-auto">Sistem Bebas Tanggungan</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">&times;</button>
+                </div>
+                <div class="toast-body">
+                    ${message}
+                </div>
+            </div>
+        </div>`;
+
+            const toastContainer = $('#toast-container');
+            toastContainer.append(toastHTML);
+            const toast = new bootstrap.Toast(toastContainer.find('.toast').last()[0]);
+            toast.show();
+
+            toastContainer.find('.toast').on('hidden.bs.toast', function () {
+                $(this).remove();
+            });
+        }
     </script>
 </body>
 
