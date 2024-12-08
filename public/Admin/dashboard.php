@@ -1,4 +1,6 @@
 <?php
+// public/Admin/dashboard.php
+
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -6,8 +8,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-?>
+require_once __DIR__ . '/../../app/controllers/DashboardAdminController.php';
 
+$dashboardController = new DashboardAdminController();
+
+// Mendapatkan id_jabatan dari session
+$id_jabatan = $_SESSION['id_jabatan'];
+
+// Mendapatkan data dashboard
+$dashboardData = $dashboardController->getDashboardData($id_jabatan);
+
+// Mendapatkan data mahasiswa
+$mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,8 +63,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card pengguna-card">
                             <div class="card-body">
-                                <h5>Pengguna </h5>
-                                <h3 class="stat-number">322</h3>
+                                <h5>Pengguna</h5>
+                                <h3 class="stat-number"><?php echo htmlspecialchars($dashboardData['total_users']); ?></h3>
                                 <p>Total pengguna keseluruhan</p>
                             </div>
                             <i class="fas fa-users card-icon"></i>
@@ -60,8 +73,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <div class="col-md-4 mb-4">
                         <div class="card admin-card verif-berkas-card">
                             <div class="card-body">
-                                <h5>Mahasiswa Verif Berkas </h5>
-                                <h3 class="stat-number">120</h3>
+                                <h5>Mahasiswa Verif Berkas</h5>
+                                <h3 class="stat-number"><?php echo htmlspecialchars($dashboardData['total_verif_berkas']); ?></h3>
                                 <p>Total pengguna persyaratan lengkap</p>
                             </div>
                             <i class="fas fa-file-alt card-icon"></i>
@@ -71,7 +84,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="card admin-card berkas-selesai-card">
                             <div class="card-body">
                                 <h5>Mahasiswa Berkas Selesai</h5>
-                                <h3 class="stat-number">80</h3>
+                                <h3 class="stat-number"><?php echo htmlspecialchars($dashboardData['total_berkas_selesai']); ?></h3>
                                 <p>Total pengguna berkas lengkap</p>
                             </div>
                             <i class="fas fa-check-circle card-icon"></i>
@@ -112,53 +125,66 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($mahasiswaData as $mhs): ?>
                             <tr>
-                                <td>2341720000</td>
-                                <td>Mamang John</td>
-                                <td><span class="badge badge-danger">Tinggi</span></td>
-                                <td>080000000000</td>
-                                <td><span class="badge badge-danger">Belum</span></td>
+                                <td><?php echo htmlspecialchars($mhs['nim']); ?></td>
+                                <td><?php echo htmlspecialchars($mhs['nama']); ?></td>
+                                <td>
+                                    <?php
+                                    // Menampilkan urgensi
+                                    switch ($mhs['urgensi']) {
+                                        case 'Tinggi':
+                                            echo '<span class="badge badge-danger">Tinggi</span>';
+                                            break;
+                                        case 'Sedang':
+                                            echo '<span class="badge badge-warning">Sedang</span>';
+                                            break;
+                                        case 'Ringan':
+                                            echo '<span class="badge badge-success">Ringan</span>';
+                                            break;
+                                        default:
+                                            echo '<span class="badge badge-secondary">Tidak Urgent</span>';
+                                            break;
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($mhs['no_telepon']); ?></td>
+                                <td>
+                                    <?php
+                                    // Menampilkan status
+                                    switch ($mhs['status']) {
+                                        case 'Belum':
+                                            echo '<span class="badge badge-danger">Belum</span>';
+                                            break;
+                                        case 'Dibaca':
+                                            echo '<span class="badge badge-warning">Dibaca</span>';
+                                            break;
+                                        case 'Dibalas':
+                                            echo '<span class="badge badge-success">Dibalas</span>';
+                                            break;
+                                        default:
+                                            echo '<span class="badge badge-secondary">Tidak Diketahui</span>';
+                                            break;
+                                    }
+                                    ?>
+                                </td>
                                 <td><a href="#" class="btn-detail"><i class="fas fa-eye"></i></a></td>
                             </tr>
-                            <tr>
-                                <td>2341720001</td>
-                                <td>Siti Rahma</td>
-                                <td><span class="badge badge-warning">Sedang</span></td>
-                                <td>081234567890</td>
-                                <td><span class="badge badge-warning">Dibaca</span></td>
-                                <td><a href="#" class="btn-detail"><i class="fas fa-eye"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>2341720002</td>
-                                <td>Ahmad Fauzi</td>
-                                <td><span class="badge badge-success">Ringan</span></td>
-                                <td>082345678901</td>
-                                <td><span class="badge badge-success">Dibalas</span></td>
-                                <td><a href="#" class="btn-detail"><i class="fas fa-eye"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>2341720003</td>
-                                <td>Linda Putri</td>
-                                <td><span class="badge badge-secondary">Tidak Urgent</span></td>
-                                <td>083456789012</td>
-                                <td><span class="badge badge-danger">Belum</span></td>
-                                <td><a href="#" class="btn-detail"><i class="fas fa-eye"></i></a></td>
-                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Pagination -->
                 <div class="d-flex justify-content-between align-items-center pagination-container">
-                    <p>Menampilkan 1-3 dari 3</p>
+                    <p>Menampilkan 1-<?php echo count($mahasiswaData); ?> dari <?php echo htmlspecialchars($dashboardData['total_verif_berkas'] + $dashboardData['total_berkas_selesai']); ?></p>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination mb-0">
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1">&laquo;</a>
                             </li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <!-- Tambahkan halaman lain sesuai kebutuhan -->
                             <li class="page-item">
                                 <a class="page-link" href="#">&raquo;</a>
                             </li>
@@ -174,7 +200,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js dan script custom -->
     <script>
-        // Include navbar dan sidebar
+        // Memasukkan navbar dan sidebar
         $(function(){
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");

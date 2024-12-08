@@ -4,18 +4,24 @@ abstract class Controller
 {
     public function view($view, $data = [])
     {
-        if (file_exists("../app/views/" . $view . ".php")) {
-            require_once "../app/views/" . $view . ".php";
+        $viewPath = __DIR__ . '/../views/' . $view . '.php';
+        if (file_exists($viewPath)) {
+            require_once $viewPath;
         } else {
             die("View does not exist.");
         }
     }
-
     public function model($model)
     {
-        if (file_exists("../app/models/" . $model . ".php")) {
-            require_once "../app/models/" . $model . ".php";
-            return new $model();
+        // Gunakan jalur absolut dengan __DIR__
+        $modelPath = __DIR__ . '/../models/' . $model . '.php';
+        if (file_exists($modelPath)) {
+            require_once $modelPath;
+            if (class_exists($model)) {
+                return new $model();
+            } else {
+                die("Model class '{$model}' does not exist.");
+            }
         } else {
             die("Model does not exist.");
         }
