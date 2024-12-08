@@ -1,3 +1,34 @@
+<?php
+session_start();
+
+// Sertakan Controller.php melalui HelpDeskController.php
+require_once '../../app/controllers/HelpDeskController.php';
+
+// Cek apakah pengguna sudah login
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../index.html");
+    exit;
+}
+
+// Jika form disubmit, proses data melalui controller
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_pesan'])) {
+    require_once '../../app/controllers/HelpDeskController.php';
+    $controller = new HelpDeskController();
+    $controller->sendMessage();
+}
+
+// Cek status untuk menampilkan toast
+$status = '';
+if (isset($_GET['status'])) {
+    if ($_GET['status'] == 'success') {
+        $status = 'success';
+    } elseif ($_GET['status'] == 'error') {
+        $status = 'error';
+    } elseif ($_GET['status'] == 'validation_error') {
+        $status = 'validation_error';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,15 +68,17 @@
                     <h2>HelpDesk</h2>
                 </div>
                 <div class="header">
-                    <img src="../img/image 10.png" alt="" class="g1">
+                    <img src="../img/image10.png" alt="" class="g1">
                     <div class="header-text">
                         <h5 class="header-title">Pertanyaan Umum</h5>
                         <p class="header-title2">
                             Beberapa Pertanyaan yang sering ditanyakan
                         </p>
                     </div>
-                    <img src="../img/image 11.png" alt="" class="g2">
+                    
+                    <img src="../img/image11.png" alt="" class="g2">
                 </div>
+                <!-- Pertanyaan Umum (Anda dapat menambahkan lebih banyak pertanyaan sesuai kebutuhan) -->
                 <div class="card">
                     <div class="card-body1">
                         <p class="bold">Pertanyaan : Apa yang dimaksud dengan surat Bebas Tanggungan?</p>
@@ -56,55 +89,36 @@
                         <p class="semi">Jawaban: Surat Bebas Tanggungan adalah...</p>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body1">
-                        <p class="bold truncate">Pertanyaan : Dokumen apa saja yang diperlukan untuk mengajukan bebas tanggungan Tugas Akhir?</p>
-                        <i class="fa-solid fa-chevron-down" data-target="#card-body24"></i>
-                    </div>
-                    <div class="card-divider"></div>
-                    <div id="card-body24" class="card-body24" style="display: none;">
-                        <p class="semi">Jawaban: Dokumen-dokumen yang diperlukan adalah...</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body1">
-                        <p class="bold">Pertanyaan : Berapa lama proses verifikasi dokumen??</p>
-                        <i class="fa-solid fa-chevron-down" data-target="#card-body25"></i>
-                    </div>
-                    <div class="card-divider"></div>
-                    <div id="card-body25" class="card-body25" style="display: none;">
-                        <p class="semi">Jawaban: Proses verifikasi berlangsung selama...</p>
-                    </div>
-                </div>
-                <div class="card body51">
-                    <div class="card-body1">
-                        <p class="bold">Pertanyaan : Apa yang harus dilakukan jika dokumen yang diajukan dinyatakan tidak lengkap?</p>
-                        <i class="fa-solid fa-chevron-down" data-target="#card-body26"></i>
-                    </div>
-                    <div class="card-divider"></div>
-                    <div id="card-body26" class="card-body26" style="display: none;">
-                        <p class="semi">Jawaban: Lengkapi dokumen sesuai petunjuk dan ajukan kembali</p>
-                    </div>
-                </div>
+                <!-- Tambahkan pertanyaan lain di sini -->
+
+                <!-- Form Pengiriman Pesan -->
                 <div class="middle-text">
                     <h2>Punya pertanyaan spesifik/Urgent?</h2>
                 </div>
                 <div class="card card61">
                     <div class="body6">
+                        <!-- Form untuk Admin Prodi -->
                         <div class="kiri">
                             <img src="../img/user-profile.jpg" alt="Profile" class="rounded-circle" height="88">
                             <h3>Admin Prodi</h3>
                             <p>1-2 Hari Kerja</p>
-                            <textarea class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..."></textarea>
-                            <button type="submit" id="kirim" class="btn btn-primary">Kirim</button>
+                            <form method="POST" action="helpDesk.php">
+                                <textarea name="pesan_mhs" class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..." required></textarea>
+                                <input type="hidden" name="tujuan_id_jabatan" value="1">
+                                <button type="submit" name="submit_pesan" class="btn btn-primary mt-2">Kirim ke Admin Prodi</button>
+                            </form>
                         </div>
                         <div class="vertical-divider"></div>
+                        <!-- Form untuk Verifikator lt 7 -->
                         <div class="kanan">
                             <img src="../img/user-profile.jpg" alt="Profile" class="rounded-circle" height="88">
                             <h3>Verifikator lt 7</h3>
                             <p>1-2 Hari Kerja</p>
-                            <textarea class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..."></textarea>
-                            <button type="submit" id="kirim" class="btn btn-primary">Kirim</button>
+                            <form method="POST" action="helpDesk.php">
+                                <textarea name="pesan_mhs" class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..." required></textarea>
+                                <input type="hidden" name="tujuan_id_jabatan" value="2">
+                                <button type="submit" name="submit_pesan" class="btn btn-primary mt-2">Kirim ke Verifikator lt 7</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -128,35 +142,38 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js dan script custom -->
     <script>
-        $(function () {
-            $("#navbar-placeholder").load("navbar.html");
-            $("#sidebar-placeholder").load("sidebar.html");
-            $("#footer-placeholder").load("footer.html");
+    $(function () {
+        $("#navbar-placeholder").load("navbar.html");
+        $("#sidebar-placeholder").load("sidebar.html");
+        $("#footer-placeholder").load("footer.html");
+    });
+
+    $(document).ready(function () {
+        $('.fa-chevron-down').on('click', function () {
+            const target = $(this).data('target');
+            $(target).slideToggle();
+            $(this).toggleClass('fa-chevron-down fa-chevron-up');
         });
 
-        $(document).ready(function () {
-            $('.fa-chevron-down').on('click', function () {
-                const target = $(this).data('target');
-                $(target).slideToggle();
-                $(this).toggleClass('fa-chevron-down fa-chevron-up');
-            });
-        });
+        // Tampilkan toast berdasarkan status
+        <?php if ($status == 'success'): ?>
+            $('#toast-message').text('Pesan anda telah terkirim!');
+            $('#toast-container').fadeIn();
+            setTimeout(() => {
+                $('#toast-container').fadeOut();
+            }, 2000);
+        <?php elseif ($status == 'error'): ?>
+            alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+        <?php elseif ($status == 'validation_error'): ?>
+            alert('Pesan tidak boleh kosong dan tujuan harus valid.');
+        <?php endif; ?>
+    });
 
-        document.querySelectorAll('#kirim').forEach(button => {
-            button.addEventListener('click', () => {
-                const toastContainer = document.getElementById('toast-container');
-                
-                toastContainer.style.display = 'block';
-                toastContainer.style.opacity = '1';
-                
-                setTimeout(() => {
-                    toastContainer.style.opacity = '0';
-                    setTimeout(() => {
-                        toastContainer.style.display = 'none';
-                    }, 300); 
-                }, 2000);
-            });
+    document.querySelectorAll('button[name="submit_pesan"]').forEach(button => {
+        button.addEventListener('click', () => {
+            // Tidak perlu menambahkan event listener di sini karena toast ditangani oleh PHP
         });
+    });
     </script>
 </body>
 </html>

@@ -1,20 +1,26 @@
 <?php
-class Database {
-    private $host = 'localhost';
-    private $db_name = 'pbl';
-    private $username = 'root';
-    private $password = '';
-    public $conn;
+$servername = "GABRIELLOQ";
+$uid = ""; // masukkan username di sini
+$password = ""; // masukkan password di sini
+$database = "pbl"; // nama database yang digunakan
 
-    public function connect() {
-        $this->conn = null;
-        try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo "Connection Error: " . $e->getMessage();
-        }
-        return $this->conn;
-    }
+// Konfigurasi koneksi
+$connection = [
+    "Database" => $database,
+    "UID" => $uid,
+    "PWD" => $password,
+    "Encrypt" => "Optional", // Atur enkripsi menjadi opsional atau 'No' jika tidak ingin enkripsi
+    "TrustServerCertificate" => true // Opsi jika sertifikat tidak tepercaya
+];
+
+// Mencoba menghubungkan ke server SQL
+$conn = sqlsrv_connect($servername, $connection);
+
+// Mengecek koneksi
+if (!$conn) {
+    die(print_r(sqlsrv_errors(), true)); // Menampilkan pesan error jika koneksi gagal
+} else {
+    echo 'Koneksi berhasil'; // Pesan jika koneksi berhasil
+    echo '<br>';
 }
 ?>

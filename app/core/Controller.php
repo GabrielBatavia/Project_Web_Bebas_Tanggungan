@@ -11,8 +11,12 @@ abstract class Controller
             die("View does not exist.");
         }
     }
+
     public function model($model)
     {
+        // Sertakan Database.php sebelum memuat model
+        require_once __DIR__ . '/Database.php';
+
         // Gunakan jalur absolut dengan __DIR__
         $modelPath = __DIR__ . '/../models/' . $model . '.php';
         if (file_exists($modelPath)) {
@@ -47,3 +51,4 @@ abstract class Controller
         exit();
     }
 }
+?>
