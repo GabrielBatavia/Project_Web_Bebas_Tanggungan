@@ -174,3 +174,16 @@ body {
     padding: 10px;
     font-size: 14px;
 }
+
+.body6 .btn-primary {
+    border: none;
+    width: 132px;
+    height: 42px;
+    background-color: #1D3568;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+#toast-container {
+    transition: opacity 0.3s ease-in-out;
+}
