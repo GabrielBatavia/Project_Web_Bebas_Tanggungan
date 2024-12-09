@@ -183,7 +183,7 @@ $pending = $overviewModel->getPendingByNIM($nim);
     <script>
         // Include navbar dan sidebar
         $(function () {
-            $("#navbar-placeholder").load("navbar.html");
+            $("#navbar-placeholder").load("navbar.php");
             $("#sidebar-placeholder").load("sidebar.html");
         });
 

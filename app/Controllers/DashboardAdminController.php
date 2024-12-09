@@ -1,5 +1,5 @@
 <?php
-// app/controllers/DashboardController.php
+// app/controllers/DashboardAdminController.php
 
 require_once __DIR__ . '/../core/Controller.php';
 require_once __DIR__ . '/../models/UserModel.php';
@@ -19,9 +19,14 @@ class DashboardAdminController extends Controller
         $this->mahasiswaModel = $this->model('MahasiswaModel');
     }
 
+    /**
+     * Mendapatkan data statistik dashboard
+     *
+     * @param int $id_jabatan
+     * @return array
+     */
     public function getDashboardData($id_jabatan)
     {
-        // Mendapatkan data statistik
         $data = [];
         $data['total_users'] = $this->userModel->getTotalUsers();
         $data['total_verif_berkas'] = $this->tanggunganModel->getVerifBerkasCount($id_jabatan);
@@ -29,10 +34,17 @@ class DashboardAdminController extends Controller
         return $data;
     }
 
+    /**
+     * Mendapatkan semua riwayat pesan mahasiswa berdasarkan jabatan
+     *
+     * @param int $id_jabatan
+     * @return array
+     */
     public function getMahasiswaData($id_jabatan)
     {
-        // Mendapatkan data mahasiswa berdasarkan jabatan
-        return $this->mahasiswaModel->getMahasiswaByJabatan($id_jabatan);
+        return $this->mahasiswaModel->getMahasiswaWithRiwayatPesan($id_jabatan);
     }
+
+    // Fungsi baru untuk mendapatkan riwayat pesan tidak diperlukan lagi karena sudah termasuk dalam getMahasiswaData
 }
 ?>

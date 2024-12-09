@@ -17,7 +17,7 @@ $data = $controller->index();
 // $data['mahasiswaData'], $data['notifikasiData'], $data['riwayatPesanData']
 
 // Include navbar dan sidebar
-include 'navbar.html';
+include 'navbar.php';
 include 'sidebar.html';
 ?>
 <!DOCTYPE html>
