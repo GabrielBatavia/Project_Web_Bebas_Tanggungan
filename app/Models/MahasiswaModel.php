@@ -105,8 +105,8 @@ class MahasiswaModel
             return $this->db->resultSet();
         }
 
-            /**
-     * Mengupdate pesan_verifikator dan status pesan
+    /**
+     * Mengupdate pesan_verifikator dan status pesan menjadi 'Dibalas'
      *
      * @param int $id_pesan
      * @param string $balasan
@@ -122,6 +122,25 @@ class MahasiswaModel
             WHERE id_riwayat_pesan = :id_pesan
         ");
         $this->db->bind(':balasan', $balasan);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':id_pesan', $id_pesan);
+        return $this->db->execute();
+    }
+
+    /**
+     * Mengupdate status pesan menjadi 'Terbaca'
+     *
+     * @param int $id_pesan
+     * @param string $status
+     * @return bool
+     */
+    public function updateStatusPesan($id_pesan, $status)
+    {
+        $this->db->query("
+            UPDATE riwayat_pesan
+            SET status = :status
+            WHERE id_riwayat_pesan = :id_pesan
+        ");
         $this->db->bind(':status', $status);
         $this->db->bind(':id_pesan', $id_pesan);
         return $this->db->execute();
