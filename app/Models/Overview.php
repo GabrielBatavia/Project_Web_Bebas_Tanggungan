@@ -28,7 +28,7 @@ class Overview {
                     t.status
                   FROM tanggungan t
                   JOIN berkas b ON t.id_berkas = b.id_berkas
-                  WHERE t.status = 'Belum Selesai' AND t.nim_mhs = :nim";
+                  WHERE t.status = 'Ditolak' AND t.nim_mhs = :nim";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nim', $nim, PDO::PARAM_STR);
         $stmt->execute();

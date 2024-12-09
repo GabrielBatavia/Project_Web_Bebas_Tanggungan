@@ -3,9 +3,9 @@ class FileUpload {
     private $db;
 
     public function __construct() {
-        // Koneksi ke database menggunakan metode connect()
+        // Koneksi ke database menggunakan properti $dbh
         $database = new Database();
-        $this->db = $database->connect();
+        $this->db = $database->dbh;
     }
 
     public function saveFile($idTanggungan, $fileName, $fileType, $fileSize, $filePath) {
@@ -24,9 +24,15 @@ class FileUpload {
     
         // Eksekusi query
         if ($stmt->execute()) {
+            // Log sukses
+            error_log("SUCCESS: File '$fileName' dengan path '$filePath' berhasil disimpan ke database.\n", 3, __DIR__ . '/../../logs/upload.log');
             return true;
         } else {
+            // Log gagal
+            $errorInfo = $stmt->errorInfo();
+            error_log("ERROR: Gagal menyimpan file '$fileName' ke database. Error: " . $errorInfo[2] . "\n", 3, __DIR__ . '/../../logs/upload.log');
             return false;
         }
     }
 }
+?>
