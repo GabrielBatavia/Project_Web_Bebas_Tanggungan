@@ -64,9 +64,22 @@ if (isset($_GET['success'])) {
                     <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 1</h5>
+                            <h5>Laporan Tugas Akhir/Skripsi</h5>
                         </div>
                         <div class="card-body">
+                        <div>
+                        <h5>Detail isi Laporan Tugas Akhir/Skripsi</h5>
+                            <ul>
+                                <li>Cover</li>
+                                <li>Daftar Isi-Gambar-Tabel</li>
+                                <li>Kata Pengantar</li>
+                                <li>Abstrak Indo-Inggris</li>
+                                <li>Pengesahan (ttd. lengkap)</li>
+                                <li>Bab 1 sampai Penutup</li>
+                                <li>Daftar Pustaka</li>
+                                <li>Lampiran (bila ada)</li>
+                            </ul>
+                        </div>
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_1">Upload File 1:</label>
@@ -79,14 +92,14 @@ if (isset($_GET['success'])) {
                     <!-- Form 2: Laporan Tugas Akhir/Skripsi 2 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 2</h5>
+                            <h5>Program Aplikasi Tugas Akhir/Skripsi</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Catatan: Upload dalam format ZIP/RAR (ukuran maksimal 1GB)</h5>
                             <div class="form-group">
-                                <label for="file_upload_2">Upload File 2:</label>
+                                <label for="file_upload_2">Upload File:</label>
                                 <input type="file" name="file_upload_2" class="form-control file-input" required id="file_upload_2">
-                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                                <small class="form-text text-muted">Upload 1 supported file: ZIP/RAR Max 1 GB.</small>
                             </div>
                         </div>
                     </div>
@@ -94,12 +107,13 @@ if (isset($_GET['success'])) {
                     <!-- Form 3: Laporan Tugas Akhir/Skripsi 3 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-2">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 3</h5>
+                            <h5>Surat Pernyataan Publikasi</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Upload Surat Pernyataan Publikasi Jurnal/Paper/Conference/Seminar/HAKI/dll.</h5>
+                            <h5>Catatan: Upload dalam bentuk</h5>
                             <div class="form-group">
-                                <label for="file_upload_3">Upload File 3:</label>
+                                <label for="file_upload_3">Upload File:</label>
                                 <input type="file" name="file_upload_3" class="form-control file-input" required id="file_upload_3">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>

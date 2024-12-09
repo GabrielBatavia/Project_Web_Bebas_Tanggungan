@@ -64,12 +64,12 @@ if (isset($_GET['success'])) {
                     <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 1</h5>
+                            <h5>Tanda Terima Penyerahan Laporan Tugas Akhir/Skripsi</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload_1">Upload File 1:</label>
+                                <label for="file_upload_1">Upload File:</label>
                                 <input type="file" name="file_upload_1" class="form-control file-input" required id="file_upload_1">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
@@ -79,12 +79,14 @@ if (isset($_GET['success'])) {
                     <!-- Form 2: Laporan Tugas Akhir/Skripsi 2 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 2</h5>
+                            <h5>Tanda Terima Penyerahan Laporan PKL/Magang</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Upload Tanda Terima Penyerahan Laporan PKL/Magang, Bila PKL/Magang lebih dari 1 kali, 
+                            berkas dijadikan 1 PDF. </h5>
+                            <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload_2">Upload File 2:</label>
+                                <label for="file_upload_2">Upload File:</label>
                                 <input type="file" name="file_upload_2" class="form-control file-input" required id="file_upload_2">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
@@ -94,12 +96,12 @@ if (isset($_GET['success'])) {
                     <!-- Form 3: Laporan Tugas Akhir/Skripsi 3 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-2">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 3</h5>
+                            <h5>Surat Bebas Kompen</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload_3">Upload File 3:</label>
+                                <label for="file_upload_3">Upload File:</label>
                                 <input type="file" name="file_upload_3" class="form-control file-input" required id="file_upload_3">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
@@ -109,12 +111,15 @@ if (isset($_GET['success'])) {
                     <!-- Form 4: Laporan Tugas Akhir/Skripsi 4 -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-3">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi 4</h5>
+                            <h5>Scan TOEIC</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
+                            <h5>Upload Scan TOEIC dengan skor minimal 450 untuk Diploma 4</h5>
+                            <p>Apabila sudah mengikuti 1x tes gratis Polinema dan 1x ujian mandiri berbayar,
+                            <br>Namun nilai masih kurang, maka akan diberikan surat keterangan dari UPA Bahasa (Grapol Lantai 3)</p>
+                            <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload_4">Upload File 4:</label>
+                                <label for="file_upload_4">Upload File:</label>
                                 <input type="file" name="file_upload_4" class="form-control file-input" required id="file_upload_4">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
