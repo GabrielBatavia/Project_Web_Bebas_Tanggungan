@@ -128,7 +128,7 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
                             <?php foreach ($mahasiswaData as $mhs): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($mhs['nim']); ?></td>
-                                <td><?php echo htmlspecialchars($mhs['nama']); ?></td>
+                                <td><?php echo htmlspecialchars($mhs['nama_mahasiswa']); ?></td>
                                 <td>
                                     <?php
                                     // Menampilkan urgensi

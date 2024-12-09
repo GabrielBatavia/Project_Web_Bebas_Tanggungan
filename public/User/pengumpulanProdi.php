@@ -58,7 +58,7 @@ if (isset($_GET['success'])) {
                 </div>
 
                 <!-- Main Form -->
-                <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                <form action="upload.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                     <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
 
                     <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->

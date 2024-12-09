@@ -58,7 +58,7 @@ if (isset($_GET['success'])) {
                 </div>
 
                 <!-- Main Form -->
-                <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                <form action="upload.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                     <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
 
                     <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
@@ -122,7 +122,8 @@ if (isset($_GET['success'])) {
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script scr="https://rerofya.github.io/resources/sweetalert.js"></script>
+    <!-- Memperbaiki typo dan menggunakan CDN resmi untuk SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
         $(document).ready(function() {
@@ -134,9 +135,9 @@ if (isset($_GET['success'])) {
                     }
                 });
                 if (allFilesSelected) {
-                    $('#uploadBtn').prop('disabled', false); // Aktifkan tombol upload
+                    $('#success').prop('disabled', false); // Aktifkan tombol upload
                 } else {
-                    $('#uploadBtn').prop('disabled', true); // Nonaktifkan jika belum semua file dipilih
+                    $('#success').prop('disabled', true); // Nonaktifkan jika belum semua file dipilih
                 }
             }
 
@@ -144,19 +145,29 @@ if (isset($_GET['success'])) {
             $(".upload-form input[type='file']").change(function() {
                 checkFiles();
             });
+
+            // Inisialisasi pengecekan saat halaman dimuat
+            checkFiles();
         });
 
         // Script pop up button upload
-        const Success = document.querySelector('#Success');
+        const successButton = document.querySelector('#success');
 
-        Success.addEventListener('click', function() {
+        successButton.addEventListener('click', function(event) {
+            // Prevent form submission untuk menampilkan alert terlebih dahulu
+            event.preventDefault();
+
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
                 text: 'Berhasil mengupload file',
-                timer: 2000
-            })            
-        })
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                // Setelah alert, submit form
+                document.getElementById('uploadForm').submit();
+            });
+        });
     </script>
 </body>
 

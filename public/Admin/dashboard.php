@@ -180,8 +180,22 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
                 </table>
             </div>
 
-                <!-- Pagination (Jika diperlukan) -->
-                <!-- Anda dapat menambahkan pagination di sini jika jumlah data sangat besar -->
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center pagination-container">
+                                <p>Menampilkan 1-<?php echo count($mahasiswaData); ?> dari <?php echo htmlspecialchars($dashboardData['total_verif_berkas'] + $dashboardData['total_berkas_selesai']); ?></p>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <!-- Tambahkan halaman lain sesuai kebutuhan -->
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">&raquo;</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
             </main>
         </div>
     </div>
