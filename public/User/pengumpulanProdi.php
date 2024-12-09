@@ -123,7 +123,7 @@ if (isset($_GET['success'])) {
 
                     <!-- Upload Button di pojok kanan atas -->
                     <div class="upload-btn-container">
-                        <button type="submit" class="btn btn-primary btn-animated" id="uploadBtn" disabled>
+                        <button type="submit" class="btn btn-primary btn-animated" id="success" disabled>
                             <i class="fas fa-upload"></i> Upload All
                         </button>
                     </div>
@@ -137,6 +137,7 @@ if (isset($_GET['success'])) {
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script scr="https://rerofya.github.io/resources/sweetalert.js"></script>
 
     <script>
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
@@ -160,6 +161,18 @@ if (isset($_GET['success'])) {
                 checkFiles();
             });
         });
+
+        // Script pop up button upload
+        const Success = document.querySelector('#Success');
+
+        Success.addEventListener('click', function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Berhasil mengupload file',
+                timer: 2000
+            })            
+        })
     </script>
 </body>
 

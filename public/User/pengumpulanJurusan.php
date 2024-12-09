@@ -108,7 +108,7 @@ if (isset($_GET['success'])) {
 
                     <!-- Upload Button di pojok kanan atas -->
                     <div class="upload-btn-container">
-                        <button type="submit" class="btn btn-primary btn-animated" id="successA" disabled>
+                        <button type="submit" class="btn btn-primary btn-animated" id="success" disabled>
                             <i class="fas fa-upload"></i> Upload All
                         </button>
                     </div>
@@ -146,7 +146,7 @@ if (isset($_GET['success'])) {
             });
         });
 
-        // Script button upload
+        // Script pop up button upload
         const Success = document.querySelector('#Success');
 
         Success.addEventListener('click', function() {
