@@ -1,6 +1,6 @@
 <?php
 // Include navbar and sidebar
-include 'navbar.html';
+include 'navbar.php';
 include 'sidebar.html';
 
 // Menampilkan pesan alert dengan animasi

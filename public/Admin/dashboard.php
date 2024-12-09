@@ -202,7 +202,7 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
     <script>
         // Memasukkan navbar dan sidebar
         $(function(){
-            $("#navbar-placeholder").load("navbar.html");
+            $("#navbar-placeholder").load("navbar.php");
             $("#sidebar-placeholder").load("sidebar.html");
         });
 
