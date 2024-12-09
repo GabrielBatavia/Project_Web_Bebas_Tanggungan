@@ -82,7 +82,7 @@ if (isset($_GET['success'])) {
                         </div>
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
-                                <label for="file_upload_1">Upload File 1:</label>
+                                <label for="file_upload_1">Upload File:</label>
                                 <input type="file" name="file_upload_1" class="form-control file-input" required id="file_upload_1">
                                 <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
                             </div>
