@@ -1,45 +1,48 @@
 <?php
 session_start();
+require_once '../app/core/Database.php';
 
-// Daftar pengguna valid (username => password)
-$valid_users = [
-    'admin' => 'admin123',
-    'admin2' => 'admin123',
-    'GabrielBatavia' => '2341720184',
-    'mahasiswa2' => 'studentpass2'
-];
+// Instantiate the database connection
+$db = new Database();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Cek kredensial
-    if (array_key_exists($username, $valid_users) && $valid_users[$username] == $password) {
+    $queryMahasiswa = "SELECT * FROM mahasiswa WHERE nim = :username AND password = :password";
+    $db->query($queryMahasiswa);
+    $db->bind(':username', $username);
+    $db->bind(':password', $password);
+    $mahasiswa = $db->single();
+
+    if ($mahasiswa) {
         $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $mahasiswa['nama'];
+        $_SESSION['nim'] = $mahasiswa['nim'];
+        $_SESSION['role'] = 'mahasiswa';
 
-        // Set NIM berdasarkan username (contoh hardcoded)
-        if ($username == 'GabrielBatavia') {
-            $_SESSION['nim'] = '1000001';
-        } elseif ($username == 'mahasiswa2') {
-            $_SESSION['nim'] = '1000002';
-        }
-
-        if ($username == 'admin') {
-            $_SESSION['id_jabatan'] = '1';
-        } elseif ($username == 'admin2') {
-            $_SESSION['id_jabatan'] = '2';
-        }
-
-        // Redirect berdasarkan peran
-        if ($username == 'admin') {
-            header("Location: Admin/dashboard.php");
-        } else {
-            header("Location: User/dashboard.php");
-        }
+        header("Location: User/dashboard.php");
         exit;
-    } else {
-        echo "<script>alert('Username atau password salah!'); window.location.href='index.html';</script>";
     }
+
+    $queryVerifikator = "SELECT * FROM verifikator WHERE nip = :username AND password = :password";
+    $db->query($queryVerifikator);
+    $db->bind(':username', $username);
+    $db->bind(':password', $password);
+    $verifikator = $db->single();
+
+    if ($verifikator) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $verifikator['nama'];
+        $_SESSION['nip'] = $verifikator['nip'];
+        $_SESSION['role'] = 'verifikator';
+        $_SESSION['id_jabatan'] = $verifikator['id_jabatan'];
+
+        header("Location: Admin/dashboard.php");
+        exit;
+    }
+
+    // Login failed
+    echo "<script>alert('Username atau password salah!'); window.location.href='index.html';</script>";
 }
 ?>
