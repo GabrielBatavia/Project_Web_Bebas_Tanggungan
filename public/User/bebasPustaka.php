@@ -40,12 +40,6 @@ if (isset($_GET['success'])) {
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        #footer {
-            bottom: 0;
-            padding: 10px 0;
-        }
-    </style>
 </head>
 
 <body>
@@ -96,14 +90,11 @@ if (isset($_GET['success'])) {
                         </button>
                     </div>
                 </form>
-
-                <br><br><br>
-                <footer id="footer" style="margin-top: 10px;"></footer>
             </main>
         </div>
     </div>
 
-    <div id="toast-container"></div>
+    <?php include 'footer.php';?>
 
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -112,7 +103,6 @@ if (isset($_GET['success'])) {
     <script>
         const uploaded = false;
 
-        $('#footer').load('footer.html');
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
         $(document).ready(function () {
             function checkFiles() {

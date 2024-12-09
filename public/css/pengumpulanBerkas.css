@@ -4,7 +4,6 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f9; /* Warna latar belakang konten */
     padding-top: 56px; /* Sesuaikan dengan tinggi navbar */
 }

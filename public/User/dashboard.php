@@ -42,6 +42,8 @@ $pending = $overviewModel->getPendingByNIM($nim);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/navbar.css">
@@ -202,11 +204,11 @@ $pending = $overviewModel->getPendingByNIM($nim);
                         </div>
                     </div>
                 </div>
-                <div class="footer" id="footer"></div>
             </main>
         </div>
     </div>
-
+    <?php include 'footer.php';?>
+    
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -215,7 +217,6 @@ $pending = $overviewModel->getPendingByNIM($nim);
         $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
-            $("#footer").load("footer.html");
         });
     </script>
 </body>
