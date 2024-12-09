@@ -170,8 +170,7 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
                                 ?>
                             </td>
                             <td>
-                                <!-- Aksi: Tombol untuk melihat detail pesan -->
-                                <a href="detail_pesan.php?id=<?php echo htmlspecialchars($mhs['id_riwayat_pesan']); ?>" class="btn-detail">
+                                <a href="pesanAdmin.php?id=<?php echo htmlspecialchars($mhs['id_riwayat_pesan']); ?>" class="btn-detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
