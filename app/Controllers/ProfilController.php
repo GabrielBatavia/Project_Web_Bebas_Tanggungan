@@ -1,28 +1,32 @@
 <?php
-class ProfilController {
+// app/controllers/ProfilController.php
+
+require_once __DIR__ . '/../core/Controller.php';
+
+class ProfilController extends Controller
+{
     private $profilModel; 
     private $notifikasiModel;
     private $riwayatPesanModel;
 
-    public function __construct() {
-        $this->profilModel = new ProfilModel(); 
-        $this->notifikasiModel = new NotifikasiModel();
-        $this->riwayatPesanModel = new RiwayatPesanModel();
+    public function __construct()
+    {
+        parent::__construct(); // Memanggil konstruktor parent untuk inisialisasi koneksi
+        $this->profilModel = $this->model('ProfilModel'); 
+        $this->notifikasiModel = $this->model('NotifikasiModel');
+        $this->riwayatPesanModel = $this->model('RiwayatPesanModel');
     }
 
-    public function index() {
-        // Jangan session_start() di sini jika sudah di public/profil.php
-        // Jika ingin tetap di sini, pastikan public/profil.php tidak lagi memanggil session_start()
-        // Untuk aman, hapus saja session_start() di sini.
-        // session_start();
-        
+    public function index()
+    {
+        // Pastikan session sudah dimulai di tempat lain, seperti di public/profil.php
         $nim = $_SESSION['nim'] ?? '1234567890';
 
         $mahasiswaData = $this->profilModel->getMahasiswaByNIM($nim); 
         $notifikasiData = $this->notifikasiModel->getNotifikasiByNIM($nim);
         $riwayatPesanData = $this->riwayatPesanModel->getRiwayatPesanByNIM($nim);
 
-        // Kembalikan data ke public/profil.php agar dapat ditampilkan di sana
+        // Kembalikan data ke view agar dapat ditampilkan di sana
         return [
             'mahasiswaData' => $mahasiswaData,
             'notifikasiData' => $notifikasiData,
@@ -30,3 +34,4 @@ class ProfilController {
         ];
     }
 }
+?>

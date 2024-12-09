@@ -1,4 +1,6 @@
 <?php
+// public/User/dashboard.php
+
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -21,8 +23,8 @@ $overviewModel = new Overview($db->dbh);
 // Ambil NIM dari session
 $nim = $_SESSION['nim'];
 
-// Ambil data tanggungan berdasarkan NIM
-$tanggungan = $tanggunganModel->getTanggunganByNIM($nim);
+// Ambil data tanggungan berdasarkan NIM dengan filter dan limit
+$tanggungan = $tanggunganModel->getFilteredTanggunganByNIM($nim, 7);
 
 // Ambil data overview
 $selesai = $overviewModel->getSelesaiByNIM($nim);
@@ -133,18 +135,23 @@ $pending = $overviewModel->getPendingByNIM($nim);
                                 List Tanggungan
                             </div>
                             <div class="card-body">
-                                <?php foreach ($tanggungan as $item): ?>
-                                    <div class="item-list mb-2">
-                                        <span>
-                                            <b><?= htmlspecialchars($item['nama_berkas']); ?></b><br>
-                                            <small><?= htmlspecialchars($item['deskripsi']); ?></small><br>
-                                            <small>Status: <?= htmlspecialchars($item['status']); ?></small>
-                                        </span>
-                                    </div>
-                                <?php endforeach; ?>
+                                <?php if (!empty($tanggungan)): ?>
+                                    <?php foreach ($tanggungan as $item): ?>
+                                        <div class="item-list mb-2">
+                                            <span>
+                                                <b><?= htmlspecialchars($item['nama_berkas']); ?></b><br>
+                                                <small><?= htmlspecialchars($item['deskripsi']); ?></small><br>
+                                                <small>Status: <?= htmlspecialchars($item['status']); ?></small>
+                                            </span>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p>Tidak ada tanggungan yang berstatus Pending atau Ditolak.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Overview -->
                     <div class="col-md-6">

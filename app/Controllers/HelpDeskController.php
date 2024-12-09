@@ -1,7 +1,6 @@
 <?php
-// File: app/controllers/HelpDeskController.php
+// app/controllers/HelpDeskController.php
 
-// Sertakan Controller.php
 require_once __DIR__ . '/../core/Controller.php';
 
 class HelpDeskController extends Controller
@@ -10,7 +9,7 @@ class HelpDeskController extends Controller
 
     public function __construct()
     {
-        // Load model melalui metode model() di Controller
+        parent::__construct(); // Memanggil konstruktor parent untuk inisialisasi koneksi
         $this->riwayatPesanModel = $this->model('RiwayatPesanModel');
     }
 

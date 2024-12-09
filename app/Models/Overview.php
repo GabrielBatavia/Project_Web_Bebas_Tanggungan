@@ -4,7 +4,7 @@ class Overview {
 
     public function __construct($db) {
         $this->conn = $db;
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Enable error handling
+        // Tidak perlu lagi memanggil setAttribute karena sudah diatur di Database.php
     }
 
     public function getSelesaiByNIM($nim) {
@@ -15,6 +15,7 @@ class Overview {
                   FROM tanggungan t
                   JOIN berkas b ON t.id_berkas = b.id_berkas
                   WHERE t.status = 'Selesai' AND t.nim_mhs = :nim";
+        $this->conn->prepare($query);
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nim', $nim, PDO::PARAM_STR);
         $stmt->execute();
@@ -48,6 +49,7 @@ class Overview {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
 
     public function getSelesai() {

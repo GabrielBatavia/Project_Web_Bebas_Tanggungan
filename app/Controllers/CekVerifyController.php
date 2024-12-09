@@ -2,22 +2,21 @@
 // app/controllers/CekVerifyController.php
 
 require_once __DIR__ . '/../core/Controller.php';
-require_once __DIR__ . '/../models/TanggunganModel.php';
-require_once __DIR__ . '/../models/MahasiswaModel.php';
-// require_once __DIR__ . '/../models/FileUploadModel.php';
-require_once __DIR__ . '/../models/KomentarModel.php';
 
 class CekVerifyController extends Controller
 {
     private $tanggunganModel;
     private $mahasiswaModel;
     private $fileUploadModel;
+    private $komentarModel;
 
     public function __construct()
     {
+        parent::__construct(); // Memanggil konstruktor parent untuk inisialisasi koneksi
         $this->tanggunganModel = $this->model('TanggunganModel');
         $this->mahasiswaModel = $this->model('MahasiswaModel');
         $this->fileUploadModel = $this->model('FileUploadModel');
+        $this->komentarModel = $this->model('KomentarModel');
     }
 
     // Mendapatkan data mahasiswa berdasarkan NIM

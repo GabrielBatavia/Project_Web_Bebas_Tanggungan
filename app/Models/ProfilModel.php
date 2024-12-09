@@ -1,14 +1,27 @@
 <?php
-class ProfilModel {
+// app/models/ProfilModel.php
+
+class ProfilModel
+{
     private $db;
 
-    public function __construct() {
-        $this->db = new Database;
+    /**
+     * Konstruktor menerima instance PDO dari Controller
+     *
+     * @param PDO $db
+     */
+    public function __construct($db)
+    {
+        $this->db = $db;
     }
 
-    public function getMahasiswaByNIM($nim) {
-        $this->db->query("SELECT * FROM mahasiswa WHERE nim = :nim");
-        $this->db->bind(':nim', $nim);
-        return $this->db->single();
+    public function getMahasiswaByNIM($nim)
+    {
+        $sql = "SELECT * FROM mahasiswa WHERE nim = :nim";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':nim', $nim);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+?>

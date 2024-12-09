@@ -1,22 +1,27 @@
 <?php
 // app/models/UserModel.php
 
-require_once __DIR__ . '/../core/Database.php';
-
 class UserModel
 {
     private $db;
 
-    public function __construct()
+    /**
+     * Konstruktor menerima instance PDO dari Controller
+     *
+     * @param PDO $db
+     */
+    public function __construct($db)
     {
-        $this->db = new Database();
+        $this->db = $db;
     }
 
     // Mendapatkan total pengguna
     public function getTotalUsers()
     {
-        $this->db->query("SELECT COUNT(*) as total FROM mahasiswa");
-        $result = $this->db->single();
+        $sql = "SELECT COUNT(*) as total FROM mahasiswa";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'];
     }
 }

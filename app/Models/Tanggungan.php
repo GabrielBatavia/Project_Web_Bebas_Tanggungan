@@ -1,10 +1,12 @@
 <?php
+// app/models/Tanggungan.php
+
 class Tanggungan {
     private $conn;
 
     public function __construct($db) {
         $this->conn = $db;
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Enable error handling
+        // Tidak perlu lagi memanggil setAttribute karena sudah diatur di Database.php
     }
 
     // Mengambil semua tanggungan (digunakan oleh admin)
@@ -39,5 +41,31 @@ class Tanggungan {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getFilteredTanggunganByNIM($nim) {
+        $query = "
+            SELECT 
+                b.id_berkas, 
+                b.nama_berkas, 
+                b.deskripsi,
+                CASE 
+                    WHEN t.status IS NULL THEN 'belum dikirim'
+                    ELSE t.status
+                END AS status
+            FROM berkas b
+            LEFT JOIN tanggungan t 
+                ON b.id_berkas = t.id_berkas 
+                AND t.nim_mhs = :nim
+            WHERE b.id_berkas BETWEEN 1 AND 7
+              AND (t.status IS NULL OR t.status <> 'selesai')
+            ORDER BY b.id_berkas ASC
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nim', $nim, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Metode tambahan jika diperlukan
 }
 ?>

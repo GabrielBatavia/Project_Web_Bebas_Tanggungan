@@ -1,16 +1,13 @@
 <?php
+// app/controllers/LoginController.php
 
-require_once '../app/core/Controller.php';
-require_once '../app/core/Database.php';
+require_once __DIR__ . '/../core/Controller.php';
 
 class LoginController extends Controller
 {
-    private $db;
-
     public function __construct()
     {
-        // Instantiate the Database connection
-        $this->db = new Database();
+        parent::__construct(); // Memanggil konstruktor parent untuk inisialisasi koneksi
     }
 
     public function authenticate($username, $password)
@@ -36,9 +33,9 @@ class LoginController extends Controller
 
     private function getMahasiswa($username, $password)
     {
-        $query = "SELECT * FROM mahasiswa WHERE nim = :username AND password = :password";
+        $query = "SELECT * FROM mahasiswa WHERE nim = :nim AND [password] = :password";
         $this->db->query($query);
-        $this->db->bind(':username', $username);
+        $this->db->bind(':nim', $username);
         $this->db->bind(':password', $password);
 
         return $this->db->single();
@@ -46,9 +43,9 @@ class LoginController extends Controller
 
     private function getVerifikator($username, $password)
     {
-        $query = "SELECT * FROM verifikator WHERE nip = :username AND password = :password";
+        $query = "SELECT * FROM verifikator WHERE nip = :nip AND [password] = :password";
         $this->db->query($query);
-        $this->db->bind(':username', $username);
+        $this->db->bind(':nip', $username);
         $this->db->bind(':password', $password);
 
         return $this->db->single();
@@ -56,6 +53,9 @@ class LoginController extends Controller
 
     private function setSession($user, $role)
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start(); // Pastikan sesi dimulai
+        }
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user['nama'];
 
@@ -69,3 +69,4 @@ class LoginController extends Controller
         $_SESSION['role'] = $role;
     }
 }
+?>

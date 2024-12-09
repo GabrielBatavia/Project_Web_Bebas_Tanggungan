@@ -2,9 +2,6 @@
 // app/controllers/DashboardAdminController.php
 
 require_once __DIR__ . '/../core/Controller.php';
-require_once __DIR__ . '/../models/UserModel.php';
-require_once __DIR__ . '/../models/TanggunganModel.php';
-require_once __DIR__ . '/../models/MahasiswaModel.php';
 
 class DashboardAdminController extends Controller
 {
@@ -14,9 +11,20 @@ class DashboardAdminController extends Controller
 
     public function __construct()
     {
+        parent::__construct(); // Memanggil konstruktor parent untuk inisialisasi koneksi
         $this->userModel = $this->model('UserModel');
         $this->tanggunganModel = $this->model('TanggunganModel');
         $this->mahasiswaModel = $this->model('MahasiswaModel');
+    }
+
+    /**
+     * Mendapatkan instance MahasiswaModel
+     *
+     * @return MahasiswaModel
+     */
+    public function getMahasiswaModel()
+    {
+        return $this->mahasiswaModel;
     }
 
     /**

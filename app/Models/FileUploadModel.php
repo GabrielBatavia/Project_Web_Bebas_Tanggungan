@@ -1,23 +1,28 @@
 <?php
 // app/models/FileUploadModel.php
 
-require_once __DIR__ . '/../core/Database.php';
-
 class FileUploadModel
 {
     private $db;
 
-    public function __construct()
+    /**
+     * Konstruktor menerima instance PDO dari Controller
+     *
+     * @param PDO $db
+     */
+    public function __construct($db)
     {
-        $this->db = new Database();
+        $this->db = $db;
     }
 
     // Mendapatkan file upload berdasarkan id_tanggungan
     public function getFilesByTanggungan($id_tanggungan)
     {
-        $this->db->query("SELECT * FROM fileupload WHERE id_tanggungan = :id_tanggungan");
-        $this->db->bind(':id_tanggungan', $id_tanggungan);
-        return $this->db->resultSet();
+        $sql = "SELECT * FROM fileupload WHERE id_tanggungan = :id_tanggungan";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id_tanggungan', $id_tanggungan);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

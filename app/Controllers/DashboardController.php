@@ -3,15 +3,15 @@ require_once "../app/core/Controller.php";
 
 class DashboardController extends Controller {
     private $tanggungan;
-    private $overview; // Jika menggunakan Overview
+    private $overview; 
 
     public function __construct($db) {
-        session_start(); // Pastikan session dimulai
+        session_start(); 
 
         // Cek apakah user sudah login
         if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             // Jika belum login, redirect ke halaman login
-            header("Location: ../public/index.html");
+            header("Location: ../public/User/index.php");
             exit;
         }
 
@@ -29,7 +29,7 @@ class DashboardController extends Controller {
         $tanggunganData = $this->tanggungan->getTanggunganByNIM($nim);
 
         // Ambil data overview jika diperlukan
-        $overviewData = $this->overview->getOverviewByNIM($nim); // Opsional
+        $overviewData = $this->overview->getOverviewByNIM($nim); 
 
         // Render view dengan data yang relevan
         $this->view("dashboard/index", [

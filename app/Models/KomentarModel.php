@@ -1,28 +1,32 @@
 <?php
 // app/models/KomentarModel.php
 
-require_once __DIR__ . '/../core/Database.php';
-
 class KomentarModel
 {
     private $db;
 
-    public function __construct()
+    /**
+     * Konstruktor menerima instance PDO dari Controller
+     *
+     * @param PDO $db
+     */
+    public function __construct($db)
     {
-        $this->db = new Database();
+        $this->db = $db;
     }
 
     // Menambahkan komentar
     public function addKomentar($id_tanggungan, $id_verifikator, $komentar)
     {
-        $this->db->query("
+        $sql = "
             INSERT INTO komentar (id_tanggungan, id_verifikator, komentar)
             VALUES (:id_tanggungan, :id_verifikator, :komentar)
-        ");
-        $this->db->bind(':id_tanggungan', $id_tanggungan);
-        $this->db->bind(':id_verifikator', $id_verifikator);
-        $this->db->bind(':komentar', $komentar);
-        return $this->db->execute();
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id_tanggungan', $id_tanggungan);
+        $stmt->bindParam(':id_verifikator', $id_verifikator);
+        $stmt->bindParam(':komentar', $komentar);
+        return $stmt->execute();
     }
 }
 ?>

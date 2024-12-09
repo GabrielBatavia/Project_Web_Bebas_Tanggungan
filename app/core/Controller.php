@@ -1,7 +1,19 @@
 <?php
+// app/core/Controller.php
+
+// Sertakan Database.php sebelum mendefinisikan kelas Controller
+require_once __DIR__ . '/Database.php';
 
 abstract class Controller
 {
+    protected $db; // Properti untuk menyimpan instance Database
+
+    public function __construct()
+    {
+        // Inisialisasi Database dan simpan instance PDO
+        $this->db = new Database();
+    }
+
     public function view($view, $data = [])
     {
         $viewPath = __DIR__ . '/../views/' . $view . '.php';
@@ -14,15 +26,12 @@ abstract class Controller
 
     public function model($model)
     {
-        // Sertakan Database.php sebelum memuat model
-        require_once __DIR__ . '/Database.php';
-
         // Gunakan jalur absolut dengan __DIR__
         $modelPath = __DIR__ . '/../models/' . $model . '.php';
         if (file_exists($modelPath)) {
             require_once $modelPath;
             if (class_exists($model)) {
-                return new $model();
+                return new $model($this->db->dbh); // Pass PDO instance
             } else {
                 die("Model class '{$model}' does not exist.");
             }
