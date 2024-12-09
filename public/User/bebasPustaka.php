@@ -94,7 +94,8 @@ if (isset($_GET['success'])) {
         </div>
     </div>
 
-    <?php include 'footer.php';?>
+    <br><br><br>
+    <div style="margin-top: 16px;"><?php include 'footer.php';?></div>
 
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
