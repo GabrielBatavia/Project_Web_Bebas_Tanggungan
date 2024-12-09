@@ -1,42 +1,3 @@
-<?php
-// Fungsi untuk membuat gambar preview dari halaman pertama PDF
-function getPdfPreview($pdfFilePath, $previewPath) {
-    // Pastikan file PDF ada
-    if (!file_exists($pdfFilePath)) {
-        echo "File PDF tidak ditemukan: " . $pdfFilePath;
-        return false;
-    }
-    
-    // Menggunakan Imagick untuk membaca PDF
-    $imagick = new Imagick();
-    $imagick->readImage($pdfFilePath . '[0]'); // [0] menunjukkan halaman pertama
-    
-    // Set resolusi gambar
-    $imagick->setResolution(150, 150); // Resolusi tinggi untuk kualitas preview
-    
-    // Simpan gambar ke file (misalnya PNG)
-    if ($imagick->writeImage($previewPath)) {
-        // Bersihkan objek Imagick
-        $imagick->clear();
-        $imagick->destroy();
-        return true;
-    } else {
-        echo "Gagal menyimpan gambar preview untuk file: " . $pdfFilePath;
-        return false;
-    }
-}
-
-// Tentukan path PDF dan gambar preview
-$pdfFolder = __DIR__ . '../../app/uploads'; // Folder tempat file PDF berada
-$pdfFiles = glob($pdfFolder . '/*.pdf'); // Ambil semua file PDF di folder
-
-// Periksa apakah ada file PDF
-if (empty($pdfFiles)) {
-    echo "Tidak ada file PDF ditemukan dalam folder: " . $pdfFolder;
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,12 +74,43 @@ if (empty($pdfFiles)) {
                             }
                             ?>
                             <div>
-                                <button type="submit" class="btn btn-primary">Add File</button>
+                                <!-- Tombol untuk membuka pop-up -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFileModal">Add File</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up -->
+    <div class="modal fade" id="addFileModal" tabindex="-1" aria-labelledby="addFileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addFileModalLabel">Upload File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="upload.php" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="fileInput">Pilih File</label>
+                            <input type="file" class="form-control-file" id="fileInput" name="uploadedFile" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fileDescription">Deskripsi File</label>
+                            <textarea class="form-control" id="fileDescription" name="fileDescription" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Upload</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 

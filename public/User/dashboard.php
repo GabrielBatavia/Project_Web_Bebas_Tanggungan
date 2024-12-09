@@ -93,34 +93,6 @@ $pending = $overviewModel->getPendingByNIM($nim);
                                 <p>Deskripsi aktivitas ketiga yang harus dilakukan.</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">4</div>
-                            <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">5</div>
-                            <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">6</div>
-                            <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">6</div>
-                            <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -138,7 +110,11 @@ $pending = $overviewModel->getPendingByNIM($nim);
                                         <span>
                                             <b><?= htmlspecialchars($item['nama_berkas']); ?></b><br>
                                             <small><?= htmlspecialchars($item['deskripsi']); ?></small><br>
-                                            <small>Status: <?= htmlspecialchars($item['status']); ?></small>
+                                            <small>Status: <?= htmlspecialchars($item['status']); ?></small><br>
+                                            <a href="#" class="btn-detail" data-toggle="modal" data-target="#detailModal" 
+                                               data-nama="<?= htmlspecialchars($item['nama_berkas']); ?>" 
+                                               data-status="<?= htmlspecialchars($item['status']); ?>" 
+                                               data-deskripsi="<?= htmlspecialchars($item['deskripsi']); ?>">Selengkapnya ></a>
                                         </span>
                                     </div>
                                 <?php endforeach; ?>
@@ -163,39 +139,10 @@ $pending = $overviewModel->getPendingByNIM($nim);
                                             <span>
                                                 <?= htmlspecialchars($item['nama_berkas']); ?><br>
                                                 <small>Status: <?= htmlspecialchars($item['status']); ?></small><br>
-                                                <a href="#" class="btn-detail">Selengkapnya ></a>
-                                            </span>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-
-                                <!-- Overview Item REJECT -->
-                                <div class="reject mb-3">
-                                    <div class="row px-3 py-1 text-red" style="border-radius: 10px;">
-                                        <span><i class="fas fa-xmark mr-2"></i>Ditolak</span>
-                                    </div>
-                                    <?php foreach ($belumSelesai as $item): ?>
-                                        <div class="item-list">
-                                            <span>
-                                                <?= htmlspecialchars($item['nama_berkas']); ?><br>
-                                                <small>Status: <?= htmlspecialchars($item['status']); ?></small><br>
-                                                <a href="#" class="btn-detail">Selengkapnya ></a>
-                                            </span>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-
-                                <!-- Overview Item PENDING -->
-                                <div class="pending">
-                                    <div class="row px-3 py-1 bg-secondary text-white" style="border-radius: 10px;">
-                                        <span><i class="fa-regular fa-clock mr-2"></i>Pending</span>
-                                    </div>
-                                    <?php foreach ($pending as $item): ?>
-                                        <div class="item-list">
-                                            <span>
-                                                <?= htmlspecialchars($item['nama_berkas']); ?><br>
-                                                <small>Status: <?= htmlspecialchars($item['status']); ?></small><br>
-                                                <a href="#" class="btn-detail">Detail ></a>
+                                                <a href="#" class="btn-detail" data-toggle="modal" data-target="#detailModal" 
+                                                   data-nama="<?= htmlspecialchars($item['nama_berkas']); ?>" 
+                                                   data-status="<?= htmlspecialchars($item['status']); ?>" 
+                                                   data-deskripsi="Tidak ada deskripsi.">Selengkapnya ></a>
                                             </span>
                                         </div>
                                     <?php endforeach; ?>
@@ -207,8 +154,29 @@ $pending = $overviewModel->getPendingByNIM($nim);
             </main>
         </div>
     </div>
+
+    <!-- pop up -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Berkas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-content">Detail tidak tersedia.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php include 'footer.php';?>
-    
+
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -217,6 +185,20 @@ $pending = $overviewModel->getPendingByNIM($nim);
         $(function () {
             $("#navbar-placeholder").load("navbar.html");
             $("#sidebar-placeholder").load("sidebar.html");
+        });
+
+        // Script untuk pop up
+        $(document).on('click', '.btn-detail', function () {
+            var nama = $(this).data('nama');
+            var status = $(this).data('status');
+            var deskripsi = $(this).data('deskripsi');
+
+            var content = `
+                <strong>Nama Berkas:</strong> ${nama}<br>
+                <strong>Status:</strong> ${status}<br>
+                <strong>Deskripsi:</strong> ${deskripsi}
+            `;
+            $('#modal-content').html(content);
         });
     </script>
 </body>
