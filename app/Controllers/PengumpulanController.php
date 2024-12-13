@@ -34,21 +34,55 @@ class PengumpulanController {
     }
 
     public function uploadFile() {
-        // Mapping dari nama input file ke id_berkas
-        $formToBerkasMap = [
-            'file_upload_1' => 1, // Sesuaikan dengan id_berkas yang sebenarnya
-            'file_upload_2' => 2,
-            'file_upload_3' => 3,
-        ];
+        $basePath = '/project_web_bebas_tanggungan';
+        // Cek tipe upload dari form
+        if (isset($_POST['type'])) {
+            $type = $_POST['type'];
+        } else {
+            // Jika tipe tidak ditentukan, redirect dengan error
+            header("Location: /public/User/upload.php?error=invalid_type");
+            exit();
+        }
 
-        $maxFileSize = 10 * 1024 * 1024; // 10 MB
+        // Mapping berdasarkan tipe upload
+        $formToBerkasMap = [];
+        $maxFileSize = 10 * 1024 * 1024; // 10 MB per file
+        $allowedTypes = ['application/pdf'];
         $uploadDir = __DIR__ . '/../uploads/';
+
+        if ($type === 'jurusan') {
+            $formToBerkasMap = [
+                'file_upload_1' => 1, 
+                'file_upload_2' => 2,
+                'file_upload_3' => 3,
+            ];
+        } elseif ($type === 'prodi') {
+            $formToBerkasMap = [
+                'file_upload_1' => 4,
+                'file_upload_2' => 5,
+                'file_upload_3' => 6,
+                'file_upload_4' => 7,
+            ];
+        } elseif ($type === 'bebasAkademikPusat') {
+            $formToBerkasMap = [
+                'file_upload_1' => 1003, // Ganti dengan id_berkas yang sesuai untuk Bebas Akademik Pusat
+            ];
+        } elseif ($type === 'bebasPustaka') {
+            $formToBerkasMap = [
+                'file_upload_1' => 1004, // Ganti dengan id_berkas yang sesuai untuk Bebas Pustaka
+            ];
+        } else {
+            // Tipe upload tidak dikenali
+            header("Location: /public/User/upload.php?error=unknown_type");
+            exit();
+        }
+
         $allSuccess = true;
 
         // Pastikan direktori upload ada
         if (!is_dir($uploadDir)) {
             if (!mkdir($uploadDir, 0777, true)) {
-                header("Location: /public/pengumpulanJurusan.php?error=mkdir_failed");
+                header("Location: /public/User/upload.php?error=mkdir_failed");
                 exit();
             }
         }
@@ -63,21 +97,21 @@ class PengumpulanController {
                 if ($file['size'] > $maxFileSize) {
                     $allSuccess = false;
                     // Redirect dengan error ukuran file
-                    header("Location: /public/pengumpulanJurusan.php?error=size");
+                    header("Location: /public/User/upload.php?error=size");
                     exit();
                 }
 
                 // Cek tipe file (hanya PDF yang diperbolehkan)
-                $allowedTypes = ['application/pdf'];
                 if (!in_array($file['type'], $allowedTypes)) {
                     $allSuccess = false;
                     // Redirect dengan error tipe file
-                    header("Location: /public/pengumpulanJurusan.php?error=type");
+                    header("Location: /public/User/upload.php?error=type");
                     exit();
                 }
 
                 // Generate nama file unik
-                $fileName = uniqid('file_') . '.pdf';
+                $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                $fileName = uniqid('file_') . '.' . strtolower($fileExtension);
                 $filePath = $uploadDir . $fileName;
 
                 // Pindahkan file ke direktori tujuan
@@ -86,30 +120,36 @@ class PengumpulanController {
                     if (!$this->fileUploadModel->saveFile($this->nim_mhs, $id_berkas, $file['name'], $file['type'], $file['size'], $filePath)) {
                         $allSuccess = false;
                         // Log atau tangani error penyimpanan file
-                        header("Location: /public/pengumpulanJurusan.php?error=upload_failed");
+                        header("Location: /public/User/upload.php?error=upload_failed");
                         exit();
                     }
                 } else {
                     $allSuccess = false;
                     // Redirect dengan error gagal memindahkan file
-                    header("Location: /public/pengumpulanJurusan.php?error=move_failed");
+                    header("Location: /public/User/upload.php?error=move_failed");
                     exit();
                 }
             } else {
                 // File tidak diupload atau terjadi error
-                // Anda dapat memilih untuk mengabaikan atau menandai sebagai gagal
-                // Di sini kita memilih untuk menandai sebagai gagal
                 $allSuccess = false;
-                header("Location: /public/pengumpulanJurusan.php?error=upload_error");
+                header("Location: /public/User/upload.php?error=upload_error");
                 exit();
             }
         }
 
+        // Mapping type ke halaman redirect yang sesuai
+        $typeRedirectMap = [
+            'jurusan' => 'pengumpulanJurusan.php',
+            'prodi' => 'pengumpulanProdi.php',
+            'bebasAkademikPusat' => 'bebasAkademikPusat.php',
+            'bebasPustaka' => 'bebasPustaka.php',
+        ];
+
         // Redirect dengan status sesuai hasil
         if ($allSuccess) {
-            header("Location: /public/pengumpulanJurusan.php?success");
+            header("Location: {$basePath}/public/User/" . $typeRedirectMap[$type] . "?success");
         } else {
-            header("Location: /public/pengumpulanJurusan.php?error=upload_failed");
+            header("Location: {$basePath}/public/User/" . $typeRedirectMap[$type] . "?error=upload_failed");
         }
         exit();
     }

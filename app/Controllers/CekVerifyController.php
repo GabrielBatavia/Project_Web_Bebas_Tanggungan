@@ -32,10 +32,10 @@ class CekVerifyController extends Controller
     }
 
     // Mengupdate status verifikasi berkas dan menambahkan komentar
-    public function updateStatusAndKomentar($data)
+    public function updateStatusAndKomentar($id_verifikator, $data)
     {
         $success = true;
-        foreach ($data['tanggungan'] as $tanggungan) {
+        foreach ($data as $tanggungan) {
             // Update status di tabel tanggungan
             $updateStatus = $this->tanggunganModel->updateStatus($tanggungan['id_tanggungan'], $tanggungan['status']);
             if (!$updateStatus) {
@@ -45,7 +45,7 @@ class CekVerifyController extends Controller
 
             // Tambahkan komentar di tabel komentar jika ada catatan
             if (!empty($tanggungan['komentar'])) {
-                $addKomentar = $this->komentarModel->addKomentar($tanggungan['id_tanggungan'], $data['id_verifikator'], $tanggungan['komentar']);
+                $addKomentar = $this->komentarModel->addKomentar($tanggungan['id_tanggungan'], $id_verifikator, $tanggungan['komentar']);
                 if (!$addKomentar) {
                     $success = false;
                     break;

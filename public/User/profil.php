@@ -16,9 +16,6 @@ $data = $controller->index();
 // Setelah ini, $data berisi:
 // $data['mahasiswaData'], $data['notifikasiData'], $data['riwayatPesanData']
 
-// Include navbar dan sidebar
-include 'navbar.php';
-include 'sidebar.html';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -180,7 +177,7 @@ include 'sidebar.html';
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(function () {
-            $("#navbar-placeholder").load("navbar.html");
+            $("#navbar-placeholder").load("navbar.php");
             $("#sidebar-placeholder").load("sidebar.html");
         });
     </script>

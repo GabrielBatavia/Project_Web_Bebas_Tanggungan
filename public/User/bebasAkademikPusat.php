@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Include navbar and sidebar
 include 'navbar.php';
 include 'sidebar.html';
@@ -24,7 +29,7 @@ if (isset($_GET['success'])) {
     <!-- Meta tags dan judul -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebas Tanggungan Jurusan</title>
+    <title>Bebas Akademi Pusat</title>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome untuk ikon -->
@@ -35,10 +40,11 @@ if (isset($_GET['success'])) {
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/pengumpulanBerkas.css">
-    
+
     <!-- Animate.css untuk animasi (Opsional tetapi disarankan) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -56,67 +62,26 @@ if (isset($_GET['success'])) {
             <!-- Konten Utama -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Bebas Tanggungan Jurusan</h2>
+                    <h2>Bebas Akademi Pusat</h2>
                 </div>
 
                 <!-- Main Form -->
                 <form action="upload.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
-                    <input type="hidden" name="type" value="jurusan"> <!-- Menentukan tipe upload -->
+                    <input type="hidden" name="type" value="bebasAkademikPusat"> <!-- Menentukan tipe upload -->
 
-                    <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
-                    <div class="card mb-4 shadow-sm animated fadeInUp">
+                    <!-- Form: Bebas Akademi Pusat -->
+                    <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
                         <div class="card-header">
-                            <h5>Laporan Tugas Akhir/Skripsi</h5>
+                            <h5>Bebas Akademi Pusat</h5>
                         </div>
                         <div class="card-body">
-                            <div>
-                                <h5>Detail isi Laporan Tugas Akhir/Skripsi</h5>
-                                <ul>
-                                    <li>Cover</li>
-                                    <li>Daftar Isi-Gambar-Tabel</li>
-                                    <li>Kata Pengantar</li>
-                                    <li>Abstrak Indo-Inggris</li>
-                                    <li>Pengesahan (ttd. lengkap)</li>
-                                    <li>Bab 1 sampai Penutup</li>
-                                    <li>Daftar Pustaka</li>
-                                    <li>Lampiran (bila ada)</li>
-                                </ul>
-                            </div>
+                            <h6>Selesaikan terlebih dahulu Persyaratan Bebas Tanggungan Akademi Pusat di 
+                            <a href="https://helpakademik.polinema.ac.id/" target="_blank">helpakademik.polinema.ac.id</a> pada menu Bebas Tanggungan
+                            dan Upload Surat Keterangan Bebas Akademi Pusat di sini.</h6><br>
                             <h5>Catatan: Upload dalam bentuk PDF dan sudah bertanda tangan (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_1">Upload File:</label>
                                 <input type="file" name="file_upload_1" class="form-control file-input" required id="file_upload_1">
-                                <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Form 2: Program Aplikasi Tugas Akhir/Skripsi -->
-                    <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
-                        <div class="card-header">
-                            <h5>Program Aplikasi Tugas Akhir/Skripsi</h5>
-                        </div>
-                        <div class="card-body">
-                            <h5>Catatan: Upload dalam format ZIP/RAR (ukuran maksimal 1GB).</h5>
-                            <div class="form-group">
-                                <label for="file_upload_2">Upload File:</label>
-                                <input type="file" name="file_upload_2" class="form-control file-input" required id="file_upload_2">
-                                <small class="form-text text-muted">Upload 1 file: ZIP/RAR. Max 1 GB.</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Form 3: Surat Pernyataan Publikasi -->
-                    <div class="card mb-4 shadow-sm animated fadeInUp delay-2">
-                        <div class="card-header">
-                            <h5>Surat Pernyataan Publikasi</h5>
-                        </div>
-                        <div class="card-body">
-                            <h5>Upload Surat Pernyataan Publikasi Jurnal/Paper/Conference/Seminar/HAKI/dll.</h5>
-                            <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
-                            <div class="form-group">
-                                <label for="file_upload_3">Upload File:</label>
-                                <input type="file" name="file_upload_3" class="form-control file-input" required id="file_upload_3">
                                 <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
@@ -128,18 +93,18 @@ if (isset($_GET['success'])) {
                             <i class="fas fa-upload"></i> Upload All
                         </button>
                     </div>
-                </form>      
+                </form>
             </main>
         </div>
     </div>
 
-    <?php include 'footer.php';?>
-
+    <?php include 'footer1Hal.php';?>
+    
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <!-- Memperbaiki typo dan menggunakan CDN resmi untuk SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
         $(document).ready(function() {

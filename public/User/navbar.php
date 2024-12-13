@@ -10,7 +10,7 @@ if (isset($_SESSION['username'])) {
 <nav class="navbar navbar-expand-lg navbar-color fixed-top">
     <a class="navbar-brand" href="dashboard.php">
         <img src="../img/Jti.png" alt="Logo" height="30">
-        Jurusan Teknologi Informasi
+        BiTA
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTopMenu" aria-controls="navbarTopMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

@@ -98,28 +98,28 @@ $pending = $overviewModel->getPendingByNIM($nim);
                         <div class="timeline-item">
                             <div class="timeline-icon">4</div>
                             <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
+                                <h5>Distribusi Buku Skripsi</h5>
                                 <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-icon">5</div>
                             <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
+                                <h5>Distribusi Laporan PKL</h5>
                                 <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-icon">6</div>
                             <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
+                                <h5>Bebas Kompen</h5>
                                 <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-icon">6</div>
+                            <div class="timeline-icon">7</div>
                             <div class="timeline-content">
-                                <h5>Penyelesaian</h5>
+                                <h5>Upload Scan TOEIC</h5>
                                 <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
                             </div>
                         </div>

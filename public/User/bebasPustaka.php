@@ -9,6 +9,8 @@ if (isset($_GET['success'])) {
 } elseif (isset($_GET['error'])) {
     if ($_GET['error'] === 'size') {
         echo "<div class='alert alert-danger animated fadeIn'>File size exceeds the limit (10 MB).</div>";
+    } elseif ($_GET['error'] === 'type') {
+        echo "<div class='alert alert-danger animated fadeIn'>Invalid file type. Please upload the correct file format.</div>";
     } else {
         echo "<div class='alert alert-danger animated fadeIn'>File upload failed.</div>";
     }
@@ -59,9 +61,9 @@ if (isset($_GET['success'])) {
                 </div>
 
                 <!-- Main Form -->
-                <form action="../app/controllers/PengumpulanController.php" method="POST" enctype="multipart/form-data"
+                <form action="upload.php" method="POST" enctype="multipart/form-data"
                     class="upload-form" id="uploadForm">
-                    <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
+                    <input type="hidden" name="type" value="bebasPustaka"> <!-- Menentukan tipe upload -->
 
                     <!-- Form: Bebas Pustaka -->
                     <div class="card mb-4 shadow-sm animated fadeInUp">
@@ -78,7 +80,7 @@ if (isset($_GET['success'])) {
                                 <label for="file_upload_1">Upload File:</label>
                                 <input type="file" name="file_upload_1" class="form-control file-input" required
                                     id="file_upload_1">
-                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                                <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
                     </div>
@@ -102,8 +104,6 @@ if (isset($_GET['success'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        const uploaded = false;
-
         // JavaScript untuk mengaktifkan tombol Upload setelah semua file dipilih
         $(document).ready(function () {
             function checkFiles() {
@@ -111,15 +111,12 @@ if (isset($_GET['success'])) {
                 $(".upload-form input[type='file']").each(function () {
                     if ($(this).val() === '') {
                         allFilesSelected = false;
-                        showToast("File Berhasil Diupload", "success");
                     }
                 });
                 if (allFilesSelected) {
                     $('#success').prop('disabled', false); // Aktifkan tombol upload
-                    $uploaded = false;
                 } else {
                     $('#success').prop('disabled', true); // Nonaktifkan jika belum semua file dipilih
-                    $uploaded = true;
                 }
             }
             // Cek file saat dipilih
@@ -132,14 +129,6 @@ if (isset($_GET['success'])) {
         });
 
         //Fix whatever happened on this toasts later.
-        $('#uploadBtn').click(function () {
-            if (uploaded) {
-                showToast("File Berhasil Diupload");
-            } else {
-                showToast("Silahkan upload file terlebih dahulu", 'warning');
-            }
-        });
-
         function showToast(message, type = 'light') {
             const toastHTML = `
         <div class="toast align-items-center text-white bg-${type} mt-2" role="alert" aria-live="assertive" aria-atomic="true">

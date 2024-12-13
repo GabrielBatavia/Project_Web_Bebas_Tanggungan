@@ -9,6 +9,8 @@ if (isset($_GET['success'])) {
 } elseif (isset($_GET['error'])) {
     if ($_GET['error'] === 'size') {
         echo "<div class='alert alert-danger animated fadeIn'>File size exceeds the limit (10 MB).</div>";
+    } elseif ($_GET['error'] === 'type') {
+        echo "<div class='alert alert-danger animated fadeIn'>Invalid file type. Only PDF files are allowed.</div>";
     } else {
         echo "<div class='alert alert-danger animated fadeIn'>File upload failed.</div>";
     }
@@ -59,9 +61,9 @@ if (isset($_GET['success'])) {
 
                 <!-- Main Form -->
                 <form action="upload.php" method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
-                    <input type="hidden" name="id_tanggungan" value="1"> <!-- Contoh nilai -->
+                    <input type="hidden" name="type" value="prodi"> <!-- Menentukan tipe upload -->
 
-                    <!-- Form 1: Laporan Tugas Akhir/Skripsi 1 -->
+                    <!-- Form 1: Tanda Terima Penyerahan Laporan Tugas Akhir/Skripsi -->
                     <div class="card mb-4 shadow-sm animated fadeInUp">
                         <div class="card-header">
                             <h5>Tanda Terima Penyerahan Laporan Tugas Akhir/Skripsi</h5>
@@ -71,29 +73,29 @@ if (isset($_GET['success'])) {
                             <div class="form-group">
                                 <label for="file_upload_1">Upload File:</label>
                                 <input type="file" name="file_upload_1" class="form-control file-input" required id="file_upload_1">
-                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                                <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Form 2: Laporan Tugas Akhir/Skripsi 2 -->
+                    <!-- Form 2: Tanda Terima Penyerahan Laporan PKL/Magang -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-1">
                         <div class="card-header">
                             <h5>Tanda Terima Penyerahan Laporan PKL/Magang</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Upload Tanda Terima Penyerahan Laporan PKL/Magang, Bila PKL/Magang lebih dari 1 kali, 
-                            berkas dijadikan 1 PDF. </h5>
+                            <h5>Upload Tanda Terima Penyerahan Laporan PKL/Magang. Jika PKL/Magang lebih dari 1 kali, 
+                            berkas dijadikan 1 PDF.</h5>
                             <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_2">Upload File:</label>
                                 <input type="file" name="file_upload_2" class="form-control file-input" required id="file_upload_2">
-                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                                <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Form 3: Laporan Tugas Akhir/Skripsi 3 -->
+                    <!-- Form 3: Surat Bebas Kompen -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-2">
                         <div class="card-header">
                             <h5>Surat Bebas Kompen</h5>
@@ -103,25 +105,25 @@ if (isset($_GET['success'])) {
                             <div class="form-group">
                                 <label for="file_upload_3">Upload File:</label>
                                 <input type="file" name="file_upload_3" class="form-control file-input" required id="file_upload_3">
-                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                                <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Form 4: Laporan Tugas Akhir/Skripsi 4 -->
+                    <!-- Form 4: Scan TOEIC -->
                     <div class="card mb-4 shadow-sm animated fadeInUp delay-3">
                         <div class="card-header">
                             <h5>Scan TOEIC</h5>
                         </div>
                         <div class="card-body">
-                            <h5>Upload Scan TOEIC dengan skor minimal 450 untuk Diploma 4</h5>
+                            <h5>Upload Scan TOEIC dengan skor minimal 450 untuk Diploma 4.</h5>
                             <p>Apabila sudah mengikuti 1x tes gratis Polinema dan 1x ujian mandiri berbayar,
-                            <br>Namun nilai masih kurang, maka akan diberikan surat keterangan dari UPA Bahasa (Grapol Lantai 3)</p>
+                            <br>Namun nilai masih kurang, maka akan diberikan surat keterangan dari UPA Bahasa (Grapol Lantai 3).</p>
                             <h5>Catatan: Upload dalam bentuk PDF. (max 10 MB).</h5>
                             <div class="form-group">
                                 <label for="file_upload_4">Upload File:</label>
                                 <input type="file" name="file_upload_4" class="form-control file-input" required id="file_upload_4">
-                                <small class="form-text text-muted">Upload 1 supported file: PDF. Max 10 MB.</small>
+                                <small class="form-text text-muted">Upload 1 file: PDF. Max 10 MB.</small>
                             </div>
                         </div>
                     </div>
@@ -132,13 +134,13 @@ if (isset($_GET['success'])) {
                             <i class="fas fa-upload"></i> Upload All
                         </button>
                     </div>
-                </form>
+                </form>      
             </main>
         </div>
     </div>
 
     <?php include 'footer.php';?>
-    
+
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -188,7 +190,7 @@ if (isset($_GET['success'])) {
                 document.getElementById('uploadForm').submit();
             });
         });
-    </>
+    </script>
 </body>
 
 </html>

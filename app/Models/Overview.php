@@ -4,7 +4,6 @@ class Overview {
 
     public function __construct($db) {
         $this->conn = $db;
-        // Tidak perlu lagi memanggil setAttribute karena sudah diatur di Database.php
     }
 
     public function getSelesaiByNIM($nim) {

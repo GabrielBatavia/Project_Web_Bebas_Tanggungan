@@ -20,8 +20,8 @@ $cekVerifyController = new CekVerifyController();
 $id_jabatan = $_SESSION['id_jabatan'];
 $id_verifikator = $_SESSION['id_verifikator'] ?? 0;
 
-// Hardcode NIM mahasiswa (untuk saat ini)
-$nim = '1000001'; // Ganti sesuai kebutuhan
+// Untuk testing, NIM diset statis. Anda bisa menggantinya sesuai kebutuhan
+$nim = '2341720184'; 
 
 // Inisialisasi variabel untuk pesan
 $message = '';
@@ -87,10 +87,11 @@ if ($mahasiswa) {
 // Status options
 $statusOptions = [
     "" => "Pilih Status",
-    "Disetujui" => "Disetujui",
+    "selesai" => "Disetujui",
     "Ditolak" => "Ditolak"
 ];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,7 +136,7 @@ $statusOptions = [
                         <h3>Berkas Tugas Akhir Skripsi</h3>
                     </div>
                     <div class="input-group justify-content-end col-lg-6">
-                        <button type="submit" form="updateForm" class="btn btn-primary">Simpan</button>
+                        <button type="submit" form="updateForm" id="simpanButton" class="btn btn-primary" disabled>Simpan</button>
                         <button type="button" class="btn btn-outline-secondary ml-2" onclick="window.history.back();">Batal</button>
                     </div>
                 </div>
@@ -198,8 +199,16 @@ $statusOptions = [
                                         <ul class="list-group">
                                             <?php foreach ($files as $file) : ?>
                                                 <li class="list-group-item">
-                                                    <button type="button" class="btn btn-outline-secondary file-uploadan" data-id_tanggungan="<?php echo htmlspecialchars($file['id_tanggungan']); ?>" data-nama_file="<?php echo htmlspecialchars($file['nama_file']); ?>" data-status="<?php echo htmlspecialchars($file['status']); ?>" data-komentar="<?php echo htmlspecialchars($file['deskripsi'] ?? ''); ?>">
+                                                    <button type="button" class="btn btn-outline-secondary file-uploadan <?php echo !empty($file['status']) ? 'status-set' : ''; ?>" 
+                                                        id="file-<?php echo htmlspecialchars($file['id_tanggungan']); ?>" 
+                                                        data-id_tanggungan="<?php echo htmlspecialchars($file['id_tanggungan']); ?>" 
+                                                        data-nama_file="<?php echo htmlspecialchars($file['nama_file']); ?>" 
+                                                        data-status="<?php echo htmlspecialchars($file['status']); ?>" 
+                                                        data-komentar="<?php echo htmlspecialchars($file['deskripsi'] ?? ''); ?>">
                                                         <?php echo htmlspecialchars($file['nama_file']); ?>
+                                                        <?php if (!empty($file['status'])): ?>
+                                                            <span class="badge badge-success ml-2">Sudah Diisi</span>
+                                                        <?php endif; ?>
                                                     </button>
                                                 </li>
                                             <?php endforeach; ?>
@@ -222,7 +231,7 @@ $statusOptions = [
 
                                         <div class="form-group">
                                             <label for="status">Status</label>
-                                            <select class="form-control" id="status" name="tanggungan[status]" required>
+                                            <select class="form-control" id="status" required>
                                                 <?php foreach ($statusOptions as $value => $label) : ?>
                                                     <option value="<?php echo htmlspecialchars($value); ?>">
                                                         <?php echo htmlspecialchars($label); ?>
@@ -233,7 +242,7 @@ $statusOptions = [
 
                                         <div class="form-group">
                                             <label for="komentar">Catatan</label>
-                                            <textarea class="form-control" id="komentar" name="tanggungan[komentar]" rows="3"></textarea>
+                                            <textarea class="form-control" id="komentar" rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -306,12 +315,45 @@ $statusOptions = [
 
         // JavaScript to handle file selection and track changes
         let changes = {};
+        let totalFiles = <?php echo count($files); ?>;
+        let filesWithStatus = 0;
+
+        // Initialize filesWithStatus based on existing statuses
+        <?php foreach ($files as $file): ?>
+            <?php if (!empty($file['status'])): ?>
+                filesWithStatus++;
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        // Function to check if all statuses are set
+        function checkAllStatuses() {
+            // Calculate total statuses set either via existing or changes
+            let currentFilesWithStatus = 0;
+            $('.file-uploadan').each(function () {
+                const id_tanggungan = $(this).data('id_tanggungan');
+                // Check if there's a change for this file
+                if (changes[id_tanggungan] && changes[id_tanggungan].status !== "") {
+                    currentFilesWithStatus++;
+                } else if ($(this).data('status') !== "") {
+                    currentFilesWithStatus++;
+                }
+            });
+
+            if (currentFilesWithStatus === totalFiles) {
+                $('#simpanButton').prop('disabled', false);
+            } else {
+                $('#simpanButton').prop('disabled', true);
+            }
+        }
+
+        // Initial check
+        checkAllStatuses();
 
         $('.file-uploadan').click(function () {
             const id_tanggungan = $(this).data('id_tanggungan');
             const nama_file = $(this).data('nama_file');
-            const status = $(this).data('status');
-            const komentar = $(this).data('komentar');
+            const status = changes[id_tanggungan] ? changes[id_tanggungan].status : $(this).data('status');
+            const komentar = changes[id_tanggungan] ? changes[id_tanggungan].komentar : $(this).data('komentar');
 
             // Set current file in aksi card
             $('#current_file').val(nama_file);
@@ -322,12 +364,6 @@ $statusOptions = [
             // Highlight selected file
             $('.file-uploadan').removeClass('active');
             $(this).addClass('active');
-
-            // If changes exist for this file, load them
-            if (changes[id_tanggungan]) {
-                $('#status').val(changes[id_tanggungan].status);
-                $('#komentar').val(changes[id_tanggungan].komentar);
-            }
         });
 
         // Handle changes in Aksi card
@@ -342,6 +378,8 @@ $statusOptions = [
                     komentar: komentar
                 };
             }
+
+            checkAllStatuses();
         });
 
         // When 'Simpan' button is clicked, populate the form with changes
@@ -357,6 +395,17 @@ $statusOptions = [
                     <input type="hidden" name="tanggungan[${id}][komentar]" value="${data.komentar}">
                 `;
                 $('#updateForm').append(inputs);
+            }
+
+            // After appending inputs, re-check all statuses
+            checkAllStatuses();
+        });
+
+        // Prevent form submission if not all statuses are set
+        $('form#updateForm').on('submit', function(e) {
+            if ($('#simpanButton').prop('disabled')) {
+                e.preventDefault();
+                showToast("Silakan lengkapi status semua berkas sebelum menyimpan.", "warning");
             }
         });
     </script>

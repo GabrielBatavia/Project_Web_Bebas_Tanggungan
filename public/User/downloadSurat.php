@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
@@ -32,7 +34,7 @@
             <!-- Konten Utama -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="pt-4 pb-2 mb-3 border-bottom">
-                    <h2>Bebas Tanggungan Jurusan</h2>
+                    <h2>Download Surat Akhir</h2>
                 </div>
             <!-- Laporan Tugas Akhir -->
                 <div class="card">
@@ -54,12 +56,14 @@
                         </ul>
                     </div>
                     <div class="preview">
-                        <h3>Prieview</h3>
-                        <img src="../img/Surat-Bebas-Tanggungan.png" alt="Preview Gambar">
+                        <h3>Preview</h3><br>
+                        <img src="../img/Surat-Bebas-Tanggungan.png" alt="Preview Gambar"><br>
                             <div>
-                                <button onclick="" class="btn btn-primary">Download Surat</button>
+                                <!-- Tombol Download yang telah diubah -->
+                                <a href="../../app/uploads/file_675c43f6a6faf.pdf" download class="btn btn-primary">Download Surat</a>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add File</button>
+                            <br>
+                            <!-- <button type="submit" class="btn btn-primary">Add File</button> -->
                         </div>
                     </div>
                 </div>
@@ -67,6 +71,7 @@
         </main>
     </div>
     </div>
+    <?php include 'footer.php';?>
 
     <!-- Bootstrap dan jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -75,7 +80,7 @@
     <script>
         // Include navbar and sidebar
         $(function () {
-            $("#navbar-placeholder").load("navbar.html");
+            $("#navbar-placeholder").load("navbar.php");
             $("#sidebar-placeholder").load("sidebar.html");
         });
     </script>

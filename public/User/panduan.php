@@ -209,7 +209,7 @@
                                 <div class="card-body d-flex align-items-center justify-content-center flex-column">
                                     <i class="fas fa-question-circle card-icon2"></i>
                                     <h5 class="card-title mt-3">Kesulitan dalam panduan?</h5>
-                                    <button type="button" class="btn btn-primary mt-3">HelpDesk</button>
+                                    <button type="button" class="btn btn-primary mt-3" onclick="window.location.href='helpDesk.php';">HelpDesk</button>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@
     <script>
         // Include navbar and sidebar
         $(function () {
-            $("#navbar-placeholder").load("navbar.html");
+            $("#navbar-placeholder").load("navbar.php");
             $("#sidebar-placeholder").load("sidebar.html");
         });
 

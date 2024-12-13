@@ -105,7 +105,7 @@ if (isset($_GET['status'])) {
                             <form method="POST" action="helpDesk.php">
                                 <textarea name="pesan_mhs" class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..." required></textarea>
                                 <input type="hidden" name="tujuan_id_jabatan" value="1">
-                                <button type="submit" name="submit_pesan" class="btn btn-primary mt-2">Kirim ke Admin Prodi</button>
+                                <button type="submit" name="submit_pesan" class="btn btn-primary mt-2">Kirim</button>
                             </form>
                         </div>
                         <div class="vertical-divider"></div>
@@ -117,7 +117,7 @@ if (isset($_GET['status'])) {
                             <form method="POST" action="helpDesk.php">
                                 <textarea name="pesan_mhs" class="form-control" rows="3" style="width: 357px; height: 133px;" placeholder="Ketik pesan disini..." required></textarea>
                                 <input type="hidden" name="tujuan_id_jabatan" value="2">
-                                <button type="submit" name="submit_pesan" class="btn btn-primary mt-2">Kirim ke Verifikator lt 7</button>
+                                <button type="submit" name="submit_pesan" class="btn btn-primary mt-2">Kirim</button>
                             </form>
                         </div>
                     </div>
