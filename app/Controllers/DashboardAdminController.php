@@ -53,6 +53,18 @@ class DashboardAdminController extends Controller
         return $this->mahasiswaModel->getMahasiswaWithRiwayatPesan($id_jabatan);
     }
 
-    // Fungsi baru untuk mendapatkan riwayat pesan tidak diperlukan lagi karena sudah termasuk dalam getMahasiswaData
+    /**
+     * Fungsi baru untuk mendapatkan data mahasiswa berdasarkan status
+     *
+     * @param int $id_jabatan
+     * @param string $status
+     * @return array
+     */
+    public function getMahasiswaDataByStatus($id_jabatan, $status)
+    {
+        return $this->mahasiswaModel->getMahasiswaDataByStatus($id_jabatan, $status);
+    }
+
+    // Fungsi baru lainnya dapat ditambahkan di sini jika diperlukan
 }
 ?>

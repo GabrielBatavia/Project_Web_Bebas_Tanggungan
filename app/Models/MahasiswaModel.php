@@ -158,5 +158,55 @@ class MahasiswaModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+        /**
+     * Fungsi baru untuk mendapatkan data mahasiswa berdasarkan status
+     *
+     * @param int $id_jabatan
+     * @param string $status
+     * @return array
+     */
+    public function getMahasiswaDataByStatus($id_jabatan, $status)
+    {
+        if ($status === 'pending') {
+            // Belum Terverifikasi: Semua berkas belum disetujui atau ditolak
+            $sql = "SELECT DISTINCT m.nim, m.nama, m.no_telepon
+                    FROM mahasiswa m
+                    JOIN tanggungan t ON m.nim = t.nim_mhs
+                    JOIN berkas b ON t.id_berkas = b.id_berkas
+                    WHERE b.id_jabatan = :id_jabatan AND t.status = 'Belum Terverifikasi'";
+        } elseif ($status === 'Ditolak') {
+            // Verifikasi Sebagian: Ada berkas yang sudah disetujui dan ada yang belum atau ditolak
+            $sql = "SELECT m.nim, m.nama, m.no_telepon
+                    FROM mahasiswa m
+                    JOIN tanggungan t ON m.nim = t.nim_mhs
+                    JOIN berkas b ON t.id_berkas = b.id_berkas
+                    WHERE b.id_jabatan = :id_jabatan
+                    GROUP BY m.nim, m.nama, m.no_telepon
+                    HAVING SUM(CASE WHEN t.status = 'Terverifikasi' THEN 1 ELSE 0 END) > 0
+                       AND SUM(CASE WHEN t.status != 'Terverifikasi' THEN 1 ELSE 0 END) > 0";
+        } elseif ($status === 'selesai') {
+            // Terverifikasi: Semua berkas sudah disetujui
+            $sql = "SELECT DISTINCT m.nim, m.nama, m.no_telepon
+                    FROM mahasiswa m
+                    JOIN tanggungan t ON m.nim = t.nim_mhs
+                    JOIN berkas b ON t.id_berkas = b.id_berkas
+                    WHERE b.id_jabatan = :id_jabatan AND t.status = 'Terverifikasi'";
+        } else {
+            // Default: Semua data tanpa filter status
+            $sql = "SELECT DISTINCT m.nim, m.nama, m.no_telepon
+                    FROM mahasiswa m
+                    JOIN tanggungan t ON m.nim = t.nim_mhs
+                    JOIN berkas b ON t.id_berkas = b.id_berkas
+                    WHERE b.id_jabatan = :id_jabatan";
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id_jabatan', $id_jabatan, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
 }
 ?>

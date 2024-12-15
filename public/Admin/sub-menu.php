@@ -1,5 +1,5 @@
 <?php
-// public/Admin/dashboard.php
+// public/Admin/sub-menu.php
 
 session_start();
 
@@ -15,11 +15,19 @@ $dashboardController = new DashboardAdminController();
 // Mendapatkan id_jabatan dari session
 $id_jabatan = $_SESSION['id_jabatan'];
 
+// Mendapatkan status dari GET parameter, default 'all' jika tidak ada
+$status = isset($_GET['status']) ? $_GET['status'] : 'all';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
 // Mendapatkan data dashboard
 $dashboardData = $dashboardController->getDashboardData($id_jabatan);
 
-// Mendapatkan data mahasiswa
-$mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
+// Mendapatkan data mahasiswa berdasarkan status dan search
+if ($status === 'all') {
+    $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
+} else {
+    $mahasiswaData = $dashboardController->getMahasiswaDataByStatus($id_jabatan, $status);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,18 +104,22 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
                 <div class="d-flex filter-search">
                     <div class="filter-container mr-3">
                         <div class="btn-group toggle-btn-group">
-                            <button type="button" class="btn btn-outline-primary active">Semua</button>
-                            <button type="button" class="btn btn-outline-primary">Selesai</button>
-                            <button type="button" class="btn btn-outline-primary">Menunggu</button>
+                            <a href="sub-menu.php?status=all" class="btn btn-outline-primary <?php echo ($status === 'all') ? 'active' : ''; ?>">Semua</a>
+                            <a href="sub-menu.php?status=belum" class="btn btn-outline-primary <?php echo ($status === 'belum') ? 'active' : ''; ?>">Belum Terverifikasi</a>
+                            <a href="sub-menu.php?status=sebagian" class="btn btn-outline-primary <?php echo ($status === 'sebagian') ? 'active' : ''; ?>">Verifikasi Sebagian</a>
+                            <a href="sub-menu.php?status=terverifikasi" class="btn btn-outline-primary <?php echo ($status === 'terverifikasi') ? 'active' : ''; ?>">Terverifikasi</a>
                         </div>
                     </div>
                     <div class="input-group search-group">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                        <form method="GET" action="sub-menu.php">
+                            <input type="hidden" name="status" value="<?php echo htmlspecialchars($status); ?>">
+                            <input type="text" name="search" class="form-control" placeholder="Search" value="<?php echo htmlspecialchars($search); ?>">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -118,66 +130,48 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
                             <tr>
                                 <th>No. Induk</th>
                                 <th>Nama Lengkap</th>
-                                <th>Urgensi</th>
                                 <th>No. Telepon</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($mahasiswaData as $mhs): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($mhs['nim']); ?></td>
-                                <td><?php echo htmlspecialchars($mhs['nama_mahasiswa']); ?></td>
-                                <td>
-                                    <?php
-                                    // Menampilkan urgensi
-                                    switch ($mhs['urgensi']) {
-                                        case 'Tinggi':
-                                            echo '<span class="badge badge-danger">Tinggi</span>';
-                                            break;
-                                        case 'Sedang':
-                                            echo '<span class="badge badge-warning">Sedang</span>';
-                                            break;
-                                        case 'Ringan':
-                                            echo '<span class="badge badge-success">Ringan</span>';
-                                            break;
-                                        default:
-                                            echo '<span class="badge badge-secondary">Tidak Urgent</span>';
-                                            break;
-                                    }
-                                    ?>
-                                </td>
-                                <td><?php echo htmlspecialchars($mhs['no_telepon']); ?></td>
-                                <td>
-                                    <?php
-                                    // Menampilkan status
-                                    switch ($mhs['status']) {
-                                        case 'Belum':
-                                            echo '<span class="badge badge-danger">Belum</span>';
-                                            break;
-                                        case 'Dibaca':
-                                            echo '<span class="badge badge-warning">Dibaca</span>';
-                                            break;
-                                        case 'Dibalas':
-                                            echo '<span class="badge badge-success">Dibalas</span>';
-                                            break;
-                                        default:
-                                            echo '<span class="badge badge-secondary">Tidak Diketahui</span>';
-                                            break;
-                                    }
-                                    ?>
-                                </td>
-                                <td><a href="#" class="btn-detail"><i class="fas fa-eye"></i></a></td>
-                            </tr>
-                            <?php endforeach; ?>
+                            <?php if (!empty($mahasiswaData)): ?>
+                                <?php foreach ($mahasiswaData as $mhs): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($mhs['nim']); ?></td>
+                                    <td><?php echo isset($mhs['nama']) ? htmlspecialchars($mhs['nama']) : htmlspecialchars($mhs['nama_mahasiswa']); ?></td>
+                                    <td><?php echo htmlspecialchars($mhs['no_telepon']); ?></td>
+                                    <td>
+                                        <?php
+                                        // Menampilkan status dengan badge
+                                        if ($status === 'belum') {
+                                            echo '<span class="badge badge-danger">Belum Terverifikasi</span>';
+                                        } elseif ($status === 'sebagian') {
+                                            echo '<span class="badge badge-warning">Verifikasi Sebagian</span>';
+                                        } elseif ($status === 'terverifikasi') {
+                                            echo '<span class="badge badge-success">Terverifikasi</span>';
+                                        } else {
+                                            // Status default jika 'all', bisa disesuaikan
+                                            echo '<span class="badge badge-secondary">All</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><a href="cekVerify.php" class="btn-detail"><i class="fas fa-eye"></i></a></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="5" class="text-center">Tidak ada data ditemukan.</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Pagination -->
                 <div class="d-flex justify-content-between align-items-center pagination-container">
-                    <p>Menampilkan 1-<?php echo count($mahasiswaData); ?> dari <?php echo htmlspecialchars($dashboardData['total_verif_berkas'] + $dashboardData['total_berkas_selesai']); ?></p>
+                    <p>Menampilkan <?php echo count($mahasiswaData); ?> data dari total</p>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination mb-0">
                             <li class="page-item disabled">
@@ -202,11 +196,11 @@ $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
     <script>
         // Memasukkan navbar dan sidebar
         $(function(){
-            $("#navbar-placeholder").load("navbar.html");
+            $("#navbar-placeholder").load("navbar.php");
             $("#sidebar-placeholder").load("sidebar.html");
         });
 
-        // Script untuk Filter dan Search (Optional)
+        // Script untuk Toggle Active pada Button Group
         $(document).ready(function(){
             $('.toggle-btn-group .btn').on('click', function(){
                 $('.toggle-btn-group .btn').removeClass('active');
