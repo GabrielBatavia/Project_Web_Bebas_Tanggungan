@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     });
 
                     $(function () {
-                        $("#navbar-placeholder").load("navbar.html");
+                        $("#navbar-placeholder").load("navbar.php");
                         $("#sidebar-placeholder").load("sidebar.html");
                         $('#cetak').click(function () {
                             if (!documentsSubmitted) {

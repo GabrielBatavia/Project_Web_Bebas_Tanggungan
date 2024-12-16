@@ -143,6 +143,12 @@ small{
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Status Selesai atau Pending - Abu-abu */
+.timeline-icon.completed {
+    background: #6c757d; /* Warna abu-abu */
+    color: white;
+}
+
 /* Animasi rotasi saat hover pada ikon */
 .timeline-item:hover .timeline-icon {
   background: linear-gradient(135deg, #4d79ff, #002981); /* Ganti dengan gradien biru */
@@ -185,7 +191,6 @@ small{
       max-width: 120px;
   }
 }
-
 
 /* overview and stuff like it idk. */
 .card-header {

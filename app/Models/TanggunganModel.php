@@ -49,16 +49,16 @@ class TanggunganModel
         return $result['total'];
     }
 
-    // Mengambil semua berkas berdasarkan NIM dan id_jabatan
+    // Metode untuk mengambil file berdasarkan NIM dan Jabatan
     public function getFilesByNIMAndJabatan($nim, $id_jabatan)
     {
         $sql = "
-            SELECT t.id_tanggungan, t.status, t.nim_mhs, b.nama_berkas, f.file_path, f.nama_file
-            FROM tanggungan t
-            INNER JOIN berkas b ON t.id_berkas = b.id_berkas
-            INNER JOIN fileupload f ON t.id_tanggungan = f.id_tanggungan
-            WHERE t.nim_mhs = :nim
-              AND b.id_jabatan = :id_jabatan
+            SELECT fu.id_file, fu.id_tanggungan, fu.file_path, fu.nama_file, fu.tipe_file, fu.ukuran_file, fu.tanggal_upload, 
+                   t.status
+            FROM fileupload fu
+            JOIN tanggungan t ON fu.id_tanggungan = t.id_tanggungan
+            JOIN berkas b ON t.id_berkas = b.id_berkas
+            WHERE t.nim_mhs = :nim AND b.id_jabatan = :id_jabatan
         ";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':nim', $nim);

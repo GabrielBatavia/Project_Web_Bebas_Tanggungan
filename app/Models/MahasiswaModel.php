@@ -207,6 +207,31 @@ class MahasiswaModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getStudentsWithVerificationStatus($id_jabatan)
+    {
+        $sql = "
+            SELECT 
+                m.nim, 
+                m.nama, 
+                m.no_telepon,
+                CASE
+                    WHEN COUNT(t.status) = SUM(CASE WHEN t.status = 'selesai' THEN 1 ELSE 0 END) THEN 'Terverifikasi'
+                    WHEN SUM(CASE WHEN t.status = 'ditolak' THEN 1 ELSE 0 END) > 0 THEN 'Verifikasi Sebagian'
+                    WHEN COUNT(t.status) = SUM(CASE WHEN t.status = 'pending' THEN 1 ELSE 0 END) THEN 'Belum Terverifikasi'
+                    ELSE 'Status Lain'
+                END AS status_verifikasi
+            FROM mahasiswa m
+            JOIN tanggungan t ON m.nim = t.nim_mhs
+            JOIN berkas b ON t.id_berkas = b.id_berkas
+            WHERE b.id_jabatan = :id_jabatan
+            GROUP BY m.nim, m.nama, m.no_telepon
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id_jabatan', $id_jabatan, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     
 }
 ?>

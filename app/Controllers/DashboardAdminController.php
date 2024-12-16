@@ -66,5 +66,16 @@ class DashboardAdminController extends Controller
     }
 
     // Fungsi baru lainnya dapat ditambahkan di sini jika diperlukan
+
+    /**
+     * Mendapatkan data mahasiswa dengan status verifikasi berdasarkan id_jabatan
+     *
+     * @param int $id_jabatan
+     * @return array
+     */
+    public function getStudentsWithVerificationStatus($id_jabatan)
+    {
+        return $this->mahasiswaModel->getStudentsWithVerificationStatus($id_jabatan);
+    }
 }
 ?>

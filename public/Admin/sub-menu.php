@@ -24,9 +24,30 @@ $dashboardData = $dashboardController->getDashboardData($id_jabatan);
 
 // Mendapatkan data mahasiswa berdasarkan status dan search
 if ($status === 'all') {
-    $mahasiswaData = $dashboardController->getMahasiswaData($id_jabatan);
+    $mahasiswaData = $dashboardController->getStudentsWithVerificationStatus($id_jabatan);
 } else {
-    $mahasiswaData = $dashboardController->getMahasiswaDataByStatus($id_jabatan, $status);
+    $allMahasiswa = $dashboardController->getStudentsWithVerificationStatus($id_jabatan);
+    
+    // Filter berdasarkan status yang dipilih
+    $mahasiswaData = array_filter($allMahasiswa, function($mhs) use ($status) {
+        switch ($status) {
+            case 'belum':
+                return $mhs['status_verifikasi'] === 'Belum Terverifikasi';
+            case 'sebagian':
+                return $mhs['status_verifikasi'] === 'Verifikasi Sebagian';
+            case 'terverifikasi':
+                return $mhs['status_verifikasi'] === 'Terverifikasi';
+            default:
+                return true;
+        }
+    });
+    
+    // Jika ada pencarian, filter berdasarkan nama atau NIM
+    if (!empty($search)) {
+        $mahasiswaData = array_filter($mahasiswaData, function($mhs) use ($search) {
+            return stripos($mhs['nama'], $search) !== false || stripos($mhs['nim'], $search) !== false;
+        });
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -140,24 +161,27 @@ if ($status === 'all') {
                                 <?php foreach ($mahasiswaData as $mhs): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($mhs['nim']); ?></td>
-                                    <td><?php echo isset($mhs['nama']) ? htmlspecialchars($mhs['nama']) : htmlspecialchars($mhs['nama_mahasiswa']); ?></td>
+                                    <td><?php echo htmlspecialchars($mhs['nama']); ?></td>
                                     <td><?php echo htmlspecialchars($mhs['no_telepon']); ?></td>
                                     <td>
                                         <?php
                                         // Menampilkan status dengan badge
-                                        if ($status === 'belum') {
-                                            echo '<span class="badge badge-danger">Belum Terverifikasi</span>';
-                                        } elseif ($status === 'sebagian') {
-                                            echo '<span class="badge badge-warning">Verifikasi Sebagian</span>';
-                                        } elseif ($status === 'terverifikasi') {
-                                            echo '<span class="badge badge-success">Terverifikasi</span>';
-                                        } else {
-                                            // Status default jika 'all', bisa disesuaikan
-                                            echo '<span class="badge badge-secondary">All</span>';
+                                        switch ($mhs['status_verifikasi']) {
+                                            case 'Belum Terverifikasi':
+                                                echo '<span class="badge badge-danger">Belum Terverifikasi</span>';
+                                                break;
+                                            case 'Verifikasi Sebagian':
+                                                echo '<span class="badge badge-warning">Verifikasi Sebagian</span>';
+                                                break;
+                                            case 'Terverifikasi':
+                                                echo '<span class="badge badge-success">Terverifikasi</span>';
+                                                break;
+                                            default:
+                                                echo '<span class="badge badge-secondary">Unknown</span>';
                                         }
                                         ?>
                                     </td>
-                                    <td><a href="cekVerify.php" class="btn-detail"><i class="fas fa-eye"></i></a></td>
+                                    <td><a href="cekVerify.php?nim=<?php echo urlencode($mhs['nim']); ?>" class="btn-detail"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
@@ -169,7 +193,7 @@ if ($status === 'all') {
                     </table>
                 </div>
 
-                <!-- Pagination -->
+                <!-- Pagination (Jika Diperlukan) -->
                 <div class="d-flex justify-content-between align-items-center pagination-container">
                     <p>Menampilkan <?php echo count($mahasiswaData); ?> data dari total</p>
                     <nav aria-label="Page navigation example">

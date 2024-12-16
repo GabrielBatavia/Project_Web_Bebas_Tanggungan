@@ -30,6 +30,11 @@ $tanggungan = $tanggunganModel->getFilteredTanggunganByNIM($nim, 7);
 $selesai = $overviewModel->getSelesaiByNIM($nim);
 $belumSelesai = $overviewModel->getBelumSelesaiByNIM($nim);
 $pending = $overviewModel->getPendingByNIM($nim);
+
+$selesaiNames = array_column($selesai, 'nama_berkas');
+$pendingNames = array_column($pending, 'nama_berkas');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -74,55 +79,37 @@ $pending = $overviewModel->getPendingByNIM($nim);
                 <div class="timeline-container">
                     <h2 class="timeline-title">Timeline Pengumpulan</h2>
                     <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-icon">1</div>
-                            <div class="timeline-content">
-                                <h5>Pengumpulan Skripsi</h5>
-                                <p>Deskripsi aktivitas pertama yang harus dilakukan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">2</div>
-                            <div class="timeline-content">
-                                <h5>Pengumpulan Program</h5>
-                                <p>Deskripsi aktivitas kedua yang harus dilakukan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">3</div>
-                            <div class="timeline-content">
-                                <h5>Pengumpulan publikasi</h5>
-                                <p>Deskripsi aktivitas ketiga yang harus dilakukan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">4</div>
-                            <div class="timeline-content">
-                                <h5>Distribusi Buku Skripsi</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">5</div>
-                            <div class="timeline-content">
-                                <h5>Distribusi Laporan PKL</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">6</div>
-                            <div class="timeline-content">
-                                <h5>Bebas Kompen</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-icon">7</div>
-                            <div class="timeline-content">
-                                <h5>Upload Scan TOEIC</h5>
-                                <p>Deskripsi aktivitas terakhir yang harus diselesaikan.</p>
-                            </div>
-                        </div>
+                        <?php
+                        // Daftar langkah dalam timeline
+                        $timelineSteps = [
+                            1 => 'Pengumpulan Skripsi',
+                            2 => 'Pengumpulan Program',
+                            3 => 'Pengumpulan Publikasi',
+                            4 => 'Distribusi Buku Skripsi',
+                            5 => 'Distribusi Laporan PKL',
+                            6 => 'Bebas Kompen',
+                            7 => 'Upload Scan TOEIC'
+                        ];
+
+                        foreach ($timelineSteps as $stepNumber => $stepName) {
+                            // Tentukan apakah langkah ini sudah selesai atau pending
+                            $isCompleted = in_array($stepName, $selesaiNames) || in_array($stepName, $pendingNames);
+                            
+                            // Tentukan kelas untuk ikon berdasarkan status
+                            $iconClass = 'timeline-icon';
+                            if ($isCompleted) {
+                                $iconClass .= ' completed';
+                            }
+
+                            echo '<div class="timeline-item">';
+                            echo '<div class="' . $iconClass . '">' . $stepNumber . '</div>';
+                            echo '<div class="timeline-content">';
+                            echo '<h5>' . htmlspecialchars($stepName) . '</h5>';
+                            echo '<p>Deskripsi aktivitas ' . strtolower($stepName) . ' yang harus dilakukan.</p>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                        ?>
                     </div>
                 </div>
 

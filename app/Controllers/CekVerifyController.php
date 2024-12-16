@@ -54,5 +54,14 @@ class CekVerifyController extends Controller
         }
         return $success;
     }
+
+    public function getFileById($id_file)
+    {
+        $sql = "SELECT * FROM fileupload WHERE id_file = :id_file";
+        $this->db->query($sql); // Menyiapkan query
+        $this->db->bind(':id_file', $id_file, PDO::PARAM_INT); // Mengikat parameter
+        $this->db->execute(); // Menjalankan query
+        return $this->db->single(); // Mengambil hasil tunggal
+    }
 }
 ?>

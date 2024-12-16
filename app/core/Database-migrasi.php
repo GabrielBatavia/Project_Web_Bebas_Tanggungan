@@ -1,68 +1,100 @@
 <?php
+// app/core/Database.php
+
 require_once __DIR__ . '/../config/Database.php';
 
 class Database {
-    private $conn; // Koneksi database
+    public $dbh; // Properti PDO yang dapat diakses secara publik
     private $stmt;
 
     public function __construct() {
-        // Menggunakan konfigurasi dari file config
         global $servername, $uid, $password, $database;
 
-        // Koneksi ke database T-SQL
-        $connection = [
-            "Database" => $database,
-            "UID" => $uid,
-            "PWD" => $password,
-            "Encrypt" => "Optional", // Enkripsi opsional
-            "TrustServerCertificate" => true // Jika sertifikat tidak tepercaya
-        ];
+        try {
+            // Membuat DSN untuk SQL Server
+            $dsn = "sqlsrv:Server=$servername;Database=$database";
+            
+            // Opsi PDO
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Mengaktifkan exception untuk error handling
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Fetch mode asosiatif
+            ];
 
-        // Menghubungkan ke database
-        $this->conn = sqlsrv_connect($servername, $connection);
-
-        if (!$this->conn) {
-            die(print_r(sqlsrv_errors(), true)); // Menampilkan error jika gagal
+            // Membuat instance PDO
+            $this->dbh = new PDO($dsn, $uid, $password, $options);
+            // echo 'Koneksi berhasil<br>'; // Opsional: bisa dihapus atau dikomentari setelah koneksi berhasil
+        } catch (PDOException $e) {
+            die("Koneksi gagal: " . $e->getMessage());
         }
     }
 
-    // Query ke database
+    /**
+     * Menyiapkan query SQL
+     *
+     * @param string $sql Query SQL dengan placeholder
+     */
     public function query($sql) {
-        $this->stmt = sqlsrv_query($this->conn, $sql);
-        if (!$this->stmt) {
-            die(print_r(sqlsrv_errors(), true)); // Menampilkan error jika query gagal
+        $this->stmt = $this->dbh->prepare($sql);
+    }
+
+    /**
+     * Mengikat parameter ke query
+     *
+     * @param string $param Nama parameter (misalnya: :nim)
+     * @param mixed $value Nilai yang akan diikat
+     * @param int|null $type Tipe data PDO
+     */
+    public function bind($param, $value, $type = null) {
+        if (is_null($type)) {
+            if (is_int($value)) {
+                $type = PDO::PARAM_INT;
+            } elseif (is_bool($value)) {
+                $type = PDO::PARAM_BOOL;
+            } elseif (is_null($value)) {
+                $type = PDO::PARAM_NULL;
+            } else {
+                $type = PDO::PARAM_STR;
+            }
         }
+        $this->stmt->bindValue($param, $value, $type);
     }
 
-    // Bind parameter ke query (tidak langsung seperti PDO)
-    public function bind($param, $value) {
-        // T-SQL tidak memerlukan bind parameter seperti PDO, jadi tidak perlu implementasi ini
-        // Untuk kasus seperti query yang lebih kompleks, kamu bisa memodifikasi query langsung
-    }
-
-    // Eksekusi query
+    /**
+     * Menjalankan query
+     *
+     * @return bool Status eksekusi
+     */
     public function execute() {
-        // Tidak perlu eksekusi khusus untuk sqlsrv_query karena query langsung dieksekusi
-        return $this->stmt;
+        return $this->stmt->execute();
     }
 
-    // Ambil semua hasil query
+    /**
+     * Mengambil semua hasil query
+     *
+     * @return array Hasil query sebagai array asosiatif
+     */
     public function resultSet() {
-        $results = [];
-        while ($row = sqlsrv_fetch_array($this->stmt, SQLSRV_FETCH_ASSOC)) {
-            $results[] = $row;
-        }
-        return $results;
+        $this->execute();
+        return $this->stmt->fetchAll();
     }
 
-    // Ambil satu hasil dari query
+    /**
+     * Mengambil satu hasil dari query
+     *
+     * @return array|null Hasil query sebagai array asosiatif atau null jika tidak ada
+     */
     public function single() {
-        return sqlsrv_fetch_array($this->stmt, SQLSRV_FETCH_ASSOC);
+        $this->execute();
+        return $this->stmt->fetch();
     }
 
-    // Tutup koneksi setelah penggunaan (optional)
-    public function close() {
-        sqlsrv_close($this->conn);
+    /**
+     * Menghitung jumlah baris yang terpengaruh
+     *
+     * @return int Jumlah baris
+     */
+    public function rowCount() {
+        return $this->stmt->rowCount();
     }
 }
 ?>
