@@ -132,15 +132,13 @@ if ($status === 'all') {
                         </div>
                     </div>
                     <div class="input-group search-group">
-                        <form method="GET" action="sub-menu.php">
-                            <input type="hidden" name="status" value="<?php echo htmlspecialchars($status); ?>">
-                            <input type="text" name="search" class="form-control" placeholder="Search" value="<?php echo htmlspecialchars($search); ?>">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
                     </div>
                 </div>
 
